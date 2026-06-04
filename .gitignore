@@ -24,5 +24,4 @@ logs
 !.env.example
 
 # Planning and local docs
-TODO-30-DAYS.md
 *.docx

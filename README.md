@@ -1,23 +1,33 @@
-# Nuxt Minimal Starter
+# Swiss Tenant Assistant
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Nuxt 4 application for Swiss tenant workflows, document checks and letter generation.
 
 ## Setup
 
-Make sure to install dependencies:
+Install dependencies:
 
 ```bash
-# npm
 npm install
+```
 
-# pnpm
-pnpm install
+Create local environment file:
 
-# yarn
-yarn install
+```bash
+copy .env.example .env
+```
 
-# bun
-bun install
+Nuxt loads `.env` for local development, `drizzle-kit` reads the same file through `dotenv`, and `docker compose` uses the same variables for MySQL.
+
+Start MySQL with Docker:
+
+```bash
+docker compose up -d mysql
+```
+
+Check container health:
+
+```bash
+docker compose ps
 ```
 
 ## Development Server
@@ -25,17 +35,7 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -43,33 +43,11 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
