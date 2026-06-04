@@ -70,3 +70,41 @@ export const checkDocumentRoleValues = [
   'previous_year_reference',
   'supporting'
 ] as const
+
+export const findingSeverityValues = ['info', 'warning', 'high'] as const
+
+export const aiPurposeValues = ['summary', 'recommendation', 'letter_generation', 'chat', 'explanation'] as const
+
+export const genericRunStatusValues = ['pending', 'completed', 'failed'] as const
+
+export const letterTypeValues = [
+  'belege_request',
+  'nebenkosten_objection',
+  'repair_request',
+  'termination',
+  'deposit_return_request',
+  'rent_increase_objection',
+  'custom'
+] as const
+
+export const letterStatusValues = ['draft', 'generated', 'downloaded', 'sent'] as const
+
+export const reportTypeValues = ['analysis_report'] as const
+
+export const reportStatusValues = ['generating', 'ready', 'failed'] as const
+
+export const productTypeValues = ['check', 'letter', 'subscription', 'credits'] as const
+
+export const paymentProviderValues = ['stripe'] as const
+
+export const paymentStatusValues = ['pending', 'checkout_created', 'paid', 'failed', 'refunded', 'expired'] as const
+
+export const emailProviderValues = ['brevo'] as const
+
+export const emailStatusValues = ['pending', 'sent', 'failed'] as const
+
+export const actorTypeValues = ['user', 'admin', 'system'] as const
+
+export const errorScopeValues = ['upload', 'extraction', 'ocr', 'ai', 'payment', 'email', 'report', 'security'] as const
+
+export const errorStatusValues = ['open', 'resolved', 'ignored'] as const

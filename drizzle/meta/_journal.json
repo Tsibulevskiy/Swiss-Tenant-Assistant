@@ -8,6 +8,13 @@
       "when": 1780592894512,
       "tag": "0000_lethal_wendigo",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1780593337478,
+      "tag": "0001_misty_kylun",
+      "breakpoints": true
     }
   ]
 }
