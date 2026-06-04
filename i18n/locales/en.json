@@ -1,0 +1,11 @@
+{
+  "app": {
+    "name": "Swiss Tenant Assistant",
+    "tagline": "Digital support for tenants in Switzerland"
+  },
+  "common": {
+    "loading": "Loading...",
+    "continue": "Continue",
+    "back": "Back"
+  }
+}

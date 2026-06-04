@@ -1,0 +1,11 @@
+{
+  "app": {
+    "name": "Swiss Tenant Assistant",
+    "tagline": "Digitale Hilfe fuer Mieterinnen und Mieter in der Schweiz"
+  },
+  "common": {
+    "loading": "Wird geladen...",
+    "continue": "Weiter",
+    "back": "Zurueck"
+  }
+}

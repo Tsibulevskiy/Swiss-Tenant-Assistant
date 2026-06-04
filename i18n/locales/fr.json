@@ -1,0 +1,11 @@
+{
+  "app": {
+    "name": "Swiss Tenant Assistant",
+    "tagline": "Assistance numerique pour les locataires en Suisse"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "continue": "Continuer",
+    "back": "Retour"
+  }
+}
