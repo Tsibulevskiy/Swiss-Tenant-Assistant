@@ -4,18 +4,8 @@ import { and, eq, gt, isNull, or } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { auditLogs, documents, signedLinks } from '../../db/schema'
-import { resolveStoredDocumentPath } from './storage'
+import { getDocumentStorageDir, resolveStoredDocumentPath } from './storage'
 import { hashSignedLinkToken } from './signed-link'
-
-function resolveDocumentStorageDir(kind: string) {
-  const config = useRuntimeConfig()
-
-  if (kind === 'generated_letter_pdf' || kind === 'generated_report_pdf') {
-    return config.storageReportsDir
-  }
-
-  return config.storageUploadsDir
-}
 
 function toDownloadFilename(originalName: string) {
   return originalName.replace(/["\r\n]/g, '_')
@@ -78,7 +68,7 @@ export async function downloadDocumentByToken(options: {
   }
 
   const absoluteStoragePath = resolveStoredDocumentPath(
-    resolveDocumentStorageDir(document.kind),
+    getDocumentStorageDir(document.kind),
     document.storagePath
   )
 
