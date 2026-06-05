@@ -3,6 +3,164 @@
     "name": "Swiss Tenant Assistant",
     "tagline": "Supporto digitale per gli inquilini in Svizzera"
   },
+  "shell": {
+    "actions": {
+      "openNavigation": "Apri navigazione",
+      "closeNavigation": "Chiudi navigazione",
+      "logout": "Esci"
+    },
+    "header": {
+      "eyebrow": "Strumenti per inquilini",
+      "title": "Panoramica del caso",
+      "status": "Costruzione MVP"
+    },
+    "nav": {
+      "dashboard": "Panoramica",
+      "checks": "Verifiche",
+      "documents": "Documenti",
+      "letters": "Lettere",
+      "soon": "Presto"
+    },
+    "sidebar": {
+      "summary": "Analizza documenti di locazione, genera lettere e tieni ogni pratica in un unico posto.",
+      "focusLabel": "Focus attuale",
+      "focusTitle": "Dal PDF a una raccomandazione utilizzabile.",
+      "focusBody": "Il flusso principale per upload, analisi, pagamento e report viene costruito passo dopo passo."
+    }
+  },
+  "auth": {
+    "navigation": {
+      "login": "Accesso",
+      "register": "Registrazione"
+    },
+    "common": {
+      "genericError": "La richiesta non puo essere completata."
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "Nuova password",
+      "resetToken": "Token di reset"
+    },
+    "layout": {
+      "eyebrow": "Accesso account",
+      "title": "Un punto di ingresso protetto per pratiche, documenti e report.",
+      "description": "Queste pagine di autenticazione usano i flussi backend gia costruiti per registrazione, login e reset password.",
+      "points": {
+        "privateTitle": "Dati privati",
+        "privateBody": "L'accesso a documenti e report e disponibile solo dopo il login.",
+        "secureTitle": "Sessioni sicure",
+        "secureBody": "Cookie di sessione persistenti e controllo ruoli lato server.",
+        "fastTitle": "Accesso rapido",
+        "fastBody": "Form chiari per registrazione, login e reset password."
+      }
+    },
+    "login": {
+      "eyebrow": "Accesso",
+      "title": "Accedi",
+      "description": "Accedi alle tue verifiche, documenti e lettere.",
+      "submit": "Accedi",
+      "success": "Accesso eseguito con successo.",
+      "forgotPassword": "Password dimenticata?",
+      "noAccount": "Non hai ancora un account?",
+      "createAccount": "Creane uno"
+    },
+    "register": {
+      "eyebrow": "Registrazione",
+      "title": "Crea un nuovo account",
+      "description": "Configura un accesso per upload documenti, verifiche e report.",
+      "submit": "Crea account",
+      "success": "Registrazione completata.",
+      "haveAccount": "Hai gia un account?",
+      "signIn": "Vai al login",
+      "consents": {
+        "terms": "Accetto i termini di servizio.",
+        "privacy": "Accetto la privacy policy.",
+        "disclaimer": "Confermo il disclaimer legale."
+      }
+    },
+    "forgot": {
+      "eyebrow": "Password dimenticata",
+      "title": "Richiedi un link di reset",
+      "description": "Generiamo un token di reset per il tuo account se l'email esiste.",
+      "submit": "Richiedi reset",
+      "debugToken": "Token di reset debug",
+      "backToLogin": "Torna al login"
+    },
+    "reset": {
+      "eyebrow": "Reimposta password",
+      "title": "Imposta una nuova password",
+      "description": "Usa il token di reset e scegli una nuova password.",
+      "submit": "Aggiorna password",
+      "success": "Password aggiornata con successo."
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "eyebrow": "Scheletro dashboard",
+      "title": "Una superficie di lavoro per verifiche, documenti e report.",
+      "description": "Questa dashboard usa ancora dati segnaposto, ma la struttura e pronta per casi reali, upload e flussi di report sbloccati dal pagamento."
+    },
+    "stats": {
+      "openCases": "Casi aperti",
+      "openCasesDetail": "Nessun caso attivo al momento.",
+      "documents": "Documenti",
+      "documentsDetail": "Gli upload appariranno qui quando il flusso storage sara collegato.",
+      "pendingActions": "Azioni in sospeso",
+      "pendingActionsDetail": "Le prossime attivita utente appariranno qui.",
+      "reports": "Report",
+      "reportsDetail": "I PDF generati appariranno qui quando il flusso report sara collegato."
+    },
+    "workflow": {
+      "eyebrow": "Percorso principale",
+      "title": "Il percorso principale del prodotto e gia definito.",
+      "description": "Ogni modulo si aggancera allo stesso flusso locatario, dall'upload fino al download.",
+      "upload": "Carica un documento di locazione",
+      "analyze": "Esegui estrazione e analisi",
+      "pay": "Sblocca il risultato a pagamento",
+      "download": "Scarica report o lettera"
+    },
+    "cases": {
+      "eyebrow": "Coda pratiche",
+      "title": "Pratiche recenti",
+      "emptyBadge": "Stato vuoto",
+      "emptyTitle": "Non e stata ancora creata alcuna pratica.",
+      "emptyDescription": "Quando upload e creazione check saranno collegati, qui compariranno verifiche spese accessorie, controlli contratto e lettere generate."
+    },
+    "quickActions": {
+      "eyebrow": "Azioni rapide",
+      "title": "Scegli il primo flusso"
+    },
+    "actions": {
+      "nebenkosten": {
+        "title": "Verifica spese accessorie",
+        "description": "Avvia il flusso di controllo annuale con upload, estrazione e analisi basata su regole.",
+        "badge": "Check"
+      },
+      "contract": {
+        "title": "Verifica contratto",
+        "description": "Controlla deposito, termini e clausole sulle spese prima della firma.",
+        "badge": "Review"
+      },
+      "letter": {
+        "title": "Generatore di lettere",
+        "description": "Prepara opposizioni, richieste e bozze strutturate di comunicazione.",
+        "badge": "Lettera"
+      }
+    },
+    "activity": {
+      "eyebrow": "Stato build",
+      "title": "Progresso recente",
+      "done": "Fatto",
+      "inProgress": "Prossimo",
+      "authReadyTitle": "Il backend di autenticazione e operativo",
+      "authReadyBody": "Registrazione, login, logout, route protette e controllo ruoli sono gia stati verificati end-to-end.",
+      "resetReadyTitle": "Il recupero password e collegato",
+      "resetReadyBody": "Forgot-password e reset-password sono collegati alla UI e supportati da token persistenti.",
+      "nextUiTitle": "I moduli pratiche e documenti sono i prossimi",
+      "nextUiBody": "La struttura dashboard e pronta per liste reali di casi, widget di upload e punti di ingresso per modulo."
+    }
+  },
   "common": {
     "loading": "Caricamento...",
     "continue": "Continua",

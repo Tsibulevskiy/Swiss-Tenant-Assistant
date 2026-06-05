@@ -3,6 +3,164 @@
     "name": "Swiss Tenant Assistant",
     "tagline": "Digitale Hilfe fuer Mieterinnen und Mieter in der Schweiz"
   },
+  "shell": {
+    "actions": {
+      "openNavigation": "Navigation oeffnen",
+      "closeNavigation": "Navigation schliessen",
+      "logout": "Abmelden"
+    },
+    "header": {
+      "eyebrow": "Mieter Werkzeugkasten",
+      "title": "Falluebersicht",
+      "status": "MVP Aufbau"
+    },
+    "nav": {
+      "dashboard": "Uebersicht",
+      "checks": "Pruefungen",
+      "documents": "Dokumente",
+      "letters": "Briefe",
+      "soon": "Spaeter"
+    },
+    "sidebar": {
+      "summary": "Pruefe Mietdokumente, erstelle Briefe und halte jeden Fall an einem Ort.",
+      "focusLabel": "Aktueller Fokus",
+      "focusTitle": "Von PDF zu verwertbarer Empfehlung.",
+      "focusBody": "Der Kernfluss fuer Upload, Analyse, Zahlung und Report wird schrittweise aufgebaut."
+    }
+  },
+  "auth": {
+    "navigation": {
+      "login": "Login",
+      "register": "Registrieren"
+    },
+    "common": {
+      "genericError": "Die Anfrage konnte nicht abgeschlossen werden."
+    },
+    "fields": {
+      "email": "E-Mail",
+      "password": "Passwort",
+      "newPassword": "Neues Passwort",
+      "resetToken": "Reset-Token"
+    },
+    "layout": {
+      "eyebrow": "Konto Zugang",
+      "title": "Ein geschuetzter Einstieg fuer Faelle, Dokumente und Berichte.",
+      "description": "Die Auth-Seiten greifen auf die bereits gebauten Backend-Flows fuer Registrierung, Login und Passwort-Reset zu.",
+      "points": {
+        "privateTitle": "Private Daten",
+        "privateBody": "Zugriff auf Dokumente und Reports erst nach Anmeldung.",
+        "secureTitle": "Sichere Sessions",
+        "secureBody": "Persistente Session-Cookies und serverseitige Rollenpruefung.",
+        "fastTitle": "Schneller Einstieg",
+        "fastBody": "Klare Formulare fuer Registrierung, Login und Passwort-Reset."
+      }
+    },
+    "login": {
+      "eyebrow": "Anmelden",
+      "title": "Melde dich an",
+      "description": "Greife auf deine Pruefungen, Dokumente und Briefe zu.",
+      "submit": "Einloggen",
+      "success": "Anmeldung erfolgreich.",
+      "forgotPassword": "Passwort vergessen?",
+      "noAccount": "Noch kein Konto?",
+      "createAccount": "Konto erstellen"
+    },
+    "register": {
+      "eyebrow": "Registrieren",
+      "title": "Neues Konto erstellen",
+      "description": "Lege einen Zugang fuer Dokumentenupload, Checks und Reports an.",
+      "submit": "Konto erstellen",
+      "success": "Registrierung erfolgreich.",
+      "haveAccount": "Bereits registriert?",
+      "signIn": "Zum Login",
+      "consents": {
+        "terms": "Ich akzeptiere die Nutzungsbedingungen.",
+        "privacy": "Ich akzeptiere die Datenschutzerklaerung.",
+        "disclaimer": "Ich bestaetige den rechtlichen Disclaimer."
+      }
+    },
+    "forgot": {
+      "eyebrow": "Passwort vergessen",
+      "title": "Reset-Link anfordern",
+      "description": "Wir erstellen einen Reset-Token fuer dein Konto, falls die E-Mail existiert.",
+      "submit": "Reset anfordern",
+      "debugToken": "Debug Reset-Token",
+      "backToLogin": "Zurueck zum Login"
+    },
+    "reset": {
+      "eyebrow": "Passwort zuruecksetzen",
+      "title": "Neues Passwort setzen",
+      "description": "Verwende den Reset-Token und vergebe ein neues Passwort.",
+      "submit": "Passwort aktualisieren",
+      "success": "Passwort erfolgreich aktualisiert."
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "eyebrow": "Dashboard Skelett",
+      "title": "Eine Arbeitsflaeche fuer Checks, Dokumente und Reports.",
+      "description": "Dieses Dashboard arbeitet noch mit Platzhalterdaten, aber die Struktur ist jetzt bereit fuer echte Faelle, Uploads und bezahlte Report-Flows."
+    },
+    "stats": {
+      "openCases": "Offene Faelle",
+      "openCasesDetail": "Noch keine aktiven Mieterfaelle.",
+      "documents": "Dokumente",
+      "documentsDetail": "Uploads erscheinen hier, sobald der Storage-Flow angebunden ist.",
+      "pendingActions": "Offene Aktionen",
+      "pendingActionsDetail": "Naechste Nutzeraufgaben werden hier sichtbar.",
+      "reports": "Reports",
+      "reportsDetail": "Generierte PDFs erscheinen hier, sobald der Report-Flow verdrahtet ist."
+    },
+    "workflow": {
+      "eyebrow": "Kernablauf",
+      "title": "Der Hauptpfad des Produkts ist bereits definiert.",
+      "description": "Jedes Modul wird in denselben klaren Mieterfluss von Upload bis Download eingebunden.",
+      "upload": "Mietdokument hochladen",
+      "analyze": "Extraktion und Analyse ausfuehren",
+      "pay": "Bezahltes Ergebnis freischalten",
+      "download": "Report oder Brief herunterladen"
+    },
+    "cases": {
+      "eyebrow": "Fallliste",
+      "title": "Letzte Faelle",
+      "emptyBadge": "Empty State",
+      "emptyTitle": "Es wurden noch keine Mieterfaelle erstellt.",
+      "emptyDescription": "Sobald Upload und Check-Erstellung verbunden sind, erscheinen hier aktive Nebenkostenpruefungen, Vertragschecks und generierte Briefe."
+    },
+    "quickActions": {
+      "eyebrow": "Schnellstart",
+      "title": "Waehle den ersten Workflow"
+    },
+    "actions": {
+      "nebenkosten": {
+        "title": "Nebenkosten Check",
+        "description": "Starte die Pruefung der Jahresabrechnung mit Upload, Extraktion und regelbasierter Analyse.",
+        "badge": "Check"
+      },
+      "contract": {
+        "title": "Mietvertrag Check",
+        "description": "Pruefe Depot, Fristen und Nebenkostenklauseln vor der Unterschrift.",
+        "badge": "Review"
+      },
+      "letter": {
+        "title": "Brief Generator",
+        "description": "Bereite Einsprachen, Anfragen und strukturierte Mieterkommunikation vor.",
+        "badge": "Brief"
+      }
+    },
+    "activity": {
+      "eyebrow": "Build Status",
+      "title": "Letzter Entwicklungsstand",
+      "done": "Fertig",
+      "inProgress": "Als Nächstes",
+      "authReadyTitle": "Authentication Backend ist einsatzbereit",
+      "authReadyBody": "Registrierung, Login, Logout, geschuetzte Routen und Rollenpruefung wurden bereits end-to-end verifiziert.",
+      "resetReadyTitle": "Passwort Recovery ist verdrahtet",
+      "resetReadyBody": "Forgot-Password und Reset-Password sind an das UI angebunden und werden durch persistente Reset-Tokens getragen.",
+      "nextUiTitle": "Case- und Dokumentmodule folgen als Nächstes",
+      "nextUiBody": "Der Dashboard-Rahmen ist bereit fuer echte Falllisten, Upload-Widgets und modulspezifische Einstiege."
+    }
+  },
   "common": {
     "loading": "Wird geladen...",
     "continue": "Weiter",

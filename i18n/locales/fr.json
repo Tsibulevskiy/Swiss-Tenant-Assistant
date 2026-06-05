@@ -3,6 +3,164 @@
     "name": "Swiss Tenant Assistant",
     "tagline": "Assistance numerique pour les locataires en Suisse"
   },
+  "shell": {
+    "actions": {
+      "openNavigation": "Ouvrir la navigation",
+      "closeNavigation": "Fermer la navigation",
+      "logout": "Deconnexion"
+    },
+    "header": {
+      "eyebrow": "Boite a outils locataire",
+      "title": "Vue d'ensemble du dossier",
+      "status": "Construction MVP"
+    },
+    "nav": {
+      "dashboard": "Vue generale",
+      "checks": "Verifications",
+      "documents": "Documents",
+      "letters": "Lettres",
+      "soon": "Bientot"
+    },
+    "sidebar": {
+      "summary": "Analysez les documents de location, generez des lettres et centralisez chaque dossier.",
+      "focusLabel": "Priorite actuelle",
+      "focusTitle": "Du PDF a une recommandation exploitable.",
+      "focusBody": "Le flux principal pour l'envoi, l'analyse, le paiement et le rapport est en cours d'assemblage."
+    }
+  },
+  "auth": {
+    "navigation": {
+      "login": "Connexion",
+      "register": "Inscription"
+    },
+    "common": {
+      "genericError": "La requete n'a pas pu etre terminee."
+    },
+    "fields": {
+      "email": "E-mail",
+      "password": "Mot de passe",
+      "newPassword": "Nouveau mot de passe",
+      "resetToken": "Jeton de reinitialisation"
+    },
+    "layout": {
+      "eyebrow": "Acces au compte",
+      "title": "Un point d'entree protege pour les dossiers, documents et rapports.",
+      "description": "Ces pages d'authentification utilisent les flux backend deja mis en place pour l'inscription, la connexion et la reinitialisation du mot de passe.",
+      "points": {
+        "privateTitle": "Donnees privees",
+        "privateBody": "L'acces aux documents et rapports n'est possible qu'apres connexion.",
+        "secureTitle": "Sessions securisees",
+        "secureBody": "Cookies de session persistants et verification des roles cote serveur.",
+        "fastTitle": "Acces rapide",
+        "fastBody": "Formulaires clairs pour inscription, connexion et reinitialisation du mot de passe."
+      }
+    },
+    "login": {
+      "eyebrow": "Connexion",
+      "title": "Se connecter",
+      "description": "Accedez a vos verifications, documents et lettres.",
+      "submit": "Se connecter",
+      "success": "Connexion reussie.",
+      "forgotPassword": "Mot de passe oublie ?",
+      "noAccount": "Pas encore de compte ?",
+      "createAccount": "Creer un compte"
+    },
+    "register": {
+      "eyebrow": "Inscription",
+      "title": "Creer un nouveau compte",
+      "description": "Configurez un acces pour les uploads, verifications et rapports.",
+      "submit": "Creer un compte",
+      "success": "Inscription reussie.",
+      "haveAccount": "Deja inscrit ?",
+      "signIn": "Aller a la connexion",
+      "consents": {
+        "terms": "J'accepte les conditions d'utilisation.",
+        "privacy": "J'accepte la politique de confidentialite.",
+        "disclaimer": "Je reconnais le disclaimer juridique."
+      }
+    },
+    "forgot": {
+      "eyebrow": "Mot de passe oublie",
+      "title": "Demander un lien de reinitialisation",
+      "description": "Nous generons un jeton de reinitialisation si l'e-mail existe.",
+      "submit": "Demander la reinitialisation",
+      "debugToken": "Jeton de reinitialisation debug",
+      "backToLogin": "Retour a la connexion"
+    },
+    "reset": {
+      "eyebrow": "Reinitialiser le mot de passe",
+      "title": "Definir un nouveau mot de passe",
+      "description": "Utilisez le jeton de reinitialisation et choisissez un nouveau mot de passe.",
+      "submit": "Mettre a jour le mot de passe",
+      "success": "Mot de passe mis a jour avec succes."
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "eyebrow": "Squelette du tableau de bord",
+      "title": "Une surface de travail pour les verifications, documents et rapports.",
+      "description": "Ce tableau de bord utilise encore des donnees fictives, mais sa structure est prete pour de vrais dossiers, uploads et flux de rapports payants."
+    },
+    "stats": {
+      "openCases": "Dossiers ouverts",
+      "openCasesDetail": "Aucun dossier locataire actif pour le moment.",
+      "documents": "Documents",
+      "documentsDetail": "Les uploads apparaitront ici une fois le flux de stockage connecte.",
+      "pendingActions": "Actions en attente",
+      "pendingActionsDetail": "Les prochaines taches utilisateur apparaitront ici.",
+      "reports": "Rapports",
+      "reportsDetail": "Les PDF generes apparaitront ici une fois le flux de rapport branche."
+    },
+    "workflow": {
+      "eyebrow": "Parcours principal",
+      "title": "Le chemin principal du produit est deja defini.",
+      "description": "Chaque module viendra se brancher sur le meme parcours locataire, de l'envoi au telechargement.",
+      "upload": "Envoyer un document locatif",
+      "analyze": "Executer l'extraction et l'analyse",
+      "pay": "Debloquer le resultat payant",
+      "download": "Telecharger le rapport ou la lettre"
+    },
+    "cases": {
+      "eyebrow": "File des dossiers",
+      "title": "Dossiers recents",
+      "emptyBadge": "Etat vide",
+      "emptyTitle": "Aucun dossier locataire n'a encore ete cree.",
+      "emptyDescription": "Une fois l'upload et la creation de verification relies, cette zone affichera les verifications de charges, de bail et les lettres generees."
+    },
+    "quickActions": {
+      "eyebrow": "Actions rapides",
+      "title": "Choisir le premier flux"
+    },
+    "actions": {
+      "nebenkosten": {
+        "title": "Verification des charges",
+        "description": "Demarrer la verification annuelle avec upload, extraction et analyse basee sur des regles.",
+        "badge": "Check"
+      },
+      "contract": {
+        "title": "Verification du bail",
+        "description": "Controler depot, delais et clauses de charges avant signature.",
+        "badge": "Review"
+      },
+      "letter": {
+        "title": "Generateur de lettres",
+        "description": "Preparer objections, demandes et brouillons structures de communication locataire.",
+        "badge": "Lettre"
+      }
+    },
+    "activity": {
+      "eyebrow": "Etat du build",
+      "title": "Progression recente",
+      "done": "Fait",
+      "inProgress": "Ensuite",
+      "authReadyTitle": "Le backend d'authentification est operationnel",
+      "authReadyBody": "Inscription, connexion, deconnexion, routes protegees et controle des roles ont deja ete verifies de bout en bout.",
+      "resetReadyTitle": "La recuperation de mot de passe est cablee",
+      "resetReadyBody": "Les flux mot de passe oublie et reinitialisation sont relies a l'UI et appuyes sur des jetons persistants.",
+      "nextUiTitle": "Les modules de dossiers et documents arrivent ensuite",
+      "nextUiBody": "Le cadre du tableau de bord est pret pour de vraies listes de dossiers, widgets d'upload et points d'entree modules."
+    }
+  },
   "common": {
     "loading": "Chargement...",
     "continue": "Continuer",

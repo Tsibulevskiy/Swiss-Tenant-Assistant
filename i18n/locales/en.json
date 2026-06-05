@@ -3,6 +3,164 @@
     "name": "Swiss Tenant Assistant",
     "tagline": "Digital support for tenants in Switzerland"
   },
+  "shell": {
+    "actions": {
+      "openNavigation": "Open navigation",
+      "closeNavigation": "Close navigation",
+      "logout": "Logout"
+    },
+    "header": {
+      "eyebrow": "Tenant toolkit",
+      "title": "Case overview",
+      "status": "MVP build"
+    },
+    "nav": {
+      "dashboard": "Overview",
+      "checks": "Checks",
+      "documents": "Documents",
+      "letters": "Letters",
+      "soon": "Soon"
+    },
+    "sidebar": {
+      "summary": "Review tenancy documents, generate letters, and keep every case in one place.",
+      "focusLabel": "Current focus",
+      "focusTitle": "From PDF to usable guidance.",
+      "focusBody": "The core flow for upload, analysis, payment, and report delivery is being assembled step by step."
+    }
+  },
+  "auth": {
+    "navigation": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "common": {
+      "genericError": "The request could not be completed."
+    },
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "newPassword": "New password",
+      "resetToken": "Reset token"
+    },
+    "layout": {
+      "eyebrow": "Account access",
+      "title": "A protected entry point for cases, documents, and reports.",
+      "description": "These auth pages use the backend flows already built for registration, login, and password reset.",
+      "points": {
+        "privateTitle": "Private data",
+        "privateBody": "Document and report access is only available after sign-in.",
+        "secureTitle": "Secure sessions",
+        "secureBody": "Persistent session cookies and server-side role checks.",
+        "fastTitle": "Fast entry",
+        "fastBody": "Clear forms for registration, login, and password reset."
+      }
+    },
+    "login": {
+      "eyebrow": "Sign in",
+      "title": "Sign in",
+      "description": "Access your checks, documents, and letters.",
+      "submit": "Sign in",
+      "success": "Signed in successfully.",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "No account yet?",
+      "createAccount": "Create one"
+    },
+    "register": {
+      "eyebrow": "Register",
+      "title": "Create a new account",
+      "description": "Set up access for document uploads, checks, and reports.",
+      "submit": "Create account",
+      "success": "Registration successful.",
+      "haveAccount": "Already registered?",
+      "signIn": "Go to login",
+      "consents": {
+        "terms": "I accept the terms of service.",
+        "privacy": "I accept the privacy policy.",
+        "disclaimer": "I acknowledge the legal disclaimer."
+      }
+    },
+    "forgot": {
+      "eyebrow": "Forgot password",
+      "title": "Request a reset link",
+      "description": "We generate a reset token for your account if the email exists.",
+      "submit": "Request reset",
+      "debugToken": "Debug reset token",
+      "backToLogin": "Back to login"
+    },
+    "reset": {
+      "eyebrow": "Reset password",
+      "title": "Set a new password",
+      "description": "Use the reset token and choose a new password.",
+      "submit": "Update password",
+      "success": "Password updated successfully."
+    }
+  },
+  "dashboard": {
+    "hero": {
+      "eyebrow": "Dashboard skeleton",
+      "title": "A control surface for checks, documents, and reports.",
+      "description": "This dashboard is still fed by placeholder data, but the structure is now ready for real cases, uploads, and payment-gated report flows."
+    },
+    "stats": {
+      "openCases": "Open cases",
+      "openCasesDetail": "No active tenant cases yet.",
+      "documents": "Documents",
+      "documentsDetail": "Uploads will appear here once storage flows are connected.",
+      "pendingActions": "Pending actions",
+      "pendingActionsDetail": "Next user tasks will be surfaced here.",
+      "reports": "Reports",
+      "reportsDetail": "Generated PDFs will be listed once the report flow is wired."
+    },
+    "workflow": {
+      "eyebrow": "Core journey",
+      "title": "The main product path is already defined.",
+      "description": "Each module will plug into the same predictable tenant flow from upload to downloadable output.",
+      "upload": "Upload tenancy document",
+      "analyze": "Run extraction and analysis",
+      "pay": "Unlock paid result",
+      "download": "Download report or letter"
+    },
+    "cases": {
+      "eyebrow": "Case queue",
+      "title": "Recent cases",
+      "emptyBadge": "Empty state",
+      "emptyTitle": "No tenant cases have been created yet.",
+      "emptyDescription": "Once upload and check creation are connected, this area will list active Nebenkosten reviews, contract checks, and generated letters."
+    },
+    "quickActions": {
+      "eyebrow": "Quick actions",
+      "title": "Choose the first workflow"
+    },
+    "actions": {
+      "nebenkosten": {
+        "title": "Service Charge Check",
+        "description": "Start the yearly statement review flow with upload, extraction, and rule-based analysis.",
+        "badge": "Check"
+      },
+      "contract": {
+        "title": "Lease Contract Check",
+        "description": "Review deposit, notice periods, and service charge clauses before signing.",
+        "badge": "Review"
+      },
+      "letter": {
+        "title": "Letter Generator",
+        "description": "Prepare objections, requests, and structured tenant communication drafts.",
+        "badge": "Letter"
+      }
+    },
+    "activity": {
+      "eyebrow": "Build status",
+      "title": "Recent implementation progress",
+      "done": "Done",
+      "inProgress": "Next",
+      "authReadyTitle": "Authentication backend is operational",
+      "authReadyBody": "Registration, login, logout, protected routes, and role checks have already been verified end-to-end.",
+      "resetReadyTitle": "Password recovery flow is wired",
+      "resetReadyBody": "Forgot-password and reset-password endpoints are connected to the UI and backed by persisted reset tokens.",
+      "nextUiTitle": "Case and document modules are next",
+      "nextUiBody": "The dashboard frame is ready for live case lists, upload widgets, and module-specific entry points."
+    }
+  },
   "common": {
     "loading": "Loading...",
     "continue": "Continue",
