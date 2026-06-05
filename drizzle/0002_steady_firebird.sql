@@ -1,0 +1,1 @@
+ALTER TABLE `user_sessions` ADD CONSTRAINT `user_sessions_token_hash_unique_idx` UNIQUE(`token_hash`);

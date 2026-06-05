@@ -8,6 +8,7 @@ export { documents } from './documents'
 export { emailMessages } from './email-messages'
 export { letters } from './letters'
 export { payments } from './payments'
+export { passwordResetTokens } from './password-reset-tokens'
 export { products } from './products'
 export { reports } from './reports'
 export { ruleFindings } from './rule-findings'
@@ -26,6 +27,7 @@ import { documents } from './documents'
 import { emailMessages } from './email-messages'
 import { letters } from './letters'
 import { payments } from './payments'
+import { passwordResetTokens } from './password-reset-tokens'
 import { products } from './products'
 import { reports } from './reports'
 import { ruleFindings } from './rule-findings'
@@ -47,6 +49,7 @@ export const schema = {
   ruleFindings,
   letters,
   reports,
+  passwordResetTokens,
   products,
   payments,
   emailMessages,
