@@ -2,6 +2,7 @@
 definePageMeta({ layout: 'auth', middleware: ['guest'] })
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const form = reactive({
   email: ''
@@ -82,7 +83,7 @@ async function submit() {
         <p class="font-medium">{{ t('auth.forgot.debugToken') }}</p>
         <NuxtLink
           class="mt-2 inline-block break-all font-medium underline underline-offset-4"
-          :to="`/auth/reset-password?token=${state.debugToken}`"
+          :to="localePath(`/auth/reset-password?token=${state.debugToken}`)"
         >
           {{ state.debugToken }}
         </NuxtLink>
@@ -90,7 +91,7 @@ async function submit() {
     </div>
 
     <p class="mt-6 text-sm text-slate-600">
-      <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" to="/auth/login">
+      <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" :to="localePath('/auth/login')">
         {{ t('auth.forgot.backToLogin') }}
       </NuxtLink>
     </p>

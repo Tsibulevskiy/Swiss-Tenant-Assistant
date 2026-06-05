@@ -4,6 +4,7 @@ const auth = useAuth()
 const route = useRoute()
 const router = useRouter()
 const { locale, locales, t } = useI18n()
+const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 
 await auth.fetchCurrentUser()
@@ -12,7 +13,7 @@ const navigation = computed(() => [
   {
     key: 'dashboard',
     label: t('shell.nav.dashboard'),
-    href: '/',
+    href: localePath('/'),
     accent: 'bg-emerald-500',
     enabled: true
   },
@@ -49,7 +50,7 @@ const availableLocales = computed(() =>
 
 async function handleLogout() {
   await auth.logout()
-  await router.push('/auth/login')
+  await router.push(localePath('/auth/login'))
 }
 </script>
 

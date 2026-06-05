@@ -2,6 +2,7 @@
 definePageMeta({ layout: 'auth', middleware: ['guest'] })
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const route = useRoute()
 const router = useRouter()
 
@@ -38,7 +39,7 @@ async function submit() {
 
     state.success = t('auth.reset.success')
     await router.push({
-      path: '/auth/login',
+      path: localePath('/auth/login'),
       query: { email: typeof route.query.email === 'string' ? route.query.email : undefined }
     })
   } catch (error) {

@@ -2,6 +2,7 @@
 definePageMeta({ layout: 'auth', middleware: ['guest'] })
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 const route = useRoute()
 const router = useRouter()
 const auth = useAuth()
@@ -46,7 +47,7 @@ async function submit() {
 
     auth.setUser(response.data.user)
     state.success = t('auth.login.success')
-    await router.push('/')
+    await router.push(localePath('/'))
   } catch (error) {
     state.error = error instanceof Error ? error.message : t('auth.common.genericError')
   } finally {
@@ -104,12 +105,12 @@ async function submit() {
     </form>
 
     <div class="mt-6 flex flex-col gap-3 text-sm text-slate-600">
-      <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" to="/auth/forgot-password">
+      <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" :to="localePath('/auth/forgot-password')">
         {{ t('auth.login.forgotPassword') }}
       </NuxtLink>
       <p>
         {{ t('auth.login.noAccount') }}
-        <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" to="/auth/register">
+        <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" :to="localePath('/auth/register')">
           {{ t('auth.login.createAccount') }}
         </NuxtLink>
       </p>

@@ -1,16 +1,17 @@
 <script setup lang="ts">
 const { locale, locales, t } = useI18n()
+const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
 const route = useRoute()
 
 const authLinks = computed(() => [
   {
     label: t('auth.navigation.login'),
-    to: '/auth/login'
+    to: localePath('/auth/login')
   },
   {
     label: t('auth.navigation.register'),
-    to: '/auth/register'
+    to: localePath('/auth/register')
   }
 ])
 
