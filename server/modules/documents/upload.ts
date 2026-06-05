@@ -9,6 +9,7 @@ import { documentUploadFieldsSchema } from '../../../shared/schemas/documents'
 import { getDb } from '../../db/client'
 import { auditLogs, cases, documents } from '../../db/schema'
 import type { AuthUser } from '../auth/types'
+import { resolveStorageRoot } from './storage'
 
 type UploadFields = z.infer<typeof documentUploadFieldsSchema>
 
@@ -39,12 +40,6 @@ function sanitizeFilename(filename: string) {
   const baseName = path.basename(filename)
 
   return baseName.replace(/[^a-zA-Z0-9._-]/g, '_')
-}
-
-function resolveStorageRoot(storageDir: string) {
-  return path.isAbsolute(storageDir)
-    ? storageDir
-    : path.resolve(process.cwd(), storageDir)
 }
 
 function validateUploadFile(file: UploadFileInput) {
