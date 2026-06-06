@@ -7,6 +7,16 @@ export type PdfTextExtractionResult = {
     text: string
     page: number
   }>
+  hasExtractedText: boolean
+  isTextlessPdf: boolean
+}
+
+function stripPdfParseArtifacts(value: string): string {
+  return value.replace(/--\s*\d+\s+of\s+\d+\s*--/gi, ' ')
+}
+
+function normalizeExtractedText(value: string): string {
+  return stripPdfParseArtifacts(value).replace(/\s+/g, ' ').trim()
 }
 
 export async function extractPdfTextFromBuffer(buffer: Buffer): Promise<PdfTextExtractionResult> {
@@ -21,14 +31,21 @@ export async function extractPdfTextFromBuffer(buffer: Buffer): Promise<PdfTextE
 
   try {
     const result = await parser.getText()
+    const pages = result.pages.map((page, index) => ({
+      text: page.text,
+      page: index + 1
+    }))
+    const normalizedDocumentText = normalizeExtractedText(result.text)
+    const hasExtractedText =
+      normalizedDocumentText.length > 0
+      || pages.some(page => normalizeExtractedText(page.text).length > 0)
 
     return {
       text: result.text,
       pageCount: result.pages.length,
-      pages: result.pages.map((page, index) => ({
-        text: page.text,
-        page: index + 1
-      }))
+      pages,
+      hasExtractedText,
+      isTextlessPdf: !hasExtractedText
     }
   } catch (error) {
     throw createError({

@@ -28,7 +28,9 @@ export async function saveDocumentTextExtraction(documentId: number) {
     const finishedAt = new Date()
     const structuredData = {
       pageCount: extraction.pageCount,
-      pages: extraction.pages
+      pages: extraction.pages,
+      hasExtractedText: extraction.hasExtractedText,
+      isTextlessPdf: extraction.isTextlessPdf
     }
 
     await db

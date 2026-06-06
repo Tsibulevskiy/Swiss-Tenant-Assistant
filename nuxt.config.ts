@@ -7,7 +7,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   nitro: {
-    compressPublicAssets: true
+    compressPublicAssets: true,
+    externals: {
+      external: ['tesseract.js', 'tesseract.js-core']
+    }
   },
   routeRules: {
     '/api/**': {
