@@ -47,42 +47,48 @@ async function submit() {
 
 <template>
   <div>
-    <p class="text-xs uppercase tracking-[0.3em] text-slate-500">{{ t('auth.forgot.eyebrow') }}</p>
-    <h2 class="mt-4 font-serif text-4xl tracking-tight">{{ t('auth.forgot.title') }}</h2>
-    <p class="mt-3 text-sm leading-6 text-slate-600">{{ t('auth.forgot.description') }}</p>
+    <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#7B8A9B]">{{ t('auth.forgot.eyebrow') }}</p>
+    <h2 class="mt-4 font-serif text-[2rem] leading-none tracking-tight text-[#0A1F44] sm:text-[2.35rem]">{{ t('auth.forgot.title') }}</h2>
+    <p class="mt-3 max-w-md text-sm leading-6 text-[#4E6279]">{{ t('auth.forgot.description') }}</p>
 
     <form class="mt-8 space-y-5" @submit.prevent="submit">
       <div>
-        <label class="text-sm font-medium text-slate-700" for="forgot-email">{{ t('auth.fields.email') }}</label>
+        <label class="text-sm font-medium text-[#163A5F]" for="forgot-email">{{ t('auth.fields.email') }}</label>
         <input
           id="forgot-email"
           v-model.trim="form.email"
           type="email"
           autocomplete="email"
           required
-          class="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none transition focus:border-emerald-500 focus:bg-white"
+          :placeholder="t('auth.fields.emailPlaceholder')"
+          class="mt-2 h-11 w-full rounded-xl border border-[#E6EBF1] bg-white px-4 text-sm outline-none transition focus:border-[#1E9F47]"
         >
       </div>
 
-      <p v-if="state.error" class="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
-        {{ state.error }}
-      </p>
+      <AuthNotice
+        v-if="state.error"
+        tone="error"
+        :message="state.error"
+      />
 
       <button
         type="submit"
         :disabled="state.pending"
-        class="inline-flex w-full items-center justify-center rounded-2xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
+        class="inline-flex h-11 w-full items-center justify-center rounded-xl bg-[#1E9F47] px-5 text-sm font-semibold text-white transition hover:bg-[#19863C] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {{ state.pending ? t('common.loading') : t('auth.forgot.submit') }}
       </button>
     </form>
 
-    <div v-if="state.success" class="mt-5 rounded-[1.75rem] border border-emerald-200 bg-emerald-50 p-4">
-      <p class="text-sm text-emerald-700">{{ state.success }}</p>
+    <div v-if="state.success" class="mt-5 space-y-4">
+      <AuthNotice
+        tone="success"
+        :message="state.success"
+      />
       <div v-if="state.debugToken" class="mt-4 text-sm text-emerald-900">
         <p class="font-medium">{{ t('auth.forgot.debugToken') }}</p>
         <NuxtLink
-          class="mt-2 inline-block break-all font-medium underline underline-offset-4"
+          class="mt-2 inline-block break-all font-medium text-[#166534] underline underline-offset-4"
           :to="localePath(`/auth/reset-password?token=${state.debugToken}`)"
         >
           {{ state.debugToken }}
@@ -90,8 +96,8 @@ async function submit() {
       </div>
     </div>
 
-    <p class="mt-6 text-sm text-slate-600">
-      <NuxtLink class="font-medium text-slate-950 underline-offset-4 hover:underline" :to="localePath('/auth/login')">
+    <p class="mt-6 text-sm text-[#4E6279]">
+      <NuxtLink class="font-medium text-[#1E9F47] hover:text-[#166534]" :to="localePath('/auth/login')">
         {{ t('auth.forgot.backToLogin') }}
       </NuxtLink>
     </p>

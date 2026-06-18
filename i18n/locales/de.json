@@ -38,7 +38,9 @@
     },
     "fields": {
       "email": "E-Mail",
+      "emailPlaceholder": "Ihre E-Mail",
       "password": "Passwort",
+      "passwordPlaceholder": "Passwort eingeben",
       "newPassword": "Neues Passwort",
       "resetToken": "Reset-Token"
     },
@@ -46,19 +48,21 @@
       "eyebrow": "Konto Zugang",
       "title": "Ein geschuetzter Einstieg fuer Faelle, Dokumente und Berichte.",
       "description": "Die Auth-Seiten greifen auf die bereits gebauten Backend-Flows fuer Registrierung, Login und Passwort-Reset zu.",
+      "pageTitle": "Autorisierung und Registrierung",
+      "footerTitle": "100% vertraulich",
+      "footerBody": "Keine Abos. Keine versteckten Kosten. Ihr Konto gibt Ihnen Zugriff auf Berichte, Pruefungen und geschuetzte Downloads.",
       "points": {
-        "privateTitle": "Private Daten",
-        "privateBody": "Zugriff auf Dokumente und Reports erst nach Anmeldung.",
-        "secureTitle": "Sichere Sessions",
-        "secureBody": "Persistente Session-Cookies und serverseitige Rollenpruefung.",
-        "fastTitle": "Schneller Einstieg",
-        "fastBody": "Klare Formulare fuer Registrierung, Login und Passwort-Reset."
+        "contractBody": "Pruefung des Mietvertrags",
+        "chargesBody": "Analyse zusaetzlicher Kosten",
+        "rightsBody": "Schutz Ihrer Mieterrechte",
+        "reportsBody": "Verstaendliche PDF-Berichte"
       }
     },
     "login": {
       "eyebrow": "Anmelden",
       "title": "Melde dich an",
       "description": "Greife auf deine Pruefungen, Dokumente und Briefe zu.",
+      "rememberMe": "Angemeldet bleiben",
       "submit": "Einloggen",
       "success": "Anmeldung erfolgreich.",
       "forgotPassword": "Passwort vergessen?",
@@ -69,9 +73,12 @@
       "eyebrow": "Registrieren",
       "title": "Neues Konto erstellen",
       "description": "Lege einen Zugang fuer Dokumentenupload, Checks und Reports an.",
+      "localeLabel": "Sprache",
+      "passwordHint": "Mindestens 8 Zeichen",
       "submit": "Konto erstellen",
       "success": "Registrierung erfolgreich.",
       "haveAccount": "Bereits registriert?",
+      "selectedProductNotice": "Ausgewaehltes Produkt: {product}. Nach der Registrierung geht es direkt weiter zum Checkout.",
       "signIn": "Zum Login",
       "consents": {
         "terms": "Ich akzeptiere die Nutzungsbedingungen.",
@@ -91,6 +98,8 @@
       "eyebrow": "Passwort zuruecksetzen",
       "title": "Neues Passwort setzen",
       "description": "Verwende den Reset-Token und vergebe ein neues Passwort.",
+      "tokenDetected": "Ein Reset-Token ist bereits vorhanden. Vergib jetzt ein neues Passwort.",
+      "tokenMissing": "Oeffne diese Seite ueber den Link aus deiner E-Mail oder fuege den Reset-Token manuell ein.",
       "submit": "Passwort aktualisieren",
       "success": "Passwort erfolgreich aktualisiert."
     }
@@ -159,6 +168,360 @@
       "resetReadyBody": "Forgot-Password und Reset-Password sind an das UI angebunden und werden durch persistente Reset-Tokens getragen.",
       "nextUiTitle": "Case- und Dokumentmodule folgen als Nächstes",
       "nextUiBody": "Der Dashboard-Rahmen ist bereit fuer echte Falllisten, Upload-Widgets und modulspezifische Einstiege."
+    }
+  },
+  "landing": {
+    "nav": {
+      "howItWorks": "Ablauf",
+      "features": "Funktionen",
+      "pricing": "Preise",
+      "faq": "FAQ"
+    },
+    "header": {
+      "signIn": "Anmelden",
+      "startNow": "Konto erstellen",
+      "openDashboard": "Dashboard oeffnen",
+      "account": "Dashboard"
+    },
+    "hero": {
+      "eyebrow": "Hilfe fuer Mieter in der Schweiz",
+      "titleLead": "Pruefen Sie Mietdokumente",
+      "titleLeadSecondary": "mit mehr Klarheit",
+      "titleAccent": "in der Schweiz",
+      "description": "Finden Sie Auffaelligkeiten, vermeiden Sie Ueberzahlungen und gehen Sie mit klareren naechsten Schritten weiter.",
+      "imageAlt": "Schweizer Alpenlandschaft mit See und Dorf",
+      "startNow": "Konto erstellen",
+      "signIn": "Anmelden",
+      "documentCheck": "Dokument pruefen",
+      "watchDemo": "Demo ansehen",
+      "openDashboard": "Dashboard oeffnen",
+      "signOutLater": "Zum Dashboard",
+      "points": {
+        "documents": "Pruefen Sie Nebenkostenabrechnungen, Mietvertraege und Vermieterschreiben in einem Ablauf.",
+        "reports": "Erhalten Sie strukturierte Findings, klarere naechste Schritte und mietertaugliche Ergebnisse.",
+        "speed": "Schnell, vertraulich und fuer Schweizer Mietdokumente aufgebaut."
+      },
+      "card": {
+        "document": "Nebenkostenabrechnung",
+        "year": "2024",
+        "amount": "CHF 1'840.50",
+        "finding": "Auffaelligkeit"
+      }
+    },
+    "features": {
+      "eyebrow": "Features",
+      "title": "Alles, was Sie brauchen, um Ihre Rechte als Mieter in der Schweiz zu schuetzen",
+      "description": "Pruefen Sie Dokumente, erkennen Sie Risiken und erhalten Sie in wenigen Minuten klare Empfehlungen.",
+      "cards": {
+        "aiTitle": "AI-Dokumentenanalyse",
+        "aiBody": "Fortschrittliche AI und ein Regelsystem analysieren Dokumente im Kontext des Schweizer Mietrechts.",
+        "risksTitle": "Versteckte Risiken finden",
+        "risksBody": "Wir erkennen unfaire Vertragsklauseln, verdaechtige Kosten und moegliche Verstosse.",
+        "pdfTitle": "Verstaendliche PDF-Berichte",
+        "pdfBody": "Erhalten Sie detaillierte Berichte mit Erklaerungen, Empfehlungen und naechsten Schritten.",
+        "lettersTitle": "Briefgenerierung",
+        "lettersBody": "Erstellen Sie in wenigen Sekunden professionelle Schreiben an Ihren Vermieter.",
+        "securityTitle": "Datensicherheit",
+        "securityBody": "Alle Dokumente werden in einer geschuetzten Umgebung verarbeitet und niemals an Dritte weitergegeben.",
+        "speedTitle": "Ergebnis in 1-3 Minuten",
+        "speedBody": "Die meisten Pruefungen sind in wenigen Minuten abgeschlossen.",
+        "storageTitle": "Dokumentenablage",
+        "storageBody": "Bewahren Sie Vertraege, Berichte und Schreiben an einem Ort auf und greifen Sie jederzeit darauf zu.",
+        "tenantTitle": "Speziell fuer Mieter gemacht",
+        "tenantBody": "Der Service ist vollstaendig auf den Schweizer Mietwohnungsmarkt ausgerichtet."
+      },
+      "bar": {
+        "swissTitle": "Basiert auf Schweizer Recht",
+        "swissBody": "Die Pruefungen beruecksichtigen die Besonderheiten des Mietens in der Schweiz.",
+        "noSubscriptionTitle": "Kein Abonnement",
+        "noSubscriptionBody": "Sie zahlen nur fuer die Pruefung, die Sie brauchen.",
+        "clearTitle": "Verlaesslich und klar",
+        "clearBody": "Verstaendliche Ergebnisse ohne schwere juristische Sprache.",
+        "supportTitle": "Hilfe bei Bedarf",
+        "supportBody": "Wir helfen Ihnen, das Ergebnis der Pruefung einzuordnen."
+      }
+    },
+    "proof": {
+      "fastTitle": "Schnell",
+      "fastBody": "Ein klares Ergebnis in wenigen Minuten.",
+      "safeTitle": "Verlaesslich",
+      "safeBody": "Vertrauliche Dokumentenpruefung fuer Mieter.",
+      "clearTitle": "Verstaendlich",
+      "clearBody": "Strukturierte Ergebnisse ohne juristische Ueberladung.",
+      "valueTitle": "Sinnvoll",
+      "valueBody": "Sie zahlen nur fuer den benoetigten Workflow."
+    },
+    "process": {
+      "eyebrow": "So funktioniert es",
+      "titleLead": "So",
+      "titleAccent": "funktioniert es",
+      "title": "So funktioniert es",
+      "description": "Analysieren Sie Ihre Mietdokumente in wenigen Minuten und schuetzen Sie Ihre Rechte als Mieter.",
+      "uploadTitle": "Dokument hochladen",
+      "uploadBody": "Laden Sie Ihren Mietvertrag, eine Nebenkostenabrechnung, eine Mitteilung zur Mietzinserhoehung oder ein Vermieterschreiben hoch.",
+      "analysisTitle": "AI- und regelbasierte Analyse",
+      "analysisBody": "Unser System prueft Ihr Dokument automatisch mit Schweizer Mietregeln und AI-gestuetzter Analyse.",
+      "reportTitle": "Bericht erhalten",
+      "reportBody": "Sie erhalten einen klaren Bericht mit erkannten Problemen, Risikostufe und praktischen Empfehlungen.",
+      "actionTitle": "Massnahmen ergreifen",
+      "actionBody": "Erzeugen Sie ein professionelles Schreiben, laden Sie Ihren PDF-Bericht herunter und antworten Sie sicher auf Ihren Vermieter.",
+      "fastTrust": "Analyse in 1-3 Minuten",
+      "fastTrustBody": "Durchschnittliche Analysezeit",
+      "swissTrust": "Auf Schweizer Mietrecht fokussiert",
+      "swissTrustBody": "Basierend auf Schweizer Mietrecht und Best Practices",
+      "pdfTrust": "Professionelle PDF-Berichte",
+      "pdfTrustBody": "Professionelle Berichte zum Herunterladen",
+      "privateTrust": "Sicher & privat",
+      "privateTrustBody": "Ihre Daten werden verschluesselt und geschuetzt",
+      "subscriptionTrust": "Kein Abonnement",
+      "subscriptionTrustBody": "Sie zahlen nur fuer das, was Sie brauchen"
+    },
+    "pricingSection": {
+      "titleLead": "Transparente",
+      "titleAccent": "Preise",
+      "description": "Sie zahlen nur fuer den Workflow, den Sie brauchen. Keine Abos. Keine versteckten Kosten.",
+      "highlightRiskTitle": "Ohne Risiko",
+      "highlightRiskBody": "Bis zum Checkout kann der Kauf jederzeit abgebrochen werden.",
+      "highlightSafetyTitle": "Sicher",
+      "highlightSafetyBody": "Ihre Dokumente bleiben im Review-Prozess geschuetzt.",
+      "highlightNoHiddenTitle": "Keine versteckten Kosten",
+      "highlightNoHiddenBody": "Der Preis ist vor der Zahlung klar sichtbar.",
+      "highlightPrivateTitle": "Privat",
+      "highlightPrivateBody": "Mietdokumente laufen in einem kontrollierten Ablauf.",
+      "listTitle": "Waehlen Sie die passende Pruefung",
+      "contractTitle": "Mietvertrag Checker",
+      "contractBody": "Pruefung des Mietvertrags vor der Unterschrift.",
+      "contractPrice": "CHF 19",
+      "nebenkostenTitle": "Nebenkosten Checker",
+      "nebenkostenBody": "Pruefung der jaehrlichen Nebenkostenabrechnung.",
+      "nebenkostenPrice": "CHF 19",
+      "rentIncreaseTitle": "Mietzinserhoehung Checker",
+      "rentIncreaseBody": "Pruefung einer Mietzinserhoehung vor der Antwort.",
+      "rentIncreasePrice": "CHF 24",
+      "depositTitle": "Deposit Return Checker",
+      "depositBody": "Pruefung bei Kautionsrueckgabe oder Abzug.",
+      "depositPrice": "CHF 29",
+      "letterTitle": "Brief Generator",
+      "letterBody": "Erzeugen Sie ein Schreiben an den Vermieter aus gefuehrten Eingaben.",
+      "letterPrice": "CHF 9",
+      "noteLead": "Enthalten:",
+      "noteBody": " jede bezahlte Pruefung umfasst AI-Analyse, Empfehlungen und einen PDF-Bericht.",
+      "bundleBadge": "Beste Wahl",
+      "bundleTitle": "Tenant Protection Bundle",
+      "bundleBody": "Alles, was fuer Dokumentenpruefung und den naechsten Mieter-Schritt benoetigt wird.",
+      "bundlePrice": "CHF 39",
+      "bundleSavings": "Bis zu CHF 33 sparen",
+      "bundleFeatureChecks": "Beliebige 3 Dokumentenpruefungen",
+      "bundleFeatureLetters": "Unbegrenzte Briefgenerierung",
+      "bundleFeatureReports": "Professionelle PDF-Berichte",
+      "bundleFeatureStorage": "Dokumentspeicher fuer 12 Monate",
+      "bundleFeaturePriority": "Priorisierte Verarbeitung",
+      "bundleFeatureSavings": "Guenstiger als der Einzelkauf der Leistungen",
+      "bundleCta": "Bundle auswaehlen",
+      "bundleFootnote": "Sichere Zahlung ueber Stripe",
+      "socialTitle": "Mieter in der ganzen Schweiz nutzen bereits strukturierte Dokumentenpruefung.",
+      "socialBody": "Schliessen Sie sich einem einfacheren, fokussierten Workflow an.",
+      "ratingLead": "Ausgezeichnet",
+      "ratingValue": "4.8 / 5 Trustpilot"
+    },
+    "faq": {
+      "title": "Haeufige Fragen",
+      "description": "Alles, was Sie wissen muessen, bevor Sie Ihre Dokumente pruefen.",
+      "ctaTitle": "Noch Fragen?",
+      "ctaDescription": "Starten Sie noch heute Ihre erste Dokumentenpruefung.",
+      "ctaAction": "Dokument pruefen",
+      "trust": {
+        "securePayment": "Sichere Zahlung",
+        "pdfReports": "PDF-Berichte",
+        "swissFocused": "Schweiz-fokussierte Analyse",
+        "noSubscription": "Kein Abo erforderlich"
+      },
+      "items": {
+        "documents": {
+          "question": "Welche Dokumente kann ich pruefen?",
+          "answer": "Sie koennen Mietvertraege, jaehrliche Nebenkostenabrechnungen, Mitteilungen zur Mietzinserhoehung, Kautionsabzuege und Schreiben vom Vermieter analysieren."
+        },
+        "timing": {
+          "question": "Wie lange dauert die Analyse?",
+          "answer": "Die meisten Dokumente werden innerhalb von 1 bis 3 Minuten analysiert. Groessere Dateien koennen etwas mehr Zeit benoetigen."
+        },
+        "result": {
+          "question": "Was erhalte ich nach der Analyse?",
+          "answer": "Sie erhalten einen detaillierten Bericht mit erkannten Problemen, Erklaerungen, Empfehlungen und gegebenenfalls einem Schreibenentwurf fuer Ihren Vermieter."
+        },
+        "legal": {
+          "question": "Ist das Rechtsberatung?",
+          "answer": "Nein. Swiss Tenant Assistant liefert informative Analysen und Empfehlungen. Das ersetzt keine Beratung durch einen qualifizierten Anwalt oder Mieterverband."
+        },
+        "security": {
+          "question": "Sind meine Daten sicher?",
+          "answer": "Ja. Dokumente werden verschluesselt, sicher verarbeitet und nicht an Dritte weitergegeben. Der Zugriff auf Berichte ist geschuetzt und zeitlich begrenzt."
+        },
+        "pdf": {
+          "question": "Kann ich einen PDF-Bericht herunterladen?",
+          "answer": "Ja. Jede abgeschlossene Analyse enthaelt einen professionellen PDF-Bericht, den Sie herunterladen und fuer Ihre Unterlagen speichern koennen."
+        },
+        "letters": {
+          "question": "Kann die Plattform Schreiben an meinen Vermieter erzeugen?",
+          "answer": "Ja. Swiss Tenant Assistant kann Schreiben fuer Nebenkostenstreitigkeiten, Reparaturanfragen, Rueckforderungen der Kaution und andere typische Mietsituationen erzeugen."
+        },
+        "languages": {
+          "question": "Welche Sprachen werden unterstuetzt?",
+          "answer": "Deutsch, Englisch, Franzoesisch und Italienisch."
+        },
+        "serious": {
+          "question": "Was passiert, wenn die Plattform ein ernstes Problem findet?",
+          "answer": "Der Bericht erklaert das Problem und schlaegt die naechsten Schritte vor. Bei komplexen rechtlichen Situationen empfehlen wir einen Anwalt oder Mieterverband."
+        },
+        "subscription": {
+          "question": "Brauche ich ein Abonnement?",
+          "answer": "Nein. Sie zahlen nur fuer die Pruefungen, die Sie wirklich brauchen. Es gibt keine wiederkehrenden Abo-Gebuehren."
+        }
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Auf Handlung ausgelegt",
+      "title": "Kein generischer Chatbot. Ein enger Mieter-Workflow vom Dokumentenupload bis zum nutzbaren Ergebnis.",
+      "description": "Die Produktlogik ist klar: weniger Theorie, mehr strukturierte Dokumentenarbeit, klarere Empfehlungen und schnellere Mieterkommunikation.",
+      "badge": "Schweizer Mieter-Workflow"
+    },
+    "footer": {
+      "description": "Swiss Tenant Assistant ist ein MVP im aktiven Aufbau. Die Plattform soll Mieter dabei unterstuetzen, Dokumente zu pruefen, Briefe zu erstellen und Fallmaterial in einem Ablauf zu organisieren.",
+      "disclaimer": "Keine Rechtsberatung. Ergebnisse muessen mit Review und Disclaimer behandelt werden.",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "impressum": "Impressum",
+      "disclaimerLink": "Disclaimer",
+      "dashboard": "Dashboard",
+      "login": "Login",
+      "register": "Registrieren"
+    }
+  },
+  "legal": {
+    "updatedLabel": "Stand:",
+    "updatedDate": "16. Juni 2026",
+    "draftTitle": "Entwurfstext",
+    "draftBody": "Diese Seiten sind produktionsnahe Platzhalter. Vor dem öffentlichen Launch müssen endgültige Rechtstexte und Unternehmensangaben ergänzt werden.",
+    "privacy": {
+      "title": "Privacy",
+      "intro": "Diese Seite beschreibt, wie Swiss Tenant Assistant Informationen erfassen, verwenden und schützen kann, wenn Nutzer Dokumente hochladen, ein Konto anlegen oder einen Workflow kaufen.",
+      "sections": [
+        {
+          "title": "Welche Daten erfasst werden",
+          "body": "Es können Kontodaten, hochgeladene Mietdokumente, Zahlungsmetadaten, Support-Nachrichten und technische Logs erfasst werden, die für den Betrieb des Dienstes erforderlich sind."
+        },
+        {
+          "title": "Wie Daten verwendet werden",
+          "body": "Übermittelte Daten werden verwendet, um Nutzer zu authentifizieren, Dokumente zu verarbeiten, Berichte oder Schreiben zu erzeugen, Zahlungen abzuwickeln, Missbrauch zu verhindern und die Zuverlässigkeit zu verbessern."
+        },
+        {
+          "title": "Speicherung und Aufbewahrung",
+          "body": "Dokumente und zugehörige Datensätze können so lange gespeichert werden, wie es für die Bereitstellung des Workflows, die Audit-Historie, die Streitbeilegung und die Einhaltung gesetzlicher Pflichten notwendig ist."
+        },
+        {
+          "title": "Dienstleister und Infrastruktur",
+          "body": "Einzelne Verarbeitungsschritte können auf Hosting-, E-Mail-, Zahlungs-, OCR- oder AI-Anbieter gestützt sein. Die finale Datenschutzerklärung muss diese Anbieter und die Rechtsgrundlage für Datenübermittlungen benennen."
+        },
+        {
+          "title": "Rechte der Nutzer",
+          "body": "Nutzer sollten Auskunft, Berichtigung, Löschung oder Export ihrer personenbezogenen Daten verlangen können, soweit keine Aufbewahrungs- oder Compliance-Pflichten entgegenstehen."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms",
+      "intro": "Diese Bedingungen beschreiben die vorgesehenen Regeln für den Zugang zu Swiss Tenant Assistant und für die Nutzung der Workflows zur Dokumentenprüfung und Mietkommunikation.",
+      "sections": [
+        {
+          "title": "Leistungsumfang",
+          "body": "Das Produkt ist ein enger Software-Workflow für Mietdokumente, Hinweiserkennung und Entwurfserstellung. Es ist keine Kanzlei und begründet kein Mandatsverhältnis."
+        },
+        {
+          "title": "Konten und Zugang",
+          "body": "Nutzer sind für ihre Zugangsdaten, die rechtmäßige Nutzung des Dienstes und die Richtigkeit der hochgeladenen oder übermittelten Informationen verantwortlich."
+        },
+        {
+          "title": "Zahlungen und kostenpflichtige Ergebnisse",
+          "body": "Bestimmte Prüfungen, Berichte oder Schreiben können erst nach Zahlung zugänglich sein. Regeln zu Abrechnung und Rückerstattung sollten vor dem Launch finalisiert werden."
+        },
+        {
+          "title": "Verfügbarkeit",
+          "body": "Der Dienst kann sich ändern, pausieren oder wegen Wartung, Updates oder technischer Störungen vorübergehend nicht verfügbar sein. Eine unterbrechungsfreie Verfügbarkeit wird nicht zugesichert."
+        },
+        {
+          "title": "Haftungsgrenzen",
+          "body": "Die finalen Bedingungen sollten Haftungsausschlüsse, zulässige Nutzung, anwendbares Recht und Streitbeilegung passend zur Zieljurisdiktion festlegen."
+        }
+      ]
+    },
+    "impressum": {
+      "title": "Impressum",
+      "intro": "Diese Seite ist für die Anbieterangaben reserviert, die vor dem Launch im jeweiligen Markt erforderlich sind.",
+      "noteTitle": "Vor dem Launch erforderlich",
+      "noteBody": "Das Produkt sollte nicht veröffentlicht werden, bevor diese Platzhalter durch Firmenname, Postadresse, Kontakt-E-Mail und alle notwendigen Register- oder MWST-Angaben ersetzt wurden.",
+      "sections": [
+        {
+          "title": "Anbieter",
+          "body": "Die Betreiberangaben von Swiss Tenant Assistant sind in diesem Repository noch nicht hinterlegt."
+        },
+        {
+          "title": "Kontakt",
+          "body": "Eine produktive Version sollte eine erreichbare E-Mail-Adresse und gegebenenfalls weitere gesetzlich erforderliche Kontaktkanäle enthalten."
+        },
+        {
+          "title": "Unternehmensangaben",
+          "body": "Falls anwendbar, ergänzen Sie Handelsregistereintrag, MWST-Nummer, vertretungsberechtigte Person und Hinweise auf Aufsichtsbehörden."
+        },
+        {
+          "title": "Veröffentlichungsstatus",
+          "body": "Diese Seite dient aktuell als Platzhalter, damit Footer und Routing während des Produktaufbaus vollständig sind."
+        }
+      ]
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "intro": "Diese Seite beschreibt die vorgesehenen Grenzen der Produktausgabe und die Prüfung, die Nutzer vor der Verwendung von Findings, Zusammenfassungen oder Entwurfsschreiben vornehmen müssen.",
+      "sections": [
+        {
+          "title": "Keine Rechtsberatung",
+          "body": "Ausgaben sind informative Software-Ergebnisse und Entwurfsmaterialien. Sie dürfen nicht als Rechtsberatung, Vertretung oder Ersatz für qualifizierte anwaltliche Beratung dargestellt werden."
+        },
+        {
+          "title": "Keine Gewähr auf Vollständigkeit",
+          "body": "Dokumentenextraktion, OCR, Regelprüfungen und AI-generierte Texte können Fakten übersehen, Quellen falsch lesen oder unvollständige Empfehlungen liefern."
+        },
+        {
+          "title": "Prüfung durch Nutzer erforderlich",
+          "body": "Nutzer bleiben dafür verantwortlich, Originaldokumente zu prüfen, Fristen und Beträge zu kontrollieren und zu entscheiden, ob professionelle rechtliche Prüfung nötig ist."
+        },
+        {
+          "title": "Abhängigkeit von Drittanbietern",
+          "body": "Die Servicequalität kann von externen Anbietern für Hosting, E-Mail, Zahlung, OCR oder AI abhängen. Störungen oder Fehler dort können die Ergebnisse beeinflussen."
+        },
+        {
+          "title": "Produktstatus",
+          "body": "Dieser Entwurfs-Disclaimer sollte zusammen mit der finalen Datenschutzerklärung und den finalen Bedingungen vor öffentlicher Freigabe geprüft werden."
+        }
+      ]
+    }
+  },
+  "pricingRedirect": {
+    "title": "Preise",
+    "body": "Der ausgewaehlte Workflow wird vorbereitet."
+  },
+  "checkout": {
+    "eyebrow": "Checkout",
+    "title": "Checkout",
+    "description": "Preis- und Routing-Logik sind jetzt produktbezogen verdrahtet. Als naechster Schritt kann Stripe Checkout angeschlossen werden.",
+    "selectedLabel": "Ausgewaehltes Produkt",
+    "totalLabel": "Gesamt",
+    "placeholder": "Stripe Checkout ist noch nicht angebunden. Diese Seite dient aktuell als Uebergabe des gewaehlten Produkts nach der Registrierung.",
+    "payAction": "Zur Zahlung",
+    "secureNote": "Platzhalter fuer sicheren Zahlungsfluss",
+    "points": {
+      "first": "Das gewaehlte Produkt bleibt von Landing ueber Registrierung bis zum Checkout erhalten.",
+      "second": "Hier kann Stripe Checkout spaeter sauber per Produktcode angebunden werden.",
+      "third": "Bundle und Einzelservices folgen jetzt unterschiedlicher Routing-Logik."
     }
   },
   "common": {

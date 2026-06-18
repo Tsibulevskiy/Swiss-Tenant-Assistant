@@ -1,5 +1,10 @@
+<script setup lang="ts">
+import PublicFooter from '~/components/layout/PublicFooter.vue'
+</script>
+
 <template>
-  <AppShell>
+  <div class="min-h-screen bg-[#F7F8FA] text-[#163A5F]">
     <slot />
-  </AppShell>
+    <PublicFooter />
+  </div>
 </template>

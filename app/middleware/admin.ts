@@ -8,6 +8,6 @@ export default defineNuxtRouteMiddleware(async () => {
   }
 
   if (user.role !== 'admin') {
-    return navigateTo(localePath('/'))
+    return navigateTo(localePath('/dashboard'))
   }
 })

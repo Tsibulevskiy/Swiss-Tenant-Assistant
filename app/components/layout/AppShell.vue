@@ -6,6 +6,7 @@ const router = useRouter()
 const { locale, locales, t } = useI18n()
 const localePath = useLocalePath()
 const switchLocalePath = useSwitchLocalePath()
+const localeOrder = ['en', 'de', 'fr', 'it']
 
 await auth.fetchCurrentUser()
 
@@ -13,7 +14,7 @@ const navigation = computed(() => [
   {
     key: 'dashboard',
     label: t('shell.nav.dashboard'),
-    href: localePath('/'),
+    href: localePath('/dashboard'),
     accent: 'bg-emerald-500',
     enabled: true
   },
@@ -41,12 +42,16 @@ const navigation = computed(() => [
 ])
 
 const availableLocales = computed(() =>
-  locales.value.map(localeOption => ({
-    code: localeOption.code,
-    label: localeOption.code.toUpperCase(),
-    to: switchLocalePath(localeOption.code)
-  }))
+  [...locales.value]
+    .sort((left, right) => localeOrder.indexOf(left.code) - localeOrder.indexOf(right.code))
+    .map(localeOption => ({
+      code: localeOption.code,
+      label: localeOption.code.toUpperCase(),
+      to: switchLocalePath(localeOption.code)
+    }))
 )
+
+const logoSrc = '/swiss-tenant-assistant-icon.svg'
 
 async function handleLogout() {
   await auth.logout()
@@ -70,10 +75,13 @@ async function handleLogout() {
         ]"
       >
         <div class="flex items-start justify-between gap-4">
-          <div>
-            <p class="font-serif text-2xl font-semibold tracking-tight text-slate-950">
-              {{ t('app.name') }}
-            </p>
+          <div class="min-w-0">
+            <div class="flex items-center gap-3">
+              <img :src="logoSrc" :alt="t('app.name')" class="h-11 w-auto shrink-0">
+              <p class="font-serif text-2xl font-semibold tracking-tight text-slate-950">
+                {{ t('app.name') }}
+              </p>
+            </div>
             <p class="mt-2 max-w-48 text-sm leading-6 text-slate-600">
               {{ t('shell.sidebar.summary') }}
             </p>
@@ -112,18 +120,19 @@ async function handleLogout() {
           </NuxtLink>
         </nav>
 
-        <div class="mt-8 flex flex-wrap gap-2">
-          <NuxtLink
-            v-for="localeOption in availableLocales"
-            :key="localeOption.code"
-            :to="localeOption.to"
-            :class="[
-              'rounded-full px-3 py-2 text-xs font-semibold uppercase tracking-[0.24em] transition',
-              locale === localeOption.code ? 'bg-slate-950 text-white' : 'border border-slate-200 text-slate-600 hover:text-slate-950'
-            ]"
-          >
-            {{ localeOption.label }}
-          </NuxtLink>
+        <div class="mt-8 flex flex-wrap items-center text-xs font-semibold uppercase tracking-[0.24em]">
+          <template v-for="(localeOption, index) in availableLocales" :key="localeOption.code">
+            <NuxtLink
+              :to="localeOption.to"
+              :class="[
+                'transition',
+                locale === localeOption.code ? 'text-slate-950 underline underline-offset-4' : 'text-slate-600 hover:text-slate-950'
+              ]"
+            >
+              {{ localeOption.label }}
+            </NuxtLink>
+            <span v-if="index < availableLocales.length - 1" class="px-2 text-slate-400">|</span>
+          </template>
         </div>
 
         <div class="mt-8 rounded-[1.75rem] bg-slate-950 p-5 text-white">

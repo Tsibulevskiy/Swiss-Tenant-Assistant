@@ -1,0 +1,39 @@
+<svg width="720" height="160" viewBox="0 0 720 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Swiss Tenant Assistant logo</title>
+  <desc id="desc">Minimal Swiss rental assistant logo with house, Swiss cross and speech bubble.</desc>
+
+  <defs>
+    <linearGradient id="navyGrad" x1="56" y1="24" x2="132" y2="124" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1F44"/>
+      <stop offset="1" stop-color="#163A5F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon container -->
+  <g transform="translate(24 20)">
+    <rect x="0" y="0" width="120" height="120" rx="30" fill="#F7F8FA"/>
+
+    <!-- House outline -->
+    <path d="M27 62L60 32L93 62" stroke="url(#navyGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M38 58V91C38 96 42 100 47 100H73C78 100 82 96 82 91V58" stroke="url(#navyGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Chat bubble -->
+    <path d="M67 69C67 60.7 73.7 54 82 54H92C100.3 54 107 60.7 107 69V77C107 85.3 100.3 92 92 92H84L71 103V91.2C68.5 88.5 67 84.9 67 81V69Z" fill="#D52B1E"/>
+
+    <!-- Swiss cross -->
+    <path d="M84 63H91V71H99V78H91V86H84V78H76V71H84V63Z" fill="white"/>
+
+    <!-- Door -->
+    <rect x="55" y="73" width="11" height="27" rx="5.5" fill="#0A1F44"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(172 49)">
+    <text x="0" y="38" font-family="Inter, Arial, Helvetica, sans-serif" font-size="42" font-weight="800" letter-spacing="-1.2">
+      <tspan fill="#D52B1E">Swiss</tspan><tspan fill="#0A1F44"> Tenant</tspan><tspan fill="#163A5F"> Assistant</tspan>
+    </text>
+    <text x="2" y="74" font-family="Inter, Arial, Helvetica, sans-serif" font-size="15" font-weight="600" letter-spacing="2.8" fill="#6B7A90">
+      RENTAL RIGHTS · DOCUMENTS · LETTERS
+    </text>
+  </g>
+</svg>

@@ -38,7 +38,9 @@
     },
     "fields": {
       "email": "Email",
+      "emailPlaceholder": "your email",
       "password": "Password",
+      "passwordPlaceholder": "Enter your password",
       "newPassword": "New password",
       "resetToken": "Reset token"
     },
@@ -46,19 +48,21 @@
       "eyebrow": "Account access",
       "title": "A protected entry point for cases, documents, and reports.",
       "description": "These auth pages use the backend flows already built for registration, login, and password reset.",
+      "pageTitle": "Authorization and registration",
+      "footerTitle": "100% confidential",
+      "footerBody": "No subscriptions. No hidden charges. Your account gives you access to reports, checks, and protected downloads.",
       "points": {
-        "privateTitle": "Private data",
-        "privateBody": "Document and report access is only available after sign-in.",
-        "secureTitle": "Secure sessions",
-        "secureBody": "Persistent session cookies and server-side role checks.",
-        "fastTitle": "Fast entry",
-        "fastBody": "Clear forms for registration, login, and password reset."
+        "contractBody": "Lease contract review",
+        "chargesBody": "Extra charge analysis",
+        "rightsBody": "Protection of your tenant rights",
+        "reportsBody": "Clear PDF reports"
       }
     },
     "login": {
       "eyebrow": "Sign in",
       "title": "Sign in",
       "description": "Access your checks, documents, and letters.",
+      "rememberMe": "Remember me",
       "submit": "Sign in",
       "success": "Signed in successfully.",
       "forgotPassword": "Forgot your password?",
@@ -69,9 +73,12 @@
       "eyebrow": "Register",
       "title": "Create a new account",
       "description": "Set up access for document uploads, checks, and reports.",
+      "localeLabel": "Language",
+      "passwordHint": "Minimum 8 characters",
       "submit": "Create account",
       "success": "Registration successful.",
       "haveAccount": "Already registered?",
+      "selectedProductNotice": "Selected product: {product}. After registration you will continue directly to checkout.",
       "signIn": "Go to login",
       "consents": {
         "terms": "I accept the terms of service.",
@@ -91,6 +98,8 @@
       "eyebrow": "Reset password",
       "title": "Set a new password",
       "description": "Use the reset token and choose a new password.",
+      "tokenDetected": "A reset token is already present. Set a new password to continue.",
+      "tokenMissing": "Open this page from the reset link in your email, or paste the reset token manually.",
       "submit": "Update password",
       "success": "Password updated successfully."
     }
@@ -159,6 +168,360 @@
       "resetReadyBody": "Forgot-password and reset-password endpoints are connected to the UI and backed by persisted reset tokens.",
       "nextUiTitle": "Case and document modules are next",
       "nextUiBody": "The dashboard frame is ready for live case lists, upload widgets, and module-specific entry points."
+    }
+  },
+  "landing": {
+    "nav": {
+      "howItWorks": "How it works",
+      "features": "Features",
+      "pricing": "Pricing",
+      "faq": "FAQ"
+    },
+    "header": {
+      "signIn": "Sign in",
+      "startNow": "Create account",
+      "openDashboard": "Open dashboard",
+      "account": "Dashboard"
+    },
+    "hero": {
+      "eyebrow": "Swiss tenant support",
+      "titleLead": "Review rental documents",
+      "titleLeadSecondary": "with more clarity",
+      "titleAccent": "in Switzerland",
+      "description": "Find issues, avoid overpayments, and move forward with clearer tenant guidance.",
+      "imageAlt": "Swiss alpine lake and village landscape",
+      "startNow": "Create account",
+      "signIn": "Sign in",
+      "documentCheck": "Check document",
+      "watchDemo": "View demo",
+      "openDashboard": "Open dashboard",
+      "signOutLater": "Go to dashboard",
+      "points": {
+        "documents": "Review Nebenkosten bills, lease contracts, and landlord letters in one workflow.",
+        "reports": "Get structured findings, clearer next steps, and tenant-ready output.",
+        "speed": "Fast, private, and designed for Swiss rental document review."
+      },
+      "card": {
+        "document": "Nebenkostenabrechnung",
+        "year": "2024",
+        "amount": "CHF 1'840.50",
+        "finding": "Issue found"
+      }
+    },
+    "features": {
+      "eyebrow": "Features",
+      "title": "Everything you need to protect your rights as a tenant in Switzerland",
+      "description": "Check documents, detect risks and receive clear recommendations in just a few minutes.",
+      "cards": {
+        "aiTitle": "AI document analysis",
+        "aiBody": "Advanced AI and a rule system review documents in the context of Swiss tenancy law.",
+        "risksTitle": "Hidden risk detection",
+        "risksBody": "We identify unfair contract terms, suspicious charges and potential violations.",
+        "pdfTitle": "Clear PDF reports",
+        "pdfBody": "Receive detailed reports with explanations, recommendations and next steps.",
+        "lettersTitle": "Letter generation",
+        "lettersBody": "Create professional letters to your landlord in just a few seconds.",
+        "securityTitle": "Data security",
+        "securityBody": "All documents are processed in a protected environment and are never shared with third parties.",
+        "speedTitle": "Results in 1-3 minutes",
+        "speedBody": "Most checks are completed within just a few minutes.",
+        "storageTitle": "Document storage",
+        "storageBody": "Keep contracts, reports and letters in one place and access them at any time.",
+        "tenantTitle": "Built for tenants",
+        "tenantBody": "The service is designed specifically for the Swiss residential rental market."
+      },
+      "bar": {
+        "swissTitle": "Based on Swiss law",
+        "swissBody": "Checks account for the specifics of renting in Switzerland.",
+        "noSubscriptionTitle": "No subscription",
+        "noSubscriptionBody": "Pay only for the check you need.",
+        "clearTitle": "Reliable and clear",
+        "clearBody": "Understand the result without dense legal language.",
+        "supportTitle": "Support when needed",
+        "supportBody": "We help you interpret the result of the review."
+      }
+    },
+    "proof": {
+      "fastTitle": "Fast",
+      "fastBody": "A clear result in a few minutes.",
+      "safeTitle": "Reliable",
+      "safeBody": "Private document handling for tenant review.",
+      "clearTitle": "Clear",
+      "clearBody": "Structured output without legalese overload.",
+      "valueTitle": "Worthwhile",
+      "valueBody": "Pay only for the workflow you need."
+    },
+    "process": {
+      "eyebrow": "How It Works",
+      "titleLead": "How",
+      "titleAccent": "it works",
+      "title": "How It Works",
+      "description": "Analyze your rental documents in minutes and protect your rights as a tenant.",
+      "uploadTitle": "Upload Your Document",
+      "uploadBody": "Upload your rental contract, service charge statement, rent increase notice or landlord letter.",
+      "analysisTitle": "AI & Rule-Based Analysis",
+      "analysisBody": "Our system automatically checks your document using Swiss tenancy rules and AI-powered analysis.",
+      "reportTitle": "Get Your Report",
+      "reportBody": "Receive a clear report with detected issues, risk level and practical recommendations.",
+      "actionTitle": "Take Action",
+      "actionBody": "Generate a professional letter, download your PDF report and confidently respond to your landlord.",
+      "fastTrust": "Analysis in 1-3 minutes",
+      "fastTrustBody": "Average analysis time",
+      "swissTrust": "Swiss tenancy focused",
+      "swissTrustBody": "Based on Swiss tenancy laws and best practices",
+      "pdfTrust": "Professional PDF reports",
+      "pdfTrustBody": "Professional reports you can download",
+      "privateTrust": "Secure & private",
+      "privateTrustBody": "Your data is encrypted and protected",
+      "subscriptionTrust": "No subscription",
+      "subscriptionTrustBody": "Pay only for what you need"
+    },
+    "pricingSection": {
+      "titleLead": "Transparent",
+      "titleAccent": "pricing",
+      "description": "Pay only for the workflow you need. No subscriptions. No hidden fees.",
+      "highlightRiskTitle": "No risk",
+      "highlightRiskBody": "Cancel the purchase at any time before checkout.",
+      "highlightSafetyTitle": "Secure",
+      "highlightSafetyBody": "Your documents stay protected during review.",
+      "highlightNoHiddenTitle": "No hidden fees",
+      "highlightNoHiddenBody": "You see the exact price before payment.",
+      "highlightPrivateTitle": "Private",
+      "highlightPrivateBody": "Tenant documents are stored in a controlled flow.",
+      "listTitle": "Choose the check you need",
+      "contractTitle": "Mietvertrag Checker",
+      "contractBody": "Review the lease agreement before signing.",
+      "contractPrice": "CHF 19",
+      "nebenkostenTitle": "Nebenkosten Checker",
+      "nebenkostenBody": "Review yearly service charge statements.",
+      "nebenkostenPrice": "CHF 19",
+      "rentIncreaseTitle": "Mietzinserhohung Checker",
+      "rentIncreaseBody": "Review a rent increase notice before replying.",
+      "rentIncreasePrice": "CHF 24",
+      "depositTitle": "Deposit Return Checker",
+      "depositBody": "Check a deposit return dispute or deduction.",
+      "depositPrice": "CHF 29",
+      "letterTitle": "Letter Generator",
+      "letterBody": "Generate a landlord letter from guided inputs.",
+      "letterPrice": "CHF 9",
+      "noteLead": "Included:",
+      "noteBody": " every paid check includes AI analysis, recommendations, and a PDF report.",
+      "bundleBadge": "Best value",
+      "bundleTitle": "Tenant Protection Bundle",
+      "bundleBody": "Everything needed to review documents and prepare the next tenant action.",
+      "bundlePrice": "CHF 39",
+      "bundleSavings": "Save up to CHF 33",
+      "bundleFeatureChecks": "Any 3 document checks",
+      "bundleFeatureLetters": "Unlimited letter generation",
+      "bundleFeatureReports": "Professional PDF reports",
+      "bundleFeatureStorage": "Document storage for 12 months",
+      "bundleFeaturePriority": "Priority processing",
+      "bundleFeatureSavings": "Lower total price than buying services separately",
+      "bundleCta": "Choose bundle",
+      "bundleFootnote": "Secure payment via Stripe",
+      "socialTitle": "Tenants across Switzerland already use structured document review.",
+      "socialBody": "Join them with a simpler, narrower workflow.",
+      "ratingLead": "Excellent",
+      "ratingValue": "4.8 / 5 Trustpilot"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "description": "Everything you need to know before checking your documents.",
+      "ctaTitle": "Still have questions?",
+      "ctaDescription": "Try your first document check today.",
+      "ctaAction": "Check My Document",
+      "trust": {
+        "securePayment": "Secure payment",
+        "pdfReports": "PDF reports",
+        "swissFocused": "Swiss-focused analysis",
+        "noSubscription": "No subscription required"
+      },
+      "items": {
+        "documents": {
+          "question": "What documents can I check?",
+          "answer": "You can analyse rental contracts (Mietvertrag), annual service charge statements (Nebenkostenabrechnung), rent increase notices (Mietzinserhoehung), deposit deductions and landlord letters."
+        },
+        "timing": {
+          "question": "How long does the analysis take?",
+          "answer": "Most documents are analysed within 1-3 minutes. Larger files may take slightly longer."
+        },
+        "result": {
+          "question": "What do I receive after the analysis?",
+          "answer": "You receive a detailed report including detected issues, explanations, recommendations and, where applicable, a draft letter you can send to your landlord."
+        },
+        "legal": {
+          "question": "Is this legal advice?",
+          "answer": "No. Swiss Tenant Assistant provides informational analysis and recommendations. It does not replace advice from a qualified lawyer or tenant association."
+        },
+        "security": {
+          "question": "Is my data secure?",
+          "answer": "Yes. Documents are encrypted, processed securely and never shared with third parties. Access to reports is protected and time-limited."
+        },
+        "pdf": {
+          "question": "Can I download a PDF report?",
+          "answer": "Yes. Every completed analysis includes a professional PDF report that you can download and keep for your records."
+        },
+        "letters": {
+          "question": "Can the platform generate letters for my landlord?",
+          "answer": "Yes. Swiss Tenant Assistant can generate letters for service charge disputes, repair requests, deposit return requests and other common tenant situations."
+        },
+        "languages": {
+          "question": "Which languages are supported?",
+          "answer": "German, English, French and Italian."
+        },
+        "serious": {
+          "question": "What if the platform finds a serious issue?",
+          "answer": "The report will explain the issue and suggest next steps. For complex legal situations, we recommend contacting a lawyer or tenant association."
+        },
+        "subscription": {
+          "question": "Do I need a subscription?",
+          "answer": "No. You only pay for the checks you need. There are no recurring subscription fees."
+        }
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Built for action",
+      "title": "Not a generic chatbot. A narrow tenant workflow from document upload to usable output.",
+      "description": "The product direction is simple: less theory, more structured document handling, clearer recommendations, and faster tenant communication.",
+      "badge": "Swiss tenant workflow"
+    },
+    "footer": {
+      "description": "Swiss Tenant Assistant is an MVP in active build. The platform is designed to help tenants review documents, generate letters, and organize case material in a single flow.",
+      "disclaimer": "No legal advice. Outputs must include review and disclaimer handling.",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "impressum": "Impressum",
+      "disclaimerLink": "Disclaimer",
+      "dashboard": "Dashboard",
+      "login": "Login",
+      "register": "Register"
+    }
+  },
+  "legal": {
+    "updatedLabel": "Last updated:",
+    "updatedDate": "16 June 2026",
+    "draftTitle": "Draft legal copy",
+    "draftBody": "These pages are product-ready placeholders. Replace them with final legal text and business details before public launch.",
+    "privacy": {
+      "title": "Privacy",
+      "intro": "This page explains how Swiss Tenant Assistant may collect, use, and protect information when a user uploads documents, creates an account, or purchases a workflow.",
+      "sections": [
+        {
+          "title": "What we collect",
+          "body": "We may collect account details, uploaded tenancy documents, payment metadata, support messages, and technical logs required to operate the service."
+        },
+        {
+          "title": "How we use data",
+          "body": "We use submitted data to authenticate users, run document extraction, generate reports or letters, process payments, prevent abuse, and improve reliability."
+        },
+        {
+          "title": "Storage and retention",
+          "body": "Documents and related records may be stored for the period needed to deliver the workflow, keep audit history, resolve disputes, and comply with legal obligations."
+        },
+        {
+          "title": "Processors and infrastructure",
+          "body": "Some processing may rely on hosting, email, payment, OCR, or AI providers. Final production policy must list each provider and the legal basis for those transfers."
+        },
+        {
+          "title": "User rights",
+          "body": "Users should be able to request access, correction, deletion, or export of their personal data, subject to retention and compliance requirements."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms",
+      "intro": "These terms describe the intended rules for access to Swiss Tenant Assistant and for use of its document review and tenant communication workflows.",
+      "sections": [
+        {
+          "title": "Service scope",
+          "body": "The product is a narrow software workflow for tenancy document handling, issue spotting, and draft generation. It is not a law firm and does not create an attorney-client relationship."
+        },
+        {
+          "title": "Accounts and access",
+          "body": "Users are responsible for account credentials, lawful use of the service, and accuracy of the information they upload or submit."
+        },
+        {
+          "title": "Payments and paid outputs",
+          "body": "Certain checks, reports, or letters may require payment before access is granted. Refund and billing rules should be finalized before launch."
+        },
+        {
+          "title": "Availability",
+          "body": "The service may change, pause, or be unavailable during maintenance, updates, or technical incidents. No uninterrupted availability is guaranteed."
+        },
+        {
+          "title": "Liability limits",
+          "body": "Final terms should define liability exclusions, permitted use, governing law, and dispute handling in line with the jurisdiction where the service is offered."
+        }
+      ]
+    },
+    "impressum": {
+      "title": "Impressum",
+      "intro": "This page is reserved for the provider information required before launch in the relevant market.",
+      "noteTitle": "Required before launch",
+      "noteBody": "Do not publish the product without replacing these placeholders with the legal entity name, postal address, contact email, and any mandatory registry or VAT information.",
+      "sections": [
+        {
+          "title": "Provider",
+          "body": "Swiss Tenant Assistant operator details have not yet been inserted in this repository."
+        },
+        {
+          "title": "Contact",
+          "body": "A production version should include a reachable email address and any additional contact channel required by local regulation."
+        },
+        {
+          "title": "Business identifiers",
+          "body": "If applicable, add commercial register details, VAT number, authorized representative, and any supervisory authority references."
+        },
+        {
+          "title": "Publication status",
+          "body": "This page currently acts as a placeholder so the footer and routing are complete during product build-out."
+        }
+      ]
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "intro": "This page explains the intended boundaries of product output and the review expected from users before they rely on generated findings, summaries, or draft letters.",
+      "sections": [
+        {
+          "title": "No legal advice",
+          "body": "Outputs are informational software results and draft materials. They should not be presented as legal advice, legal representation, or a substitute for qualified counsel."
+        },
+        {
+          "title": "No guarantee of completeness",
+          "body": "Document extraction, OCR, rule checks, and AI-generated text can miss facts, misread source material, or produce incomplete recommendations."
+        },
+        {
+          "title": "User review required",
+          "body": "Users remain responsible for reviewing source documents, checking deadlines and figures, and deciding whether professional legal review is necessary."
+        },
+        {
+          "title": "Third-party dependencies",
+          "body": "Service quality may depend on external providers used for storage, email, payment, OCR, or AI processing. Interruptions or defects in those services can affect results."
+        },
+        {
+          "title": "Product status",
+          "body": "This draft disclaimer should be reviewed together with the final privacy policy and terms before the service is made publicly available."
+        }
+      ]
+    }
+  },
+  "pricingRedirect": {
+    "title": "Pricing",
+    "body": "Preparing the selected workflow."
+  },
+  "checkout": {
+    "eyebrow": "Checkout",
+    "title": "Checkout",
+    "description": "The pricing and routing logic is now wired by product. The payment step can be connected to Stripe next.",
+    "selectedLabel": "Selected product",
+    "totalLabel": "Total",
+    "placeholder": "Stripe checkout is not connected yet. This page acts as the selected-product handoff after registration.",
+    "payAction": "Continue to payment",
+    "secureNote": "Secure payment flow placeholder",
+    "points": {
+      "first": "Selected product is preserved from landing to registration and checkout.",
+      "second": "This is the correct place to attach Stripe Checkout by product code.",
+      "third": "Bundle and individual services now follow different routing logic."
     }
   },
   "common": {

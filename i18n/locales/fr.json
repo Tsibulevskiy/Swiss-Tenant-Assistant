@@ -38,7 +38,9 @@
     },
     "fields": {
       "email": "E-mail",
+      "emailPlaceholder": "Votre e-mail",
       "password": "Mot de passe",
+      "passwordPlaceholder": "Entrez votre mot de passe",
       "newPassword": "Nouveau mot de passe",
       "resetToken": "Jeton de reinitialisation"
     },
@@ -46,19 +48,21 @@
       "eyebrow": "Acces au compte",
       "title": "Un point d'entree protege pour les dossiers, documents et rapports.",
       "description": "Ces pages d'authentification utilisent les flux backend deja mis en place pour l'inscription, la connexion et la reinitialisation du mot de passe.",
+      "pageTitle": "Autorisation et inscription",
+      "footerTitle": "100% confidentiel",
+      "footerBody": "Pas d'abonnement. Pas de frais caches. Votre compte donne acces aux rapports, controles et telechargements proteges.",
       "points": {
-        "privateTitle": "Donnees privees",
-        "privateBody": "L'acces aux documents et rapports n'est possible qu'apres connexion.",
-        "secureTitle": "Sessions securisees",
-        "secureBody": "Cookies de session persistants et verification des roles cote serveur.",
-        "fastTitle": "Acces rapide",
-        "fastBody": "Formulaires clairs pour inscription, connexion et reinitialisation du mot de passe."
+        "contractBody": "Verification du contrat de location",
+        "chargesBody": "Analyse des frais supplementaires",
+        "rightsBody": "Protection de vos droits de locataire",
+        "reportsBody": "Rapports PDF clairs"
       }
     },
     "login": {
       "eyebrow": "Connexion",
       "title": "Se connecter",
       "description": "Accedez a vos verifications, documents et lettres.",
+      "rememberMe": "Se souvenir de moi",
       "submit": "Se connecter",
       "success": "Connexion reussie.",
       "forgotPassword": "Mot de passe oublie ?",
@@ -69,9 +73,12 @@
       "eyebrow": "Inscription",
       "title": "Creer un nouveau compte",
       "description": "Configurez un acces pour les uploads, verifications et rapports.",
+      "localeLabel": "Langue",
+      "passwordHint": "Minimum 8 caracteres",
       "submit": "Creer un compte",
       "success": "Inscription reussie.",
       "haveAccount": "Deja inscrit ?",
+      "selectedProductNotice": "Produit selectionne : {product}. Apres inscription, vous passerez directement au checkout.",
       "signIn": "Aller a la connexion",
       "consents": {
         "terms": "J'accepte les conditions d'utilisation.",
@@ -91,6 +98,8 @@
       "eyebrow": "Reinitialiser le mot de passe",
       "title": "Definir un nouveau mot de passe",
       "description": "Utilisez le jeton de reinitialisation et choisissez un nouveau mot de passe.",
+      "tokenDetected": "Un jeton de reinitialisation est deja present. Definissez maintenant un nouveau mot de passe.",
+      "tokenMissing": "Ouvrez cette page depuis le lien de reinitialisation dans votre email ou collez le jeton manuellement.",
       "submit": "Mettre a jour le mot de passe",
       "success": "Mot de passe mis a jour avec succes."
     }
@@ -159,6 +168,360 @@
       "resetReadyBody": "Les flux mot de passe oublie et reinitialisation sont relies a l'UI et appuyes sur des jetons persistants.",
       "nextUiTitle": "Les modules de dossiers et documents arrivent ensuite",
       "nextUiBody": "Le cadre du tableau de bord est pret pour de vraies listes de dossiers, widgets d'upload et points d'entree modules."
+    }
+  },
+  "landing": {
+    "nav": {
+      "howItWorks": "Parcours",
+      "features": "Fonctionnalites",
+      "pricing": "Tarifs",
+      "faq": "FAQ"
+    },
+    "header": {
+      "signIn": "Se connecter",
+      "startNow": "Creer un compte",
+      "openDashboard": "Ouvrir le tableau de bord",
+      "account": "Tableau de bord"
+    },
+    "hero": {
+      "eyebrow": "Assistance locataire en Suisse",
+      "titleLead": "Verifiez vos documents",
+      "titleLeadSecondary": "locatifs avec plus de clarte",
+      "titleAccent": "en Suisse",
+      "description": "Reperez les points sensibles, evitez les surcouts et avancez avec une prochaine etape plus claire.",
+      "imageAlt": "Paysage alpin suisse avec lac et village",
+      "startNow": "Creer un compte",
+      "signIn": "Se connecter",
+      "documentCheck": "Verifier un document",
+      "watchDemo": "Voir la demo",
+      "openDashboard": "Ouvrir le tableau de bord",
+      "signOutLater": "Aller au tableau de bord",
+      "points": {
+        "documents": "Verifiez decomptes de charges, baux et lettres du bailleur dans un meme flux.",
+        "reports": "Obtenez des constats structures, des prochaines etapes plus claires et un resultat exploitable.",
+        "speed": "Rapide, confidentiel et pense pour les documents locatifs suisses."
+      },
+      "card": {
+        "document": "Decompte de charges",
+        "year": "2024",
+        "amount": "CHF 1'840.50",
+        "finding": "Point signale"
+      }
+    },
+    "features": {
+      "eyebrow": "Features",
+      "title": "Tout le necessaire pour proteger vos droits de locataire en Suisse",
+      "description": "Verifiez vos documents, detectez les risques et recevez des recommandations claires en quelques minutes.",
+      "cards": {
+        "aiTitle": "Analyse AI des documents",
+        "aiBody": "Une AI avancee et un systeme de regles analysent les documents selon le droit locatif suisse.",
+        "risksTitle": "Detection des risques caches",
+        "risksBody": "Nous trouvons les clauses injustes, les charges suspectes et les violations potentielles.",
+        "pdfTitle": "Rapports PDF clairs",
+        "pdfBody": "Recevez des rapports detailles avec explications, recommandations et prochaines etapes.",
+        "lettersTitle": "Generation de lettres",
+        "lettersBody": "Creez des lettres professionnelles a votre bailleur en quelques secondes.",
+        "securityTitle": "Securite des donnees",
+        "securityBody": "Tous les documents sont traites dans un environnement securise et ne sont jamais partages avec des tiers.",
+        "speedTitle": "Resultat en 1-3 minutes",
+        "speedBody": "La plupart des controles sont termines en quelques minutes seulement.",
+        "storageTitle": "Stockage des documents",
+        "storageBody": "Conservez contrats, rapports et lettres au meme endroit et accedez-y a tout moment.",
+        "tenantTitle": "Concu pour les locataires",
+        "tenantBody": "Le service est entierement pense pour le marche suisse de la location residentielle."
+      },
+      "bar": {
+        "swissTitle": "Base sur le droit suisse",
+        "swissBody": "Les controles tiennent compte des specificites de la location en Suisse.",
+        "noSubscriptionTitle": "Sans abonnement",
+        "noSubscriptionBody": "Payez uniquement pour le controle dont vous avez besoin.",
+        "clearTitle": "Fiable et transparent",
+        "clearBody": "Des resultats comprehensibles sans formulations juridiques lourdes.",
+        "supportTitle": "Support si necessaire",
+        "supportBody": "Nous vous aidons a comprendre le resultat de la verification."
+      }
+    },
+    "proof": {
+      "fastTitle": "Rapide",
+      "fastBody": "Un resultat clair en quelques minutes.",
+      "safeTitle": "Fiable",
+      "safeBody": "Traitement prive des documents locatifs.",
+      "clearTitle": "Clair",
+      "clearBody": "Un rendu structure sans surcharge juridique.",
+      "valueTitle": "Utile",
+      "valueBody": "Paiement uniquement pour le flux necessaire."
+    },
+    "process": {
+      "eyebrow": "Comment ca marche",
+      "titleLead": "Comment",
+      "titleAccent": "ca marche",
+      "title": "Comment ca marche",
+      "description": "Analysez vos documents locatifs en quelques minutes et protegez vos droits de locataire.",
+      "uploadTitle": "Telechargez votre document",
+      "uploadBody": "Telechargez votre contrat de bail, decompte de charges, avis d'augmentation de loyer ou lettre du bailleur.",
+      "analysisTitle": "Analyse AI et basee sur des regles",
+      "analysisBody": "Notre systeme verifie automatiquement votre document avec les regles suisses du bail et une analyse assistee par AI.",
+      "reportTitle": "Recevez votre rapport",
+      "reportBody": "Recevez un rapport clair avec les problemes detectes, le niveau de risque et des recommandations pratiques.",
+      "actionTitle": "Passez a l'action",
+      "actionBody": "Generez une lettre professionnelle, telechargez votre rapport PDF et repondez avec confiance a votre bailleur.",
+      "fastTrust": "Analyse en 1-3 minutes",
+      "fastTrustBody": "Temps d'analyse moyen",
+      "swissTrust": "Centre sur le droit locatif suisse",
+      "swissTrustBody": "Base sur le droit locatif suisse et les bonnes pratiques",
+      "pdfTrust": "Rapports PDF professionnels",
+      "pdfTrustBody": "Rapports professionnels a telecharger",
+      "privateTrust": "Securise et prive",
+      "privateTrustBody": "Vos donnees sont chiffrees et protegees",
+      "subscriptionTrust": "Sans abonnement",
+      "subscriptionTrustBody": "Payez uniquement ce dont vous avez besoin"
+    },
+    "pricingSection": {
+      "titleLead": "Tarifs",
+      "titleAccent": "transparents",
+      "description": "Payez uniquement pour le workflow dont vous avez besoin. Pas d'abonnement. Pas de frais caches.",
+      "highlightRiskTitle": "Sans risque",
+      "highlightRiskBody": "Vous pouvez annuler avant le paiement final.",
+      "highlightSafetyTitle": "Securise",
+      "highlightSafetyBody": "Vos documents restent proteges pendant l'analyse.",
+      "highlightNoHiddenTitle": "Sans frais caches",
+      "highlightNoHiddenBody": "Le prix exact est visible avant paiement.",
+      "highlightPrivateTitle": "Prive",
+      "highlightPrivateBody": "Les documents locatifs suivent un flux controle.",
+      "listTitle": "Choisissez le controle necessaire",
+      "contractTitle": "Mietvertrag Checker",
+      "contractBody": "Verification du bail avant signature.",
+      "contractPrice": "CHF 19",
+      "nebenkostenTitle": "Nebenkosten Checker",
+      "nebenkostenBody": "Verification du decompte annuel de charges.",
+      "nebenkostenPrice": "CHF 19",
+      "rentIncreaseTitle": "Mietzinserhohung Checker",
+      "rentIncreaseBody": "Verification d'un avis d'augmentation de loyer avant reponse.",
+      "rentIncreasePrice": "CHF 24",
+      "depositTitle": "Deposit Return Checker",
+      "depositBody": "Verification d'un litige ou d'une retenue sur depot.",
+      "depositPrice": "CHF 29",
+      "letterTitle": "Letter Generator",
+      "letterBody": "Generez une lettre au bailleur a partir d'entrees guidees.",
+      "letterPrice": "CHF 9",
+      "noteLead": "Inclus :",
+      "noteBody": " chaque controle payant inclut une analyse AI, des recommandations et un rapport PDF.",
+      "bundleBadge": "Meilleure offre",
+      "bundleTitle": "Tenant Protection Bundle",
+      "bundleBody": "Tout le necessaire pour verifier des documents et preparer l'action suivante du locataire.",
+      "bundlePrice": "CHF 39",
+      "bundleSavings": "Economisez jusqu'a CHF 33",
+      "bundleFeatureChecks": "3 controles de documents au choix",
+      "bundleFeatureLetters": "Generation illimitee de lettres",
+      "bundleFeatureReports": "Rapports PDF professionnels",
+      "bundleFeatureStorage": "Stockage des documents pendant 12 mois",
+      "bundleFeaturePriority": "Traitement prioritaire",
+      "bundleFeatureSavings": "Moins cher que l'achat separe des services",
+      "bundleCta": "Choisir le bundle",
+      "bundleFootnote": "Paiement securise via Stripe",
+      "socialTitle": "Des locataires dans toute la Suisse utilisent deja une revue documentaire structuree.",
+      "socialBody": "Rejoignez un workflow plus simple et plus cible.",
+      "ratingLead": "Excellent",
+      "ratingValue": "4.8 / 5 Trustpilot"
+    },
+    "faq": {
+      "title": "Questions frequentes",
+      "description": "Tout ce qu'il faut savoir avant de verifier vos documents.",
+      "ctaTitle": "Encore des questions ?",
+      "ctaDescription": "Essayez votre premier controle de document aujourd'hui.",
+      "ctaAction": "Verifier mon document",
+      "trust": {
+        "securePayment": "Paiement securise",
+        "pdfReports": "Rapports PDF",
+        "swissFocused": "Analyse orientee Suisse",
+        "noSubscription": "Sans abonnement"
+      },
+      "items": {
+        "documents": {
+          "question": "Quels documents puis-je verifier ?",
+          "answer": "Vous pouvez analyser des contrats de bail, des decomptes annuels de charges, des avis d'augmentation de loyer, des deductions sur depot de garantie et des lettres du bailleur."
+        },
+        "timing": {
+          "question": "Combien de temps prend l'analyse ?",
+          "answer": "La plupart des documents sont analyses en 1 a 3 minutes. Les fichiers plus volumineux peuvent prendre un peu plus de temps."
+        },
+        "result": {
+          "question": "Que recois-je apres l'analyse ?",
+          "answer": "Vous recevez un rapport detaille avec les problemes detectes, des explications, des recommandations et, si applicable, un projet de lettre a envoyer a votre bailleur."
+        },
+        "legal": {
+          "question": "S'agit-il d'un conseil juridique ?",
+          "answer": "Non. Swiss Tenant Assistant fournit une analyse informative et des recommandations. Cela ne remplace pas l'avis d'un avocat qualifie ou d'une association de locataires."
+        },
+        "security": {
+          "question": "Mes donnees sont-elles securisees ?",
+          "answer": "Oui. Les documents sont chiffres, traites de maniere securisee et jamais partages avec des tiers. L'acces aux rapports est protege et limite dans le temps."
+        },
+        "pdf": {
+          "question": "Puis-je telecharger un rapport PDF ?",
+          "answer": "Oui. Chaque analyse terminee inclut un rapport PDF professionnel que vous pouvez telecharger et conserver."
+        },
+        "letters": {
+          "question": "La plateforme peut-elle generer des lettres pour mon bailleur ?",
+          "answer": "Oui. Swiss Tenant Assistant peut generer des lettres pour les litiges de charges, les demandes de reparation, les demandes de restitution de depot et d'autres situations courantes."
+        },
+        "languages": {
+          "question": "Quelles langues sont prises en charge ?",
+          "answer": "Allemand, anglais, francais et italien."
+        },
+        "serious": {
+          "question": "Que se passe-t-il si la plateforme detecte un probleme grave ?",
+          "answer": "Le rapport explique le probleme et propose les prochaines etapes. Pour les situations juridiques complexes, nous recommandons de contacter un avocat ou une association de locataires."
+        },
+        "subscription": {
+          "question": "Ai-je besoin d'un abonnement ?",
+          "answer": "Non. Vous payez uniquement pour les controles dont vous avez besoin. Il n'y a pas de frais d'abonnement recurrents."
+        }
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Concu pour l'action",
+      "title": "Pas un chatbot generique. Un workflow locataire etroit du document telecharge au resultat exploitable.",
+      "description": "La direction produit reste simple: moins de theorie, plus de traitement documentaire structure, des recommandations plus claires et une communication locataire plus rapide.",
+      "badge": "Workflow locataire suisse"
+    },
+    "footer": {
+      "description": "Swiss Tenant Assistant est un MVP en cours de construction. La plateforme vise a aider les locataires a verifier leurs documents, generer des lettres et organiser leur dossier dans un seul flux.",
+      "disclaimer": "Pas de conseil juridique. Les sorties doivent rester accompagnees d'une relecture et d'un disclaimer.",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "impressum": "Impressum",
+      "disclaimerLink": "Disclaimer",
+      "dashboard": "Tableau de bord",
+      "login": "Login",
+      "register": "Inscription"
+    }
+  },
+  "legal": {
+    "updatedLabel": "Derniere mise a jour :",
+    "updatedDate": "16 juin 2026",
+    "draftTitle": "Texte provisoire",
+    "draftBody": "Ces pages sont des placeholders prets pour le produit. Avant le lancement public, il faut ajouter les textes juridiques definitifs et les informations de l'entite.",
+    "privacy": {
+      "title": "Privacy",
+      "intro": "Cette page explique comment Swiss Tenant Assistant peut collecter, utiliser et proteger les informations lorsqu'un utilisateur televerse des documents, cree un compte ou achete un workflow.",
+      "sections": [
+        {
+          "title": "Donnees collectees",
+          "body": "Le service peut collecter les informations de compte, les documents locatifs televerses, les metadonnees de paiement, les messages de support et les journaux techniques necessaires au fonctionnement."
+        },
+        {
+          "title": "Utilisation des donnees",
+          "body": "Les donnees soumises servent a authentifier les utilisateurs, executer l'extraction de documents, generer des rapports ou des lettres, traiter les paiements, prevenir les abus et ameliorer la fiabilite."
+        },
+        {
+          "title": "Stockage et conservation",
+          "body": "Les documents et enregistrements associes peuvent etre conserves pendant la duree necessaire pour fournir le workflow, conserver l'historique d'audit, resoudre des litiges et respecter les obligations legales."
+        },
+        {
+          "title": "Sous-traitants et infrastructure",
+          "body": "Certains traitements peuvent reposer sur des fournisseurs d'hebergement, d'email, de paiement, d'OCR ou d'AI. La politique finale devra lister ces fournisseurs et la base legale des transferts."
+        },
+        {
+          "title": "Droits des utilisateurs",
+          "body": "Les utilisateurs devraient pouvoir demander l'acces, la correction, la suppression ou l'export de leurs donnees personnelles, sous reserve des obligations de conservation et de conformite."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms",
+      "intro": "Ces conditions decrivent les regles prevues pour l'acces a Swiss Tenant Assistant et pour l'utilisation de ses workflows de revue de documents et de communication locataire.",
+      "sections": [
+        {
+          "title": "Portee du service",
+          "body": "Le produit est un workflow logiciel cible pour la gestion de documents locatifs, la detection de problemes et la generation d'ebauches. Ce n'est pas un cabinet d'avocats et il ne cree pas de relation avocat-client."
+        },
+        {
+          "title": "Comptes et acces",
+          "body": "Les utilisateurs sont responsables de leurs identifiants, de l'usage licite du service et de l'exactitude des informations televersees ou soumises."
+        },
+        {
+          "title": "Paiements et contenus payants",
+          "body": "Certaines verifications, certains rapports ou certaines lettres peuvent necessiter un paiement avant d'etre accessibles. Les regles de facturation et de remboursement doivent etre finalisees avant le lancement."
+        },
+        {
+          "title": "Disponibilite",
+          "body": "Le service peut evoluer, etre suspendu ou devenir indisponible pendant la maintenance, les mises a jour ou des incidents techniques. Une disponibilite ininterrompue n'est pas garantie."
+        },
+        {
+          "title": "Limitation de responsabilite",
+          "body": "Les conditions finales doivent definir les exclusions de responsabilite, l'usage autorise, le droit applicable et le traitement des litiges selon la juridiction cible."
+        }
+      ]
+    },
+    "impressum": {
+      "title": "Impressum",
+      "intro": "Cette page est reservee aux informations sur l'editeur qui devront etre publiees avant le lancement sur le marche concerne.",
+      "noteTitle": "Obligatoire avant lancement",
+      "noteBody": "Ne publiez pas le produit tant que ces placeholders n'ont pas ete remplaces par le nom de l'entite, l'adresse postale, l'email de contact et les informations de registre ou de TVA obligatoires.",
+      "sections": [
+        {
+          "title": "Editeur",
+          "body": "Les informations de l'operateur Swiss Tenant Assistant n'ont pas encore ete inserees dans ce repository."
+        },
+        {
+          "title": "Contact",
+          "body": "La version de production doit inclure une adresse email joignable et tout autre canal de contact requis par la reglementation locale."
+        },
+        {
+          "title": "Identifiants de l'entite",
+          "body": "Le cas echeant, ajoutez les details du registre du commerce, le numero de TVA, le representant autorise et les references a l'autorite de surveillance."
+        },
+        {
+          "title": "Statut de publication",
+          "body": "Cette page sert actuellement de placeholder afin que le footer et le routage soient complets pendant la construction du produit."
+        }
+      ]
+    },
+    "disclaimer": {
+      "title": "Disclaimer",
+      "intro": "Cette page precise les limites prevues des sorties du produit et la verification attendue des utilisateurs avant de se fier a des findings, resumes ou lettres generees.",
+      "sections": [
+        {
+          "title": "Pas de conseil juridique",
+          "body": "Les sorties sont des resultats logiciels informatifs et des brouillons. Elles ne doivent pas etre presentees comme un conseil juridique, une representation legale ou un substitut a un conseil qualifie."
+        },
+        {
+          "title": "Aucune garantie d'exhaustivite",
+          "body": "L'extraction de documents, l'OCR, les regles et les textes generes par l'AI peuvent omettre des faits, mal lire les sources ou produire des recommandations incompletes."
+        },
+        {
+          "title": "Verification utilisateur requise",
+          "body": "Les utilisateurs restent responsables de la verification des documents sources, des delais et des montants, et de la decision de demander ou non un examen juridique professionnel."
+        },
+        {
+          "title": "Dependance a des services tiers",
+          "body": "La qualite du service peut dependre de fournisseurs externes pour l'hebergement, l'email, le paiement, l'OCR ou l'AI. Leurs interruptions ou defauts peuvent affecter les resultats."
+        },
+        {
+          "title": "Statut du produit",
+          "body": "Ce disclaimer provisoire doit etre relu avec la politique de confidentialite finale et les conditions finales avant toute mise a disposition publique."
+        }
+      ]
+    }
+  },
+  "pricingRedirect": {
+    "title": "Tarifs",
+    "body": "Preparation du workflow selectionne."
+  },
+  "checkout": {
+    "eyebrow": "Checkout",
+    "title": "Checkout",
+    "description": "La logique de prix et de routage est maintenant reliee au produit. L'etape suivante consiste a brancher Stripe Checkout.",
+    "selectedLabel": "Produit selectionne",
+    "totalLabel": "Total",
+    "placeholder": "Stripe Checkout n'est pas encore connecte. Cette page sert actuellement de relais du produit choisi apres inscription.",
+    "payAction": "Continuer vers le paiement",
+    "secureNote": "Placeholder de paiement securise",
+    "points": {
+      "first": "Le produit choisi est conserve du landing a l'inscription puis au checkout.",
+      "second": "C'est ici qu'il faut rattacher Stripe Checkout par code produit.",
+      "third": "Le bundle et les services unitaires suivent maintenant une logique de routage differente."
     }
   },
   "common": {

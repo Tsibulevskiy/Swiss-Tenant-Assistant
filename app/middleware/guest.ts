@@ -4,6 +4,6 @@ export default defineNuxtRouteMiddleware(async () => {
   const user = await auth.fetchCurrentUser()
 
   if (user) {
-    return navigateTo(localePath('/'))
+    return navigateTo(localePath('/dashboard'))
   }
 })
