@@ -111,69 +111,240 @@
   },
   "dashboard": {
     "hero": {
-      "eyebrow": "Dashboard Skelett",
-      "title": "Eine Arbeitsflaeche fuer Checks, Dokumente und Reports.",
-      "description": "Dieses Dashboard arbeitet noch mit Platzhalterdaten, aber die Struktur ist jetzt bereit fuer echte Faelle, Uploads und bezahlte Report-Flows."
+      "title": "Willkommen zurueck, {name}",
+      "description": "Verwalten Sie Ihre Mietdokumente und Pruefungen an einem Ort.",
+      "uploadAction": "Dokument hochladen"
     },
     "stats": {
-      "openCases": "Offene Faelle",
-      "openCasesDetail": "Noch keine aktiven Mieterfaelle.",
-      "documents": "Dokumente",
-      "documentsDetail": "Uploads erscheinen hier, sobald der Storage-Flow angebunden ist.",
-      "pendingActions": "Offene Aktionen",
-      "pendingActionsDetail": "Naechste Nutzeraufgaben werden hier sichtbar.",
-      "reports": "Reports",
-      "reportsDetail": "Generierte PDFs erscheinen hier, sobald der Report-Flow verdrahtet ist."
-    },
-    "workflow": {
-      "eyebrow": "Kernablauf",
-      "title": "Der Hauptpfad des Produkts ist bereits definiert.",
-      "description": "Jedes Modul wird in denselben klaren Mieterfluss von Upload bis Download eingebunden.",
-      "upload": "Mietdokument hochladen",
-      "analyze": "Extraktion und Analyse ausfuehren",
-      "pay": "Bezahltes Ergebnis freischalten",
-      "download": "Report oder Brief herunterladen"
-    },
-    "cases": {
-      "eyebrow": "Fallliste",
-      "title": "Letzte Faelle",
-      "emptyBadge": "Empty State",
-      "emptyTitle": "Es wurden noch keine Mieterfaelle erstellt.",
-      "emptyDescription": "Sobald Upload und Check-Erstellung verbunden sind, erscheinen hier aktive Nebenkostenpruefungen, Vertragschecks und generierte Briefe."
+      "documents": "Gesamte Dokumente",
+      "documentsDelta": "+2 diesen Monat",
+      "completedChecks": "Abgeschlossene Pruefungen",
+      "completedChecksDelta": "+3 diesen Monat",
+      "generatedLetters": "Erstellte Briefe",
+      "generatedLettersDelta": "+1 diesen Monat",
+      "openDeadlines": "Offene Fristen",
+      "openDeadlinesDelta": "Alle ansehen"
     },
     "quickActions": {
-      "eyebrow": "Schnellstart",
-      "title": "Waehle den ersten Workflow"
+      "title": "Schnellaktionen",
+      "nebenkostenTitle": "Nebenkosten Check starten",
+      "nebenkostenBody": "Pruefen Sie Ihre Nebenkostenabrechnung auf moegliche Probleme.",
+      "contractTitle": "Mietvertrag Check starten",
+      "contractBody": "Pruefen Sie Ihren Mietvertrag auf unfaire Klauseln.",
+      "letterTitle": "Brief erstellen",
+      "letterBody": "Erstellen Sie einen professionellen Brief an Ihren Vermieter.",
+      "uploadTitle": "Dokument hochladen",
+      "uploadBody": "Laden Sie ein Dokument zur Analyse hoch."
+    },
+    "sections": {
+      "recentChecks": "Letzte Pruefungen",
+      "upcomingDeadlines": "Kommende Fristen",
+      "recentDocuments": "Letzte Dokumente",
+      "plan": "Ihr Plan"
     },
     "actions": {
-      "nebenkosten": {
-        "title": "Nebenkosten Check",
-        "description": "Starte die Pruefung der Jahresabrechnung mit Upload, Extraktion und regelbasierter Analyse.",
-        "badge": "Check"
-      },
-      "contract": {
-        "title": "Mietvertrag Check",
-        "description": "Pruefe Depot, Fristen und Nebenkostenklauseln vor der Unterschrift.",
-        "badge": "Review"
-      },
-      "letter": {
-        "title": "Brief Generator",
-        "description": "Bereite Einsprachen, Anfragen und strukturierte Mieterkommunikation vor.",
-        "badge": "Brief"
+      "viewAllChecks": "Alle Pruefungen ansehen",
+      "viewAll": "Alle ansehen",
+      "openVault": "Dokumentenablage oeffnen",
+      "moreDocuments": "+8 weitere Dokumente"
+    },
+    "table": {
+      "document": "Dokument",
+      "type": "Typ",
+      "risk": "Risikostufe",
+      "status": "Status",
+      "date": "Datum"
+    },
+    "checkTypes": {
+      "nebenkosten": "Nebenkosten",
+      "contract": "Vertrag",
+      "rentIncrease": "Mietzinserhoehung"
+    },
+    "risk": {
+      "low": "Niedrig",
+      "medium": "Mittel",
+      "high": "Hoch"
+    },
+    "status": {
+      "ready": "Bereit"
+    },
+    "deadlines": {
+      "noticeTitle": "Kuendigungsfrist",
+      "noticeRemaining": "45 Tage offen",
+      "rentIncreaseTitle": "Antwort auf Mietzinserhoehung",
+      "rentIncreaseRemaining": "22 Tage offen",
+      "documentsTitle": "Belege anfordern",
+      "documentsRemaining": "14 Tage offen"
+    },
+    "plan": {
+      "badge": "Pay-as-you-go",
+      "description": "Sie haben kein aktives Abonnement. Zahlen Sie nur fuer die Pruefungen, die Sie brauchen.",
+      "cta": "Preise ansehen"
+    }
+  },
+  "dashboardPages": {
+    "documents": {
+      "eyebrow": "Dokumente",
+      "title": "Meine Dokumente",
+      "description": "Hier erscheinen hochgeladene Vertraege, Abrechnungen, Briefe und generierte Reports."
+    },
+    "checks": {
+      "eyebrow": "Pruefungen",
+      "title": "Pruefungen",
+      "description": "Hier sehen Sie laufende und abgeschlossene Dokumentpruefungen mit ihrem aktuellen Status."
+    },
+    "letters": {
+      "eyebrow": "Briefe",
+      "title": "Briefe",
+      "description": "Hier liegen Briefentwuerfe, gesendete Schreiben und herunterladbare Kommunikation mit Vermietern."
+    },
+    "deadlines": {
+      "eyebrow": "Fristen",
+      "title": "Fristen",
+      "description": "Hier werden Kuendigungsfristen, Antwortfristen und bevorstehende Mieteraktionen gesammelt."
+    },
+    "payments": {
+      "eyebrow": "Zahlungen",
+      "title": "Zahlungen",
+      "description": "Hier erscheinen Zahlungen, Rechnungen und der Status gekaufter Pruefungen."
+    },
+    "settings": {
+      "eyebrow": "Einstellungen",
+      "title": "Einstellungen",
+      "description": "Hier finden Sie Kontoeinstellungen, Sprache und Sicherheitsoptionen."
+    },
+    "support": {
+      "eyebrow": "Hilfe und Support",
+      "title": "Hilfe und Support",
+      "description": "Hier werden Support-Kontakte, haeufige Antworten und Hinweise zum Produkt bereitgestellt."
+    }
+  },
+  "documentsPage": {
+    "eyebrow": "Dokumente",
+    "title": "Meine Dokumente",
+    "description": "Laden Sie Mietdokumente hoch, verfolgen Sie ihren Status und laden Sie sie bei Bedarf erneut herunter.",
+    "stats": {
+      "total": "Gesamte Dokumente",
+      "ready": "Bereit",
+      "processing": "In Bearbeitung"
+    },
+    "actions": {
+      "refresh": "Aktualisieren",
+      "download": "Download",
+      "createCheck": "Pruefung erstellen",
+      "createCheckError": "Die Pruefung konnte nicht erstellt werden."
+    },
+    "upload": {
+      "title": "Neues Dokument hochladen",
+      "kindLabel": "Dokumenttyp",
+      "fileLabel": "Datei waehlen",
+      "submit": "Hochladen",
+      "errors": {
+        "fileRequired": "Bitte waehlen Sie vor dem Hochladen eine Datei aus.",
+        "generic": "Das Dokument konnte nicht hochgeladen werden."
       }
     },
-    "activity": {
-      "eyebrow": "Build Status",
-      "title": "Letzter Entwicklungsstand",
-      "done": "Fertig",
-      "inProgress": "Als Nächstes",
-      "authReadyTitle": "Authentication Backend ist einsatzbereit",
-      "authReadyBody": "Registrierung, Login, Logout, geschuetzte Routen und Rollenpruefung wurden bereits end-to-end verifiziert.",
-      "resetReadyTitle": "Passwort Recovery ist verdrahtet",
-      "resetReadyBody": "Forgot-Password und Reset-Password sind an das UI angebunden und werden durch persistente Reset-Tokens getragen.",
-      "nextUiTitle": "Case- und Dokumentmodule folgen als Nächstes",
-      "nextUiBody": "Der Dashboard-Rahmen ist bereit fuer echte Falllisten, Upload-Widgets und modulspezifische Einstiege."
+    "list": {
+      "title": "Dokumentenliste"
+    },
+    "table": {
+      "name": "Name",
+      "kind": "Typ",
+      "size": "Groesse",
+      "status": "Status",
+      "uploaded": "Hochgeladen",
+      "actions": "Aktionen"
+    },
+    "status": {
+      "uploaded": "Hochgeladen",
+      "processing": "In Bearbeitung",
+      "ready": "Bereit",
+      "failed": "Fehlgeschlagen",
+      "deleted": "Geloescht"
+    },
+    "kinds": {
+      "mietvertrag": "Mietvertrag",
+      "nebenkostenabrechnung": "Nebenkostenabrechnung",
+      "rentIncrease": "Mietzinserhoehung",
+      "rent_increase_letter": "Mietzinserhoehung",
+      "landlordLetter": "Vermieterschreiben",
+      "landlord_letter": "Vermieterschreiben",
+      "other": "Sonstiges"
+    },
+    "empty": {
+      "title": "Noch keine Dokumente hochgeladen.",
+      "description": "Laden Sie Ihren ersten Vertrag, Ihre erste Abrechnung oder ein Vermieterschreiben hoch, um den Workflow zu starten."
     }
+  },
+  "checksPage": {
+    "eyebrow": "Pruefungen",
+    "title": "Pruefungen",
+    "description": "Verfolgen Sie laufende, abgeschlossene und zahlungspflichtige Pruefungen an einem Ort.",
+    "actions": {
+      "refresh": "Aktualisieren",
+      "startCheck": "Pruefung starten",
+      "viewDetails": "Details ansehen"
+    },
+    "stats": {
+      "total": "Gesamte Pruefungen",
+      "active": "Aktiv",
+      "ready": "Bereit",
+      "awaitingPayment": "warten auf Zahlung"
+    },
+    "list": {
+      "title": "Pruefungsliste"
+    },
+    "types": {
+      "nebenkosten_check": "Nebenkosten Check",
+      "mietvertrag_check": "Mietvertrag Check",
+      "rent_increase_check": "Mietzinserhoehung Check",
+      "deposit_return_check": "Kautionsrueckgabe Check"
+    },
+    "status": {
+      "draft": "Entwurf",
+      "uploaded": "Hochgeladen",
+      "extracting": "Extraktion",
+      "analyzing": "Analyse",
+      "payment_required": "Zahlung erforderlich",
+      "ready": "Bereit",
+      "failed": "Fehlgeschlagen"
+    },
+    "risk": {
+      "low": "Niedriges Risiko",
+      "medium": "Mittleres Risiko",
+      "high": "Hohes Risiko"
+    },
+    "createdAt": "Erstellt",
+    "noSummary": "Fuer diese Pruefung ist noch keine Zusammenfassung verfuegbar.",
+    "empty": {
+      "title": "Noch keine Pruefungen erstellt.",
+      "description": "Starten Sie eine Dokumentpruefung aus dem Pricing, um Status und Ergebnisse hier zu sehen."
+    }
+  },
+  "checkDetailPage": {
+    "back": "Zurueck zu Pruefungen",
+    "notFound": "Die angeforderte Pruefung konnte nicht geladen werden.",
+    "eyebrow": "Pruefungsdetails",
+    "startedAt": "Gestartet",
+    "finishedAt": "Beendet",
+    "aiSummaryTitle": "AI Zusammenfassung",
+    "ruleFindingsTitle": "Regel-Findings",
+    "recommendedActionTitle": "Empfohlene Aktion",
+    "noSummary": "Fuer diese Pruefung liegt noch keine Zusammenfassung vor.",
+    "documentTitle": "Primaeres Dokument",
+    "documentName": "Dokumentname",
+    "documentType": "Dokumenttyp",
+    "documentSize": "Dateigroesse",
+    "noDocument": "Dieser Pruefung ist kein primaeres Dokument zugeordnet.",
+    "extractionTitle": "Extraktionsergebnis",
+    "extractionEngine": "Engine",
+    "extractionConfidence": "Konfidenz",
+    "extractionCreated": "Erstellt",
+    "extractedText": "Extrahierter Text",
+    "noExtractionText": "Kein extrahierter Text verfuegbar.",
+    "noExtraction": "Fuer diese Pruefung liegt noch kein Extraktionsergebnis vor.",
+    "matchedValue": "Trefferwert",
+    "noFindings": "Es sind noch keine Regel-Findings gespeichert. Dieser Bereich ist fuer spaetere Rule-Engine-Ausgaben vorbereitet."
   },
   "landing": {
     "nav": {

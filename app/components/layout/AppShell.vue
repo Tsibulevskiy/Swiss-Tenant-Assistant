@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { markRaw } from 'vue'
-import { Bell, CalendarDays, CircleHelp, CreditCard, FileSearch, FolderOpen, House, LogOut, Mail, Menu, Settings, ShieldCheck, X } from 'lucide-vue-next'
+import { Bell, CalendarDays, CircleHelp, CreditCard, FileSearch, FolderOpen, House, LogOut, Mail, Menu, Settings, X } from 'lucide-vue-next'
 
 const appStore = useAppStore()
 const auth = useAuth()
@@ -28,57 +28,49 @@ const navigation = computed(() => [
     key: 'dashboard',
     label: t('shell.nav.dashboard'),
     href: localePath('/dashboard'),
-    icon: icons.dashboard,
-    enabled: true
+    icon: icons.dashboard
   },
   {
     key: 'documents',
     label: t('shell.nav.documents'),
-    href: '#',
-    icon: icons.documents,
-    enabled: false
+    href: localePath('/documents'),
+    icon: icons.documents
   },
   {
     key: 'checks',
     label: t('shell.nav.checks'),
-    href: '#',
-    icon: icons.checks,
-    enabled: false
+    href: localePath('/checks'),
+    icon: icons.checks
   },
   {
     key: 'letters',
     label: t('shell.nav.letters'),
-    href: '#',
-    icon: icons.letters,
-    enabled: false
+    href: localePath('/letters'),
+    icon: icons.letters
   },
   {
     key: 'deadlines',
     label: t('shell.nav.deadlines'),
-    href: '#',
-    icon: icons.deadlines,
-    enabled: false
+    href: localePath('/deadlines'),
+    icon: icons.deadlines
   },
   {
     key: 'payments',
     label: t('shell.nav.payments'),
-    href: '#',
-    icon: icons.payments,
-    enabled: false
+    href: localePath('/payments'),
+    icon: icons.payments
   },
   {
     key: 'settings',
     label: t('shell.nav.settings'),
-    href: '#',
-    icon: icons.settings,
-    enabled: false
+    href: localePath('/settings'),
+    icon: icons.settings
   },
   {
     key: 'support',
     label: t('shell.nav.support'),
-    href: '#',
-    icon: icons.support,
-    enabled: false
+    href: localePath('/support'),
+    icon: icons.support
   }
 ])
 
@@ -93,6 +85,15 @@ const localeOptions = computed(() =>
 )
 
 const logoSrc = '/swiss-tenant-assistant-icon.svg'
+const userDisplayName = computed(() => auth.user.value?.email?.split('@')[0] || 'Anna Mueller')
+const userInitials = computed(() =>
+  userDisplayName.value
+    .split(/[.\s_-]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part[0]?.toUpperCase())
+    .join('') || 'AM'
+)
 
 async function handleLogout() {
   await auth.logout()
@@ -162,7 +163,6 @@ async function handleLocaleChange(event: Event) {
               route.path === item.href
                 ? 'bg-emerald-50 text-emerald-700'
                 : 'text-slate-600 hover:bg-slate-50 hover:text-slate-950',
-              !item.enabled ? 'pointer-events-none opacity-55' : ''
             ]"
             @click="appStore.setSidebarOpen(false)"
           >
@@ -195,7 +195,7 @@ async function handleLocaleChange(event: Event) {
       </aside>
 
       <div class="flex min-w-0 flex-1 flex-col">
-        <header class="rounded-[2rem] border border-slate-200 bg-white px-5 py-4 shadow-[0_18px_40px_rgba(15,23,42,0.05)]">
+        <header class="sticky top-4 z-20 rounded-[2rem] border border-slate-200 bg-white px-5 py-4 shadow-[0_18px_40px_rgba(15,23,42,0.05)]">
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
               <button
@@ -207,13 +207,18 @@ async function handleLocaleChange(event: Event) {
                 <Menu class="h-5 w-5" />
               </button>
 
-              <div>
-                <p class="text-xs uppercase tracking-[0.28em] text-slate-500">
-                  {{ t('shell.header.eyebrow') }}
-                </p>
-                <h1 class="text-2xl font-semibold tracking-tight text-slate-950">
-                  {{ t('shell.header.title') }}
-                </h1>
+              <div class="hidden items-center gap-3 rounded-full border border-slate-200 bg-white px-3 py-2 sm:flex">
+                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[linear-gradient(135deg,#fde68a,#fca5a5)] text-xs font-semibold text-slate-700">
+                  {{ userInitials }}
+                </div>
+                <div class="min-w-0">
+                  <p class="truncate text-sm font-medium text-slate-950">
+                    {{ userDisplayName }}
+                  </p>
+                  <p class="text-xs text-slate-500">
+                    {{ t('shell.header.status') }}
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -230,24 +235,19 @@ async function handleLocaleChange(event: Event) {
 
               <button
                 type="button"
-                class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600"
+                class="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600"
               >
                 <Bell class="h-4 w-4" />
+                <span class="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-rose-500" />
               </button>
 
-              <div class="hidden items-center gap-3 rounded-full border border-slate-200 bg-white px-3 py-2 sm:flex">
-                <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">
-                  <ShieldCheck class="h-4 w-4" />
-                </div>
-                <div class="min-w-0">
-                  <p class="truncate text-sm font-medium text-slate-950">
-                    {{ auth.user.value?.email || t('app.name') }}
-                  </p>
-                  <p class="text-xs text-slate-500">
-                    {{ t('shell.header.status') }}
-                  </p>
-                </div>
-              </div>
+              <button
+                type="button"
+                class="hidden h-11 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:text-slate-950 lg:inline-flex"
+                @click="handleLogout"
+              >
+                {{ t('shell.actions.logout') }}
+              </button>
             </div>
           </div>
         </header>

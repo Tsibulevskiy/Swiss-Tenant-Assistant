@@ -111,69 +111,240 @@
   },
   "dashboard": {
     "hero": {
-      "eyebrow": "Scheletro dashboard",
-      "title": "Una superficie di lavoro per verifiche, documenti e report.",
-      "description": "Questa dashboard usa ancora dati segnaposto, ma la struttura e pronta per casi reali, upload e flussi di report sbloccati dal pagamento."
+      "title": "Bentornato, {name}",
+      "description": "Gestisci documenti di locazione e verifiche in un unico posto.",
+      "uploadAction": "Carica documento"
     },
     "stats": {
-      "openCases": "Casi aperti",
-      "openCasesDetail": "Nessun caso attivo al momento.",
-      "documents": "Documenti",
-      "documentsDetail": "Gli upload appariranno qui quando il flusso storage sara collegato.",
-      "pendingActions": "Azioni in sospeso",
-      "pendingActionsDetail": "Le prossime attivita utente appariranno qui.",
-      "reports": "Report",
-      "reportsDetail": "I PDF generati appariranno qui quando il flusso report sara collegato."
-    },
-    "workflow": {
-      "eyebrow": "Percorso principale",
-      "title": "Il percorso principale del prodotto e gia definito.",
-      "description": "Ogni modulo si aggancera allo stesso flusso locatario, dall'upload fino al download.",
-      "upload": "Carica un documento di locazione",
-      "analyze": "Esegui estrazione e analisi",
-      "pay": "Sblocca il risultato a pagamento",
-      "download": "Scarica report o lettera"
-    },
-    "cases": {
-      "eyebrow": "Coda pratiche",
-      "title": "Pratiche recenti",
-      "emptyBadge": "Stato vuoto",
-      "emptyTitle": "Non e stata ancora creata alcuna pratica.",
-      "emptyDescription": "Quando upload e creazione check saranno collegati, qui compariranno verifiche spese accessorie, controlli contratto e lettere generate."
+      "documents": "Documenti totali",
+      "documentsDelta": "+2 questo mese",
+      "completedChecks": "Verifiche completate",
+      "completedChecksDelta": "+3 questo mese",
+      "generatedLetters": "Lettere generate",
+      "generatedLettersDelta": "+1 questo mese",
+      "openDeadlines": "Scadenze aperte",
+      "openDeadlinesDelta": "Vedi tutto"
     },
     "quickActions": {
-      "eyebrow": "Azioni rapide",
-      "title": "Scegli il primo flusso"
+      "title": "Azioni rapide",
+      "nebenkostenTitle": "Avvia check Nebenkosten",
+      "nebenkostenBody": "Controlla il rendiconto delle spese accessorie per possibili problemi.",
+      "contractTitle": "Avvia check Mietvertrag",
+      "contractBody": "Esamina il contratto di affitto per clausole ingiuste.",
+      "letterTitle": "Genera lettera",
+      "letterBody": "Crea una lettera professionale per il proprietario.",
+      "uploadTitle": "Carica documento",
+      "uploadBody": "Carica qualsiasi documento per l'analisi."
+    },
+    "sections": {
+      "recentChecks": "Verifiche recenti",
+      "upcomingDeadlines": "Prossime scadenze",
+      "recentDocuments": "Documenti recenti",
+      "plan": "Il tuo piano"
     },
     "actions": {
-      "nebenkosten": {
-        "title": "Verifica spese accessorie",
-        "description": "Avvia il flusso di controllo annuale con upload, estrazione e analisi basata su regole.",
-        "badge": "Check"
-      },
-      "contract": {
-        "title": "Verifica contratto",
-        "description": "Controlla deposito, termini e clausole sulle spese prima della firma.",
-        "badge": "Review"
-      },
-      "letter": {
-        "title": "Generatore di lettere",
-        "description": "Prepara opposizioni, richieste e bozze strutturate di comunicazione.",
-        "badge": "Lettera"
+      "viewAllChecks": "Vedi tutte le verifiche",
+      "viewAll": "Vedi tutto",
+      "openVault": "Apri archivio documenti",
+      "moreDocuments": "+8 altri documenti"
+    },
+    "table": {
+      "document": "Documento",
+      "type": "Tipo",
+      "risk": "Livello di rischio",
+      "status": "Stato",
+      "date": "Data"
+    },
+    "checkTypes": {
+      "nebenkosten": "Nebenkosten",
+      "contract": "Contratto",
+      "rentIncrease": "Aumento affitto"
+    },
+    "risk": {
+      "low": "Basso",
+      "medium": "Medio",
+      "high": "Alto"
+    },
+    "status": {
+      "ready": "Pronto"
+    },
+    "deadlines": {
+      "noticeTitle": "Termine di disdetta",
+      "noticeRemaining": "45 giorni rimasti",
+      "rentIncreaseTitle": "Rispondi all'aumento dell'affitto",
+      "rentIncreaseRemaining": "22 giorni rimasti",
+      "documentsTitle": "Richiedi documenti giustificativi",
+      "documentsRemaining": "14 giorni rimasti"
+    },
+    "plan": {
+      "badge": "Pay-as-you-go",
+      "description": "Non hai un abbonamento attivo. Paga solo per le verifiche di cui hai bisogno.",
+      "cta": "Vedi prezzi"
+    }
+  },
+  "dashboardPages": {
+    "documents": {
+      "eyebrow": "Documenti",
+      "title": "I miei documenti",
+      "description": "Questa sezione mostrera contratti, conteggi, lettere e report generati."
+    },
+    "checks": {
+      "eyebrow": "Verifiche",
+      "title": "Verifiche",
+      "description": "Questa sezione mostrera le verifiche in corso e quelle completate con il relativo stato."
+    },
+    "letters": {
+      "eyebrow": "Lettere",
+      "title": "Lettere",
+      "description": "Questa sezione conterra bozze, lettere inviate e comunicazioni scaricabili per il proprietario."
+    },
+    "deadlines": {
+      "eyebrow": "Scadenze",
+      "title": "Scadenze",
+      "description": "Questa sezione seguira termini di risposta, scadenze e prossime azioni dell'inquilino."
+    },
+    "payments": {
+      "eyebrow": "Pagamenti",
+      "title": "Pagamenti",
+      "description": "Questa sezione mostrera pagamenti, fatture e stato delle verifiche acquistate."
+    },
+    "settings": {
+      "eyebrow": "Impostazioni",
+      "title": "Impostazioni",
+      "description": "Questa sezione conterra impostazioni account, lingua e opzioni di sicurezza."
+    },
+    "support": {
+      "eyebrow": "Aiuto e supporto",
+      "title": "Aiuto e supporto",
+      "description": "Questa sezione raccogliera contatti di supporto, risposte comuni e guide del prodotto."
+    }
+  },
+  "documentsPage": {
+    "eyebrow": "Documenti",
+    "title": "I miei documenti",
+    "description": "Carica documenti di locazione, controlla il loro stato e riscaricali quando serve.",
+    "stats": {
+      "total": "Documenti totali",
+      "ready": "Pronti",
+      "processing": "In elaborazione"
+    },
+    "actions": {
+      "refresh": "Aggiorna",
+      "download": "Scarica",
+      "createCheck": "Crea verifica",
+      "createCheckError": "Non e stato possibile creare la verifica."
+    },
+    "upload": {
+      "title": "Carica un nuovo documento",
+      "kindLabel": "Tipo di documento",
+      "fileLabel": "Scegli file",
+      "submit": "Carica",
+      "errors": {
+        "fileRequired": "Seleziona un file prima del caricamento.",
+        "generic": "Non e stato possibile caricare il documento."
       }
     },
-    "activity": {
-      "eyebrow": "Stato build",
-      "title": "Progresso recente",
-      "done": "Fatto",
-      "inProgress": "Prossimo",
-      "authReadyTitle": "Il backend di autenticazione e operativo",
-      "authReadyBody": "Registrazione, login, logout, route protette e controllo ruoli sono gia stati verificati end-to-end.",
-      "resetReadyTitle": "Il recupero password e collegato",
-      "resetReadyBody": "Forgot-password e reset-password sono collegati alla UI e supportati da token persistenti.",
-      "nextUiTitle": "I moduli pratiche e documenti sono i prossimi",
-      "nextUiBody": "La struttura dashboard e pronta per liste reali di casi, widget di upload e punti di ingresso per modulo."
+    "list": {
+      "title": "Elenco documenti"
+    },
+    "table": {
+      "name": "Nome",
+      "kind": "Tipo",
+      "size": "Dimensione",
+      "status": "Stato",
+      "uploaded": "Caricato",
+      "actions": "Azioni"
+    },
+    "status": {
+      "uploaded": "Caricato",
+      "processing": "In elaborazione",
+      "ready": "Pronto",
+      "failed": "Fallito",
+      "deleted": "Eliminato"
+    },
+    "kinds": {
+      "mietvertrag": "Contratto di locazione",
+      "nebenkostenabrechnung": "Rendiconto spese accessorie",
+      "rentIncrease": "Aumento dell'affitto",
+      "rent_increase_letter": "Aumento dell'affitto",
+      "landlordLetter": "Lettera del proprietario",
+      "landlord_letter": "Lettera del proprietario",
+      "other": "Altro"
+    },
+    "empty": {
+      "title": "Nessun documento caricato finora.",
+      "description": "Carica il primo contratto, rendiconto o lettera del proprietario per avviare il workflow."
     }
+  },
+  "checksPage": {
+    "eyebrow": "Verifiche",
+    "title": "Verifiche",
+    "description": "Tieni traccia delle verifiche attive, completate e di quelle in attesa di pagamento.",
+    "actions": {
+      "refresh": "Aggiorna",
+      "startCheck": "Avvia verifica",
+      "viewDetails": "Vedi dettagli"
+    },
+    "stats": {
+      "total": "Verifiche totali",
+      "active": "Attive",
+      "ready": "Pronte",
+      "awaitingPayment": "in attesa di pagamento"
+    },
+    "list": {
+      "title": "Elenco verifiche"
+    },
+    "types": {
+      "nebenkosten_check": "Verifica Nebenkosten",
+      "mietvertrag_check": "Verifica Mietvertrag",
+      "rent_increase_check": "Verifica aumento affitto",
+      "deposit_return_check": "Verifica restituzione deposito"
+    },
+    "status": {
+      "draft": "Bozza",
+      "uploaded": "Caricato",
+      "extracting": "Estrazione",
+      "analyzing": "Analisi",
+      "payment_required": "Pagamento richiesto",
+      "ready": "Pronto",
+      "failed": "Fallito"
+    },
+    "risk": {
+      "low": "Rischio basso",
+      "medium": "Rischio medio",
+      "high": "Rischio alto"
+    },
+    "createdAt": "Creato il",
+    "noSummary": "Nessun riepilogo disponibile per questa verifica.",
+    "empty": {
+      "title": "Nessuna verifica creata finora.",
+      "description": "Avvia una verifica dalla pagina prezzi per vedere qui stato e risultato."
+    }
+  },
+  "checkDetailPage": {
+    "back": "Torna alle verifiche",
+    "notFound": "Non e stato possibile caricare la verifica richiesta.",
+    "eyebrow": "Dettagli verifica",
+    "startedAt": "Avviata",
+    "finishedAt": "Conclusa",
+    "aiSummaryTitle": "Riepilogo AI",
+    "ruleFindingsTitle": "Rule findings",
+    "recommendedActionTitle": "Azione consigliata",
+    "noSummary": "Nessun riepilogo disponibile per questa verifica.",
+    "documentTitle": "Documento principale",
+    "documentName": "Nome documento",
+    "documentType": "Tipo documento",
+    "documentSize": "Dimensione file",
+    "noDocument": "Nessun documento principale collegato a questa verifica.",
+    "extractionTitle": "Risultato estrazione",
+    "extractionEngine": "Motore",
+    "extractionConfidence": "Confidenza",
+    "extractionCreated": "Creato il",
+    "extractedText": "Testo estratto",
+    "noExtractionText": "Nessun testo estratto disponibile.",
+    "noExtraction": "Nessun risultato di estrazione disponibile per questa verifica.",
+    "matchedValue": "Valore rilevato",
+    "noFindings": "Nessun finding di regola e ancora salvato. Quest'area e pronta per il futuro output del rule engine."
   },
   "landing": {
     "nav": {

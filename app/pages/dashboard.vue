@@ -1,240 +1,443 @@
 <script setup lang="ts">
+import { computed, markRaw } from 'vue'
+import {
+  ArrowRight,
+  CalendarDays,
+  CheckCircle2,
+  CircleEllipsis,
+  FileText,
+  FolderOpen,
+  Mail,
+  ReceiptText,
+  ShieldCheck,
+  Upload
+} from 'lucide-vue-next'
+
 definePageMeta({ layout: 'dashboard', middleware: ['auth'] })
 
+const auth = useAuth()
 const { t } = useI18n()
+
+await auth.fetchCurrentUser()
+
+const firstName = computed(() => auth.user.value?.email?.split('@')[0] || 'Anna')
 
 const stats = computed(() => [
   {
-    label: t('dashboard.stats.openCases'),
-    value: '0',
-    detail: t('dashboard.stats.openCasesDetail'),
-    tone: 'from-emerald-500/18 to-emerald-100'
-  },
-  {
+    key: 'documents',
     label: t('dashboard.stats.documents'),
-    value: '0',
-    detail: t('dashboard.stats.documentsDetail'),
-    tone: 'from-sky-500/18 to-sky-100'
+    value: '12',
+    delta: t('dashboard.stats.documentsDelta'),
+    icon: markRaw(FileText),
+    tone: 'emerald'
   },
   {
-    label: t('dashboard.stats.pendingActions'),
-    value: '0',
-    detail: t('dashboard.stats.pendingActionsDetail'),
-    tone: 'from-amber-500/18 to-amber-100'
+    key: 'checks',
+    label: t('dashboard.stats.completedChecks'),
+    value: '7',
+    delta: t('dashboard.stats.completedChecksDelta'),
+    icon: markRaw(ShieldCheck),
+    tone: 'sky'
   },
   {
-    label: t('dashboard.stats.reports'),
-    value: '0',
-    detail: t('dashboard.stats.reportsDetail'),
-    tone: 'from-rose-500/18 to-rose-100'
+    key: 'letters',
+    label: t('dashboard.stats.generatedLetters'),
+    value: '5',
+    delta: t('dashboard.stats.generatedLettersDelta'),
+    icon: markRaw(Mail),
+    tone: 'violet'
+  },
+  {
+    key: 'deadlines',
+    label: t('dashboard.stats.openDeadlines'),
+    value: '3',
+    delta: t('dashboard.stats.openDeadlinesDelta'),
+    icon: markRaw(CalendarDays),
+    tone: 'amber'
   }
 ])
 
 const quickActions = computed(() => [
   {
-    title: t('dashboard.actions.nebenkosten.title'),
-    description: t('dashboard.actions.nebenkosten.description'),
-    badge: t('dashboard.actions.nebenkosten.badge'),
-    href: '#'
+    key: 'nebenkosten',
+    title: t('dashboard.quickActions.nebenkostenTitle'),
+    body: t('dashboard.quickActions.nebenkostenBody'),
+    icon: markRaw(ReceiptText),
+    tone: 'emerald'
   },
   {
-    title: t('dashboard.actions.contract.title'),
-    description: t('dashboard.actions.contract.description'),
-    badge: t('dashboard.actions.contract.badge'),
-    href: '#'
+    key: 'contract',
+    title: t('dashboard.quickActions.contractTitle'),
+    body: t('dashboard.quickActions.contractBody'),
+    icon: markRaw(FileText),
+    tone: 'emerald'
   },
   {
-    title: t('dashboard.actions.letter.title'),
-    description: t('dashboard.actions.letter.description'),
-    badge: t('dashboard.actions.letter.badge'),
-    href: '#'
+    key: 'letter',
+    title: t('dashboard.quickActions.letterTitle'),
+    body: t('dashboard.quickActions.letterBody'),
+    icon: markRaw(Mail),
+    tone: 'emerald'
+  },
+  {
+    key: 'upload',
+    title: t('dashboard.quickActions.uploadTitle'),
+    body: t('dashboard.quickActions.uploadBody'),
+    icon: markRaw(Upload),
+    tone: 'emerald'
   }
 ])
 
-const workflow = computed(() => [
-  t('dashboard.workflow.upload'),
-  t('dashboard.workflow.analyze'),
-  t('dashboard.workflow.pay'),
-  t('dashboard.workflow.download')
-])
-
-const activity = computed(() => [
+const recentChecks = computed(() => [
   {
-    title: t('dashboard.activity.authReadyTitle'),
-    body: t('dashboard.activity.authReadyBody'),
-    status: t('dashboard.activity.done')
+    file: 'Nebenkostenabrechnung 2024.pdf',
+    type: t('dashboard.checkTypes.nebenkosten'),
+    risk: t('dashboard.risk.medium'),
+    riskTone: 'amber',
+    status: t('dashboard.status.ready'),
+    date: '24.05.2024'
   },
   {
-    title: t('dashboard.activity.resetReadyTitle'),
-    body: t('dashboard.activity.resetReadyBody'),
-    status: t('dashboard.activity.done')
+    file: 'Mietvertrag.pdf',
+    type: t('dashboard.checkTypes.contract'),
+    risk: t('dashboard.risk.low'),
+    riskTone: 'emerald',
+    status: t('dashboard.status.ready'),
+    date: '21.05.2024'
   },
   {
-    title: t('dashboard.activity.nextUiTitle'),
-    body: t('dashboard.activity.nextUiBody'),
-    status: t('dashboard.activity.inProgress')
+    file: 'Mietzinserhoehung Mai 2024.pdf',
+    type: t('dashboard.checkTypes.rentIncrease'),
+    risk: t('dashboard.risk.high'),
+    riskTone: 'rose',
+    status: t('dashboard.status.ready'),
+    date: '18.05.2024'
   }
 ])
+
+const upcomingDeadlines = computed(() => [
+  {
+    title: t('dashboard.deadlines.noticeTitle'),
+    date: '31.07.2024',
+    remaining: t('dashboard.deadlines.noticeRemaining'),
+    tone: 'emerald',
+    icon: markRaw(CalendarDays)
+  },
+  {
+    title: t('dashboard.deadlines.rentIncreaseTitle'),
+    date: '15.06.2024',
+    remaining: t('dashboard.deadlines.rentIncreaseRemaining'),
+    tone: 'amber',
+    icon: markRaw(Mail)
+  },
+  {
+    title: t('dashboard.deadlines.documentsTitle'),
+    date: '07.06.2024',
+    remaining: t('dashboard.deadlines.documentsRemaining'),
+    tone: 'rose',
+    icon: markRaw(FileText)
+  }
+])
+
+const recentDocuments = computed(() => [
+  {
+    title: 'Mietvertrag.pdf',
+    date: '21.05.2024'
+  },
+  {
+    title: 'Nebenkostenabrechnung 2024.pdf',
+    date: '24.05.2024'
+  },
+  {
+    title: 'Uebergabeprotokoll.pdf',
+    date: '12.04.2024'
+  },
+  {
+    title: 'Hausordnung.pdf',
+    date: '03.03.2024'
+  }
+])
+
+function iconTone(tone: string) {
+  switch (tone) {
+    case 'sky':
+      return 'bg-sky-50 text-sky-600'
+    case 'violet':
+      return 'bg-violet-50 text-violet-600'
+    case 'amber':
+      return 'bg-amber-50 text-amber-600'
+    case 'rose':
+      return 'bg-rose-50 text-rose-600'
+    default:
+      return 'bg-emerald-50 text-emerald-600'
+  }
+}
+
+function badgeTone(tone: string) {
+  switch (tone) {
+    case 'amber':
+      return 'bg-amber-50 text-amber-700'
+    case 'rose':
+      return 'bg-rose-50 text-rose-700'
+    default:
+      return 'bg-emerald-50 text-emerald-700'
+  }
+}
 </script>
 
 <template>
   <div class="space-y-6">
-    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
-      <div class="rounded-[2.25rem] border border-white/70 bg-white/85 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.1)] backdrop-blur sm:p-8">
-        <p class="text-xs uppercase tracking-[0.34em] text-slate-500">
-          {{ t('dashboard.hero.eyebrow') }}
-        </p>
-
-        <h2 class="mt-5 max-w-4xl font-serif text-4xl leading-none tracking-tight text-slate-950 sm:text-5xl">
-          {{ t('dashboard.hero.title') }}
-        </h2>
-
-        <p class="mt-6 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-          {{ t('dashboard.hero.description') }}
-        </p>
-
-        <div class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div
-            v-for="stat in stats"
-            :key="stat.label"
-            :class="['rounded-[1.75rem] border border-slate-200 bg-gradient-to-br p-5', stat.tone]"
-          >
-            <p class="text-xs uppercase tracking-[0.28em] text-slate-500">
-              {{ stat.label }}
-            </p>
-            <p class="mt-4 font-serif text-4xl text-slate-950">
-              {{ stat.value }}
-            </p>
-            <p class="mt-2 text-sm leading-6 text-slate-600">
-              {{ stat.detail }}
-            </p>
-          </div>
+    <section class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)] sm:px-7">
+      <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div>
+          <h2 class="text-[2rem] font-semibold tracking-tight text-slate-950 sm:text-[2.2rem]">
+            {{ t('dashboard.hero.title', { name: firstName }) }}
+          </h2>
+          <p class="mt-2 text-sm text-slate-500 sm:text-base">
+            {{ t('dashboard.hero.description') }}
+          </p>
         </div>
+
+        <NuxtLink
+          to="#"
+          class="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 text-sm font-medium text-white shadow-sm transition hover:bg-emerald-700"
+        >
+          <Upload class="h-4 w-4" />
+          <span>{{ t('dashboard.hero.uploadAction') }}</span>
+        </NuxtLink>
       </div>
 
-      <aside class="rounded-[2.25rem] border border-slate-950/10 bg-slate-950 p-6 text-white shadow-[0_24px_70px_rgba(15,23,42,0.18)] sm:p-8">
-        <p class="text-xs uppercase tracking-[0.34em] text-white/55">
-          {{ t('dashboard.workflow.eyebrow') }}
-        </p>
-        <p class="mt-4 font-serif text-3xl leading-tight">
-          {{ t('dashboard.workflow.title') }}
-        </p>
-        <p class="mt-4 text-sm leading-7 text-white/72">
-          {{ t('dashboard.workflow.description') }}
-        </p>
-
-        <div class="mt-8 space-y-3">
-          <div
-            v-for="(step, index) in workflow"
-            :key="step"
-            class="flex items-center gap-4 rounded-[1.5rem] border border-white/10 bg-white/6 px-4 py-4"
-          >
-            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/12 text-sm font-semibold text-white">
-              {{ index + 1 }}
+      <div class="mt-6 grid gap-4 xl:grid-cols-4">
+        <article
+          v-for="stat in stats"
+          :key="stat.key"
+          class="rounded-[1.25rem] border border-slate-200 bg-white px-5 py-5 shadow-[0_8px_24px_rgba(15,23,42,0.04)]"
+        >
+          <div class="flex items-start gap-4">
+            <div :class="['flex h-12 w-12 shrink-0 items-center justify-center rounded-full', iconTone(stat.tone)]">
+              <component :is="stat.icon" class="h-5 w-5" />
             </div>
-            <p class="text-sm font-medium text-white">
-              {{ step }}
-            </p>
+            <div>
+              <p class="text-xs font-medium text-slate-500">
+                {{ stat.label }}
+              </p>
+              <p class="mt-2 text-[2rem] font-semibold leading-none text-slate-950">
+                {{ stat.value }}
+              </p>
+              <p class="mt-2 text-sm font-medium text-emerald-600">
+                {{ stat.delta }}
+              </p>
+            </div>
           </div>
-        </div>
-      </aside>
+        </article>
+      </div>
     </section>
 
-    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)]">
-      <div class="rounded-[2.25rem] border border-white/70 bg-white/85 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur sm:p-8">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div>
-            <p class="text-xs uppercase tracking-[0.3em] text-slate-500">
-              {{ t('dashboard.cases.eyebrow') }}
-            </p>
-            <h3 class="mt-4 font-serif text-3xl tracking-tight text-slate-950">
-              {{ t('dashboard.cases.title') }}
-            </h3>
-          </div>
-          <div class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600">
-            {{ t('dashboard.cases.emptyBadge') }}
-          </div>
-        </div>
+    <section class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)] sm:px-7">
+      <h3 class="text-lg font-semibold text-slate-950">
+        {{ t('dashboard.quickActions.title') }}
+      </h3>
 
-        <div class="mt-8 rounded-[2rem] border border-dashed border-slate-300 bg-slate-50/80 p-8 text-center">
-          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl shadow-sm">
-            +
-          </div>
-          <p class="mt-5 font-medium text-slate-950">
-            {{ t('dashboard.cases.emptyTitle') }}
-          </p>
-          <p class="mx-auto mt-3 max-w-xl text-sm leading-7 text-slate-600">
-            {{ t('dashboard.cases.emptyDescription') }}
-          </p>
-          <div class="mt-6 flex flex-wrap justify-center gap-3">
-            <NuxtLink
-              v-for="action in quickActions"
-              :key="action.title"
-              :to="action.href"
-              class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-950 hover:text-slate-950"
-            >
-              {{ action.title }}
-            </NuxtLink>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid gap-6">
-        <section class="rounded-[2.25rem] border border-white/70 bg-white/85 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur sm:p-8">
-          <p class="text-xs uppercase tracking-[0.3em] text-slate-500">
-            {{ t('dashboard.quickActions.eyebrow') }}
-          </p>
-          <h3 class="mt-4 font-serif text-3xl tracking-tight text-slate-950">
-            {{ t('dashboard.quickActions.title') }}
-          </h3>
-
-          <div class="mt-6 grid gap-4">
-            <NuxtLink
-              v-for="action in quickActions"
-              :key="action.title"
-              :to="action.href"
-              class="rounded-[1.75rem] border border-slate-200 bg-slate-50 px-5 py-5 transition hover:border-slate-950 hover:bg-white"
-            >
-              <div class="flex items-start justify-between gap-4">
-                <div>
-                  <p class="font-medium text-slate-950">{{ action.title }}</p>
-                  <p class="mt-2 text-sm leading-6 text-slate-600">{{ action.description }}</p>
-                </div>
-                <span class="rounded-full bg-slate-950 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-white">
-                  {{ action.badge }}
-                </span>
+      <div class="mt-4 grid gap-4 xl:grid-cols-4">
+        <NuxtLink
+          v-for="action in quickActions"
+          :key="action.key"
+          to="#"
+          class="group rounded-[1.25rem] border border-slate-200 bg-white px-5 py-5 transition hover:border-emerald-200 hover:shadow-[0_12px_30px_rgba(15,23,42,0.06)]"
+        >
+          <div class="flex min-h-[122px] flex-col">
+            <div class="flex items-start justify-between gap-4">
+              <div :class="['flex h-11 w-11 items-center justify-center rounded-full', iconTone(action.tone)]">
+                <component :is="action.icon" class="h-5 w-5" />
               </div>
-            </NuxtLink>
+              <ArrowRight class="h-4 w-4 text-slate-400 transition group-hover:text-slate-700" />
+            </div>
+
+            <div class="mt-4">
+              <p class="text-sm font-semibold text-slate-950">
+                {{ action.title }}
+              </p>
+              <p class="mt-2 text-sm leading-6 text-slate-500">
+                {{ action.body }}
+              </p>
+            </div>
           </div>
-        </section>
+        </NuxtLink>
+      </div>
+    </section>
 
-        <section class="rounded-[2.25rem] border border-white/70 bg-white/85 p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] backdrop-blur sm:p-8">
-          <p class="text-xs uppercase tracking-[0.3em] text-slate-500">
-            {{ t('dashboard.activity.eyebrow') }}
-          </p>
-          <h3 class="mt-4 font-serif text-3xl tracking-tight text-slate-950">
-            {{ t('dashboard.activity.title') }}
+    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.55fr)_360px]">
+      <article class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)] sm:px-7">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-lg font-semibold text-slate-950">
+            {{ t('dashboard.sections.recentChecks') }}
           </h3>
+          <NuxtLink to="#" class="text-sm font-medium text-emerald-600">
+            {{ t('dashboard.actions.viewAllChecks') }}
+          </NuxtLink>
+        </div>
 
-          <div class="mt-6 space-y-4">
-            <div
-              v-for="item in activity"
-              :key="item.title"
-              class="rounded-[1.75rem] border border-slate-200 bg-white p-5"
-            >
-              <div class="flex items-start justify-between gap-4">
+        <div class="mt-5 overflow-x-auto">
+          <table class="min-w-full text-left">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs font-medium text-slate-500">
+                <th class="pb-3 pr-4">{{ t('dashboard.table.document') }}</th>
+                <th class="pb-3 pr-4">{{ t('dashboard.table.type') }}</th>
+                <th class="pb-3 pr-4">{{ t('dashboard.table.risk') }}</th>
+                <th class="pb-3 pr-4">{{ t('dashboard.table.status') }}</th>
+                <th class="pb-3 pr-4">{{ t('dashboard.table.date') }}</th>
+                <th class="pb-3" />
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="check in recentChecks"
+                :key="check.file"
+                class="border-b border-slate-100 last:border-b-0"
+              >
+                <td class="py-4 pr-4">
+                  <div class="flex items-center gap-3">
+                    <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-rose-50 text-rose-500">
+                      <FileText class="h-4 w-4" />
+                    </span>
+                    <span class="text-sm font-medium text-slate-700">{{ check.file }}</span>
+                  </div>
+                </td>
+                <td class="py-4 pr-4">
+                  <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+                    {{ check.type }}
+                  </span>
+                </td>
+                <td class="py-4 pr-4">
+                  <span :class="['rounded-full px-2.5 py-1 text-xs font-medium', badgeTone(check.riskTone)]">
+                    {{ check.risk }}
+                  </span>
+                </td>
+                <td class="py-4 pr-4">
+                  <span class="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
+                    {{ check.status }}
+                  </span>
+                </td>
+                <td class="py-4 pr-4 text-sm text-slate-500">
+                  {{ check.date }}
+                </td>
+                <td class="py-4 text-right">
+                  <button type="button" class="text-slate-400 transition hover:text-slate-700">
+                    <CircleEllipsis class="h-4 w-4" />
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)]">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-lg font-semibold text-slate-950">
+            {{ t('dashboard.sections.upcomingDeadlines') }}
+          </h3>
+          <NuxtLink to="#" class="text-sm font-medium text-emerald-600">
+            {{ t('dashboard.actions.viewAll') }}
+          </NuxtLink>
+        </div>
+
+        <div class="mt-5 space-y-4">
+          <div
+            v-for="item in upcomingDeadlines"
+            :key="item.title"
+            class="flex items-start gap-3"
+          >
+            <span :class="['mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full', iconTone(item.tone)]">
+              <component :is="item.icon" class="h-4 w-4" />
+            </span>
+            <div class="min-w-0 flex-1">
+              <div class="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <p class="font-medium text-slate-950">{{ item.title }}</p>
-                  <p class="mt-2 text-sm leading-6 text-slate-600">{{ item.body }}</p>
+                  <p class="text-sm font-medium text-slate-900">{{ item.title }}</p>
+                  <p class="mt-1 text-sm text-slate-500">{{ item.date }}</p>
                 </div>
-                <span class="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-slate-600">
-                  {{ item.status }}
+                <span :class="['rounded-full px-2.5 py-1 text-xs font-medium', badgeTone(item.tone)]">
+                  {{ item.remaining }}
                 </span>
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.55fr)_360px]">
+      <article class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)] sm:px-7">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-lg font-semibold text-slate-950">
+            {{ t('dashboard.sections.recentDocuments') }}
+          </h3>
+          <NuxtLink to="#" class="text-sm font-medium text-emerald-600">
+            {{ t('dashboard.actions.openVault') }}
+          </NuxtLink>
+        </div>
+
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
+          <div
+            v-for="document in recentDocuments"
+            :key="document.title"
+            class="rounded-[1rem] border border-slate-200 bg-white px-4 py-4"
+          >
+            <div class="flex items-start gap-3">
+              <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-rose-50 text-rose-500">
+                <FileText class="h-4 w-4" />
+              </span>
+              <div class="min-w-0">
+                <p class="line-clamp-2 text-sm font-medium text-slate-800">
+                  {{ document.title }}
+                </p>
+                <p class="mt-2 text-xs text-slate-500">
+                  {{ document.date }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <NuxtLink
+            to="#"
+            class="rounded-[1rem] border border-slate-200 bg-slate-50 px-4 py-4 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-white"
+          >
+            <div class="flex h-full items-center gap-3">
+              <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">
+                <FolderOpen class="h-4 w-4" />
+              </span>
+              <span>{{ t('dashboard.actions.moreDocuments') }}</span>
+            </div>
+          </NuxtLink>
+        </div>
+      </article>
+
+      <article class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)]">
+        <div class="flex items-center justify-between gap-4">
+          <h3 class="text-lg font-semibold text-slate-950">
+            {{ t('dashboard.sections.plan') }}
+          </h3>
+          <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+            {{ t('dashboard.plan.badge') }}
+          </span>
+        </div>
+
+        <p class="mt-5 text-sm leading-7 text-slate-500">
+          {{ t('dashboard.plan.description') }}
+        </p>
+
+        <NuxtLink
+          to="#"
+          class="mt-5 inline-flex h-11 items-center justify-center rounded-xl bg-emerald-600 px-5 text-sm font-medium text-white transition hover:bg-emerald-700"
+        >
+          {{ t('dashboard.plan.cta') }}
+        </NuxtLink>
+
+        <div class="mt-8 flex h-28 items-center justify-center rounded-[1.5rem] border border-slate-100 bg-slate-50 text-slate-300">
+          <FileText class="h-12 w-12" />
+        </div>
+      </article>
     </section>
   </div>
 </template>

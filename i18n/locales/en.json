@@ -111,69 +111,240 @@
   },
   "dashboard": {
     "hero": {
-      "eyebrow": "Dashboard skeleton",
-      "title": "A control surface for checks, documents, and reports.",
-      "description": "This dashboard is still fed by placeholder data, but the structure is now ready for real cases, uploads, and payment-gated report flows."
+      "title": "Welcome back, {name}",
+      "description": "Manage your rental documents and checks in one place.",
+      "uploadAction": "Upload Document"
     },
     "stats": {
-      "openCases": "Open cases",
-      "openCasesDetail": "No active tenant cases yet.",
-      "documents": "Documents",
-      "documentsDetail": "Uploads will appear here once storage flows are connected.",
-      "pendingActions": "Pending actions",
-      "pendingActionsDetail": "Next user tasks will be surfaced here.",
-      "reports": "Reports",
-      "reportsDetail": "Generated PDFs will be listed once the report flow is wired."
-    },
-    "workflow": {
-      "eyebrow": "Core journey",
-      "title": "The main product path is already defined.",
-      "description": "Each module will plug into the same predictable tenant flow from upload to downloadable output.",
-      "upload": "Upload tenancy document",
-      "analyze": "Run extraction and analysis",
-      "pay": "Unlock paid result",
-      "download": "Download report or letter"
-    },
-    "cases": {
-      "eyebrow": "Case queue",
-      "title": "Recent cases",
-      "emptyBadge": "Empty state",
-      "emptyTitle": "No tenant cases have been created yet.",
-      "emptyDescription": "Once upload and check creation are connected, this area will list active Nebenkosten reviews, contract checks, and generated letters."
+      "documents": "Total documents",
+      "documentsDelta": "+2 this month",
+      "completedChecks": "Completed checks",
+      "completedChecksDelta": "+3 this month",
+      "generatedLetters": "Generated letters",
+      "generatedLettersDelta": "+1 this month",
+      "openDeadlines": "Open deadlines",
+      "openDeadlinesDelta": "View all"
     },
     "quickActions": {
-      "eyebrow": "Quick actions",
-      "title": "Choose the first workflow"
+      "title": "Quick Actions",
+      "nebenkostenTitle": "Start Nebenkosten Check",
+      "nebenkostenBody": "Check your service charge statement for potential issues.",
+      "contractTitle": "Start Mietvertrag Check",
+      "contractBody": "Review your rental contract for unfair clauses.",
+      "letterTitle": "Generate Letter",
+      "letterBody": "Create a professional letter to your landlord.",
+      "uploadTitle": "Upload Document",
+      "uploadBody": "Upload any document for analysis."
+    },
+    "sections": {
+      "recentChecks": "Recent Checks",
+      "upcomingDeadlines": "Upcoming Deadlines",
+      "recentDocuments": "Recent Documents",
+      "plan": "Your Plan"
     },
     "actions": {
-      "nebenkosten": {
-        "title": "Service Charge Check",
-        "description": "Start the yearly statement review flow with upload, extraction, and rule-based analysis.",
-        "badge": "Check"
-      },
-      "contract": {
-        "title": "Lease Contract Check",
-        "description": "Review deposit, notice periods, and service charge clauses before signing.",
-        "badge": "Review"
-      },
-      "letter": {
-        "title": "Letter Generator",
-        "description": "Prepare objections, requests, and structured tenant communication drafts.",
-        "badge": "Letter"
+      "viewAllChecks": "View all checks",
+      "viewAll": "View all",
+      "openVault": "Open document vault",
+      "moreDocuments": "+8 more documents"
+    },
+    "table": {
+      "document": "Document",
+      "type": "Type",
+      "risk": "Risk Level",
+      "status": "Status",
+      "date": "Date"
+    },
+    "checkTypes": {
+      "nebenkosten": "Nebenkosten",
+      "contract": "Contract",
+      "rentIncrease": "Rent increase"
+    },
+    "risk": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "status": {
+      "ready": "Ready"
+    },
+    "deadlines": {
+      "noticeTitle": "Kuendigungsfrist",
+      "noticeRemaining": "45 days left",
+      "rentIncreaseTitle": "Reply to rent increase",
+      "rentIncreaseRemaining": "22 days left",
+      "documentsTitle": "Request Belege",
+      "documentsRemaining": "14 days left"
+    },
+    "plan": {
+      "badge": "Pay-as-you-go",
+      "description": "You have no active subscription. Pay only for the checks you need.",
+      "cta": "View Pricing"
+    }
+  },
+  "dashboardPages": {
+    "documents": {
+      "eyebrow": "Documents",
+      "title": "My Documents",
+      "description": "This section will list uploaded contracts, statements, letters, and generated reports."
+    },
+    "checks": {
+      "eyebrow": "Checks",
+      "title": "Checks",
+      "description": "This section will show active and completed document checks with their current status."
+    },
+    "letters": {
+      "eyebrow": "Letters",
+      "title": "Letters",
+      "description": "This section will contain draft letters, sent letters, and downloadable landlord communication."
+    },
+    "deadlines": {
+      "eyebrow": "Deadlines",
+      "title": "Deadlines",
+      "description": "This section will track notice periods, response deadlines, and upcoming tenant actions."
+    },
+    "payments": {
+      "eyebrow": "Payments",
+      "title": "Payments",
+      "description": "This section will show completed payments, invoices, and the status of purchased checks."
+    },
+    "settings": {
+      "eyebrow": "Settings",
+      "title": "Settings",
+      "description": "This section will contain account settings, language preferences, and security options."
+    },
+    "support": {
+      "eyebrow": "Help & Support",
+      "title": "Help & Support",
+      "description": "This section will provide support contact options, common answers, and product guidance."
+    }
+  },
+  "documentsPage": {
+    "eyebrow": "Documents",
+    "title": "My Documents",
+    "description": "Upload rental documents, track their status, and download them again when needed.",
+    "stats": {
+      "total": "Total documents",
+      "ready": "Ready",
+      "processing": "Processing"
+    },
+    "actions": {
+      "refresh": "Refresh",
+      "download": "Download",
+      "createCheck": "Create check",
+      "createCheckError": "The check could not be created."
+    },
+    "upload": {
+      "title": "Upload a new document",
+      "kindLabel": "Document type",
+      "fileLabel": "Choose file",
+      "submit": "Upload",
+      "errors": {
+        "fileRequired": "Please choose a file before uploading.",
+        "generic": "The document could not be uploaded."
       }
     },
-    "activity": {
-      "eyebrow": "Build status",
-      "title": "Recent implementation progress",
-      "done": "Done",
-      "inProgress": "Next",
-      "authReadyTitle": "Authentication backend is operational",
-      "authReadyBody": "Registration, login, logout, protected routes, and role checks have already been verified end-to-end.",
-      "resetReadyTitle": "Password recovery flow is wired",
-      "resetReadyBody": "Forgot-password and reset-password endpoints are connected to the UI and backed by persisted reset tokens.",
-      "nextUiTitle": "Case and document modules are next",
-      "nextUiBody": "The dashboard frame is ready for live case lists, upload widgets, and module-specific entry points."
+    "list": {
+      "title": "Document list"
+    },
+    "table": {
+      "name": "Name",
+      "kind": "Type",
+      "size": "Size",
+      "status": "Status",
+      "uploaded": "Uploaded",
+      "actions": "Actions"
+    },
+    "status": {
+      "uploaded": "Uploaded",
+      "processing": "Processing",
+      "ready": "Ready",
+      "failed": "Failed",
+      "deleted": "Deleted"
+    },
+    "kinds": {
+      "mietvertrag": "Rental contract",
+      "nebenkostenabrechnung": "Service charge statement",
+      "rentIncrease": "Rent increase notice",
+      "rent_increase_letter": "Rent increase notice",
+      "landlordLetter": "Landlord letter",
+      "landlord_letter": "Landlord letter",
+      "other": "Other"
+    },
+    "empty": {
+      "title": "No documents uploaded yet.",
+      "description": "Upload your first contract, statement, or landlord letter to start your tenant workflow."
     }
+  },
+  "checksPage": {
+    "eyebrow": "Checks",
+    "title": "Checks",
+    "description": "Track active, completed, and payment-gated checks in one place.",
+    "actions": {
+      "refresh": "Refresh",
+      "startCheck": "Start a check",
+      "viewDetails": "View details"
+    },
+    "stats": {
+      "total": "Total checks",
+      "active": "Active",
+      "ready": "Ready",
+      "awaitingPayment": "awaiting payment"
+    },
+    "list": {
+      "title": "Check list"
+    },
+    "types": {
+      "nebenkosten_check": "Nebenkosten check",
+      "mietvertrag_check": "Mietvertrag check",
+      "rent_increase_check": "Rent increase check",
+      "deposit_return_check": "Deposit return check"
+    },
+    "status": {
+      "draft": "Draft",
+      "uploaded": "Uploaded",
+      "extracting": "Extracting",
+      "analyzing": "Analyzing",
+      "payment_required": "Payment required",
+      "ready": "Ready",
+      "failed": "Failed"
+    },
+    "risk": {
+      "low": "Low risk",
+      "medium": "Medium risk",
+      "high": "High risk"
+    },
+    "createdAt": "Created",
+    "noSummary": "No summary is available for this check yet.",
+    "empty": {
+      "title": "No checks created yet.",
+      "description": "Start a document check from pricing to see its status and results here."
+    }
+  },
+  "checkDetailPage": {
+    "back": "Back to checks",
+    "notFound": "The requested check could not be loaded.",
+    "eyebrow": "Check details",
+    "startedAt": "Started",
+    "finishedAt": "Finished",
+    "aiSummaryTitle": "AI summary",
+    "ruleFindingsTitle": "Rule findings",
+    "recommendedActionTitle": "Recommended action",
+    "noSummary": "No summary is available for this check yet.",
+    "documentTitle": "Primary document",
+    "documentName": "Document name",
+    "documentType": "Document type",
+    "documentSize": "File size",
+    "noDocument": "No primary document is linked to this check.",
+    "extractionTitle": "Extraction result",
+    "extractionEngine": "Engine",
+    "extractionConfidence": "Confidence",
+    "extractionCreated": "Created",
+    "extractedText": "Extracted text",
+    "noExtractionText": "No extracted text is available.",
+    "noExtraction": "No extraction result is available for this check yet.",
+    "matchedValue": "Matched value",
+    "noFindings": "No rule findings are stored yet. This area is ready for the future rule engine output."
   },
   "landing": {
     "nav": {

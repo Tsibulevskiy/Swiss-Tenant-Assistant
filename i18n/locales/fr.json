@@ -111,69 +111,240 @@
   },
   "dashboard": {
     "hero": {
-      "eyebrow": "Squelette du tableau de bord",
-      "title": "Une surface de travail pour les verifications, documents et rapports.",
-      "description": "Ce tableau de bord utilise encore des donnees fictives, mais sa structure est prete pour de vrais dossiers, uploads et flux de rapports payants."
+      "title": "Bienvenue, {name}",
+      "description": "Gerez vos documents locatifs et vos verifications au meme endroit.",
+      "uploadAction": "Televerser un document"
     },
     "stats": {
-      "openCases": "Dossiers ouverts",
-      "openCasesDetail": "Aucun dossier locataire actif pour le moment.",
-      "documents": "Documents",
-      "documentsDetail": "Les uploads apparaitront ici une fois le flux de stockage connecte.",
-      "pendingActions": "Actions en attente",
-      "pendingActionsDetail": "Les prochaines taches utilisateur apparaitront ici.",
-      "reports": "Rapports",
-      "reportsDetail": "Les PDF generes apparaitront ici une fois le flux de rapport branche."
-    },
-    "workflow": {
-      "eyebrow": "Parcours principal",
-      "title": "Le chemin principal du produit est deja defini.",
-      "description": "Chaque module viendra se brancher sur le meme parcours locataire, de l'envoi au telechargement.",
-      "upload": "Envoyer un document locatif",
-      "analyze": "Executer l'extraction et l'analyse",
-      "pay": "Debloquer le resultat payant",
-      "download": "Telecharger le rapport ou la lettre"
-    },
-    "cases": {
-      "eyebrow": "File des dossiers",
-      "title": "Dossiers recents",
-      "emptyBadge": "Etat vide",
-      "emptyTitle": "Aucun dossier locataire n'a encore ete cree.",
-      "emptyDescription": "Une fois l'upload et la creation de verification relies, cette zone affichera les verifications de charges, de bail et les lettres generees."
+      "documents": "Total documents",
+      "documentsDelta": "+2 ce mois-ci",
+      "completedChecks": "Verifications terminees",
+      "completedChecksDelta": "+3 ce mois-ci",
+      "generatedLetters": "Lettres generees",
+      "generatedLettersDelta": "+1 ce mois-ci",
+      "openDeadlines": "Echeances ouvertes",
+      "openDeadlinesDelta": "Voir tout"
     },
     "quickActions": {
-      "eyebrow": "Actions rapides",
-      "title": "Choisir le premier flux"
+      "title": "Actions rapides",
+      "nebenkostenTitle": "Lancer le check Nebenkosten",
+      "nebenkostenBody": "Verifiez votre decompte de charges pour detecter d'eventuels problemes.",
+      "contractTitle": "Lancer le check Mietvertrag",
+      "contractBody": "Examinez votre contrat de location pour reperer les clauses abusives.",
+      "letterTitle": "Generer une lettre",
+      "letterBody": "Creez une lettre professionnelle pour votre proprietaire.",
+      "uploadTitle": "Televerser un document",
+      "uploadBody": "Televersez un document pour analyse."
+    },
+    "sections": {
+      "recentChecks": "Verifications recentes",
+      "upcomingDeadlines": "Echeances a venir",
+      "recentDocuments": "Documents recents",
+      "plan": "Votre offre"
     },
     "actions": {
-      "nebenkosten": {
-        "title": "Verification des charges",
-        "description": "Demarrer la verification annuelle avec upload, extraction et analyse basee sur des regles.",
-        "badge": "Check"
-      },
-      "contract": {
-        "title": "Verification du bail",
-        "description": "Controler depot, delais et clauses de charges avant signature.",
-        "badge": "Review"
-      },
-      "letter": {
-        "title": "Generateur de lettres",
-        "description": "Preparer objections, demandes et brouillons structures de communication locataire.",
-        "badge": "Lettre"
+      "viewAllChecks": "Voir toutes les verifications",
+      "viewAll": "Voir tout",
+      "openVault": "Ouvrir l'espace documents",
+      "moreDocuments": "+8 autres documents"
+    },
+    "table": {
+      "document": "Document",
+      "type": "Type",
+      "risk": "Niveau de risque",
+      "status": "Statut",
+      "date": "Date"
+    },
+    "checkTypes": {
+      "nebenkosten": "Nebenkosten",
+      "contract": "Contrat",
+      "rentIncrease": "Hausse de loyer"
+    },
+    "risk": {
+      "low": "Faible",
+      "medium": "Moyen",
+      "high": "Eleve"
+    },
+    "status": {
+      "ready": "Pret"
+    },
+    "deadlines": {
+      "noticeTitle": "Delai de resiliation",
+      "noticeRemaining": "45 jours restants",
+      "rentIncreaseTitle": "Repondre a la hausse de loyer",
+      "rentIncreaseRemaining": "22 jours restants",
+      "documentsTitle": "Demander les justificatifs",
+      "documentsRemaining": "14 jours restants"
+    },
+    "plan": {
+      "badge": "Pay-as-you-go",
+      "description": "Vous n'avez aucun abonnement actif. Payez uniquement pour les verifications dont vous avez besoin.",
+      "cta": "Voir les tarifs"
+    }
+  },
+  "dashboardPages": {
+    "documents": {
+      "eyebrow": "Documents",
+      "title": "Mes documents",
+      "description": "Cette section affichera les contrats, decomptes, lettres et rapports generes."
+    },
+    "checks": {
+      "eyebrow": "Verifications",
+      "title": "Verifications",
+      "description": "Cette section affichera les verifications en cours et terminees avec leur statut."
+    },
+    "letters": {
+      "eyebrow": "Lettres",
+      "title": "Lettres",
+      "description": "Cette section contiendra les brouillons, lettres envoyees et documents a telecharger."
+    },
+    "deadlines": {
+      "eyebrow": "Echeances",
+      "title": "Echeances",
+      "description": "Cette section suivra les delais de reponse, les dates limites et les prochaines actions."
+    },
+    "payments": {
+      "eyebrow": "Paiements",
+      "title": "Paiements",
+      "description": "Cette section affichera les paiements, factures et le statut des verifications achetees."
+    },
+    "settings": {
+      "eyebrow": "Parametres",
+      "title": "Parametres",
+      "description": "Cette section contiendra les preferences du compte, la langue et les options de securite."
+    },
+    "support": {
+      "eyebrow": "Aide et support",
+      "title": "Aide et support",
+      "description": "Cette section regroupera les contacts support, les reponses frequentes et les guides produit."
+    }
+  },
+  "documentsPage": {
+    "eyebrow": "Documents",
+    "title": "Mes documents",
+    "description": "Televersez vos documents locatifs, suivez leur statut et retéléchargez-les si necessaire.",
+    "stats": {
+      "total": "Total documents",
+      "ready": "Prets",
+      "processing": "En traitement"
+    },
+    "actions": {
+      "refresh": "Actualiser",
+      "download": "Telecharger",
+      "createCheck": "Creer une verification",
+      "createCheckError": "La verification n'a pas pu etre creee."
+    },
+    "upload": {
+      "title": "Televerser un nouveau document",
+      "kindLabel": "Type de document",
+      "fileLabel": "Choisir un fichier",
+      "submit": "Televerser",
+      "errors": {
+        "fileRequired": "Veuillez choisir un fichier avant de televerser.",
+        "generic": "Le document n'a pas pu etre televerse."
       }
     },
-    "activity": {
-      "eyebrow": "Etat du build",
-      "title": "Progression recente",
-      "done": "Fait",
-      "inProgress": "Ensuite",
-      "authReadyTitle": "Le backend d'authentification est operationnel",
-      "authReadyBody": "Inscription, connexion, deconnexion, routes protegees et controle des roles ont deja ete verifies de bout en bout.",
-      "resetReadyTitle": "La recuperation de mot de passe est cablee",
-      "resetReadyBody": "Les flux mot de passe oublie et reinitialisation sont relies a l'UI et appuyes sur des jetons persistants.",
-      "nextUiTitle": "Les modules de dossiers et documents arrivent ensuite",
-      "nextUiBody": "Le cadre du tableau de bord est pret pour de vraies listes de dossiers, widgets d'upload et points d'entree modules."
+    "list": {
+      "title": "Liste des documents"
+    },
+    "table": {
+      "name": "Nom",
+      "kind": "Type",
+      "size": "Taille",
+      "status": "Statut",
+      "uploaded": "Televerse",
+      "actions": "Actions"
+    },
+    "status": {
+      "uploaded": "Televerse",
+      "processing": "En traitement",
+      "ready": "Pret",
+      "failed": "Echec",
+      "deleted": "Supprime"
+    },
+    "kinds": {
+      "mietvertrag": "Contrat de location",
+      "nebenkostenabrechnung": "Decompte de charges",
+      "rentIncrease": "Hausse de loyer",
+      "rent_increase_letter": "Hausse de loyer",
+      "landlordLetter": "Lettre du proprietaire",
+      "landlord_letter": "Lettre du proprietaire",
+      "other": "Autre"
+    },
+    "empty": {
+      "title": "Aucun document televerse pour le moment.",
+      "description": "Televersez votre premier contrat, decompte ou courrier de proprietaire pour lancer le workflow."
     }
+  },
+  "checksPage": {
+    "eyebrow": "Verifications",
+    "title": "Verifications",
+    "description": "Suivez les verifications actives, terminees et celles qui attendent le paiement.",
+    "actions": {
+      "refresh": "Actualiser",
+      "startCheck": "Demarrer une verification",
+      "viewDetails": "Voir les details"
+    },
+    "stats": {
+      "total": "Total verifications",
+      "active": "Actives",
+      "ready": "Pretes",
+      "awaitingPayment": "en attente de paiement"
+    },
+    "list": {
+      "title": "Liste des verifications"
+    },
+    "types": {
+      "nebenkosten_check": "Verification Nebenkosten",
+      "mietvertrag_check": "Verification Mietvertrag",
+      "rent_increase_check": "Verification hausse de loyer",
+      "deposit_return_check": "Verification restitution de depot"
+    },
+    "status": {
+      "draft": "Brouillon",
+      "uploaded": "Televerse",
+      "extracting": "Extraction",
+      "analyzing": "Analyse",
+      "payment_required": "Paiement requis",
+      "ready": "Pret",
+      "failed": "Echec"
+    },
+    "risk": {
+      "low": "Risque faible",
+      "medium": "Risque moyen",
+      "high": "Risque eleve"
+    },
+    "createdAt": "Cree le",
+    "noSummary": "Aucun resume n'est encore disponible pour cette verification.",
+    "empty": {
+      "title": "Aucune verification creee pour le moment.",
+      "description": "Demarrez une verification depuis la page de pricing pour voir son statut et son resultat ici."
+    }
+  },
+  "checkDetailPage": {
+    "back": "Retour aux verifications",
+    "notFound": "La verification demandee n'a pas pu etre chargee.",
+    "eyebrow": "Details de la verification",
+    "startedAt": "Debut",
+    "finishedAt": "Fin",
+    "aiSummaryTitle": "Resume AI",
+    "ruleFindingsTitle": "Constats des regles",
+    "recommendedActionTitle": "Action recommandee",
+    "noSummary": "Aucun resume n'est encore disponible pour cette verification.",
+    "documentTitle": "Document principal",
+    "documentName": "Nom du document",
+    "documentType": "Type de document",
+    "documentSize": "Taille du fichier",
+    "noDocument": "Aucun document principal n'est lie a cette verification.",
+    "extractionTitle": "Resultat de l'extraction",
+    "extractionEngine": "Moteur",
+    "extractionConfidence": "Confiance",
+    "extractionCreated": "Cree le",
+    "extractedText": "Texte extrait",
+    "noExtractionText": "Aucun texte extrait n'est disponible.",
+    "noExtraction": "Aucun resultat d'extraction n'est encore disponible pour cette verification.",
+    "matchedValue": "Valeur trouvee",
+    "noFindings": "Aucun constat de regle n'est encore enregistre. Cette zone est prete pour les futurs resultats du moteur de regles."
   },
   "landing": {
     "nav": {
