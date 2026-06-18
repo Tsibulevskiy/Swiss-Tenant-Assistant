@@ -17,11 +17,16 @@
     "nav": {
       "dashboard": "Vue generale",
       "checks": "Verifications",
-      "documents": "Documents",
+      "documents": "Mes documents",
       "letters": "Lettres",
+      "deadlines": "Echeances",
+      "payments": "Paiements",
+      "settings": "Parametres",
+      "support": "Aide et support",
       "soon": "Bientot"
     },
     "sidebar": {
+      "label": "Tableau locataire",
       "summary": "Analysez les documents de location, generez des lettres et centralisez chaque dossier.",
       "focusLabel": "Priorite actuelle",
       "focusTitle": "Du PDF a une recommandation exploitable.",

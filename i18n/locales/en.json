@@ -17,11 +17,16 @@
     "nav": {
       "dashboard": "Overview",
       "checks": "Checks",
-      "documents": "Documents",
+      "documents": "My Documents",
       "letters": "Letters",
+      "deadlines": "Deadlines",
+      "payments": "Payments",
+      "settings": "Settings",
+      "support": "Help & Support",
       "soon": "Soon"
     },
     "sidebar": {
+      "label": "Tenant dashboard",
       "summary": "Review tenancy documents, generate letters, and keep every case in one place.",
       "focusLabel": "Current focus",
       "focusTitle": "From PDF to usable guidance.",

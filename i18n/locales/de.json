@@ -17,11 +17,16 @@
     "nav": {
       "dashboard": "Uebersicht",
       "checks": "Pruefungen",
-      "documents": "Dokumente",
+      "documents": "Meine Dokumente",
       "letters": "Briefe",
+      "deadlines": "Fristen",
+      "payments": "Zahlungen",
+      "settings": "Einstellungen",
+      "support": "Hilfe und Support",
       "soon": "Spaeter"
     },
     "sidebar": {
+      "label": "Mieter Dashboard",
       "summary": "Pruefe Mietdokumente, erstelle Briefe und halte jeden Fall an einem Ort.",
       "focusLabel": "Aktueller Fokus",
       "focusTitle": "Von PDF zu verwertbarer Empfehlung.",

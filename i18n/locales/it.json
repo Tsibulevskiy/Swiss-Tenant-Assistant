@@ -17,11 +17,16 @@
     "nav": {
       "dashboard": "Panoramica",
       "checks": "Verifiche",
-      "documents": "Documenti",
+      "documents": "I miei documenti",
       "letters": "Lettere",
+      "deadlines": "Scadenze",
+      "payments": "Pagamenti",
+      "settings": "Impostazioni",
+      "support": "Aiuto e supporto",
       "soon": "Presto"
     },
     "sidebar": {
+      "label": "Dashboard inquilino",
       "summary": "Analizza documenti di locazione, genera lettere e tieni ogni pratica in un unico posto.",
       "focusLabel": "Focus attuale",
       "focusTitle": "Dal PDF a una raccomandazione utilizzabile.",
