@@ -6,6 +6,8 @@ const route = useRoute()
 const localePath = useLocalePath()
 const auth = useAuth()
 const { t } = useI18n()
+const isSubmitting = ref(false)
+const checkoutError = ref('')
 
 await auth.fetchCurrentUser()
 
@@ -67,6 +69,47 @@ const checkoutProduct = computed(() => {
       }
   }
 })
+
+const paymentStatus = computed(() => {
+  const raw = typeof route.query.payment === 'string' ? route.query.payment : ''
+
+  return raw === 'success' || raw === 'cancel' ? raw : null
+})
+
+async function startCheckout() {
+  if (!product.value) {
+    return
+  }
+
+  const checkId = typeof route.query.checkId === 'string' && /^\d+$/.test(route.query.checkId)
+    ? Number(route.query.checkId)
+    : undefined
+  const caseId = typeof route.query.caseId === 'string' && /^\d+$/.test(route.query.caseId)
+    ? Number(route.query.caseId)
+    : undefined
+
+  isSubmitting.value = true
+  checkoutError.value = ''
+
+  try {
+    const response = await $fetch<{ ok: true, data: { checkoutUrl: string } }>('/api/payments/checkout-session', {
+      method: 'POST',
+      body: {
+        productCode: product.value,
+        ...(checkId ? { checkId } : {}),
+        ...(caseId ? { caseId } : {})
+      }
+    })
+
+    await navigateTo(response.data.checkoutUrl, {
+      external: true
+    })
+  } catch (error: any) {
+    checkoutError.value = error?.data?.statusMessage || error?.statusMessage || t('checkout.errors.generic')
+  } finally {
+    isSubmitting.value = false
+  }
+}
 
 useHead(() => ({
   title: `${t('checkout.title')} · ${t('app.name')}`
@@ -130,16 +173,28 @@ useHead(() => ({
             {{ checkoutProduct.price }}
           </p>
 
-          <div class="mt-6 rounded-[0.875rem] bg-[#F7F9FB] px-4 py-3 text-sm leading-6 text-[#4E6279]">
+          <div
+            v-if="paymentStatus"
+            class="mt-6 rounded-[0.875rem] px-4 py-3 text-sm leading-6"
+            :class="paymentStatus === 'success' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700'"
+          >
+            {{ paymentStatus === 'success' ? t('checkout.status.success') : t('checkout.status.cancel') }}
+          </div>
+          <div v-else class="mt-6 rounded-[0.875rem] bg-[#F7F9FB] px-4 py-3 text-sm leading-6 text-[#4E6279]">
             {{ t('checkout.placeholder') }}
+          </div>
+
+          <div v-if="checkoutError" class="mt-4 rounded-[0.875rem] bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700">
+            {{ checkoutError }}
           </div>
 
           <button
             type="button"
-            disabled
-            class="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-[0.875rem] bg-[#1E9F47] px-6 py-3 text-sm font-semibold text-white opacity-80"
+            :disabled="isSubmitting"
+            class="mt-6 inline-flex min-h-12 w-full items-center justify-center rounded-[0.875rem] bg-[#1E9F47] px-6 py-3 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-80"
+            @click="startCheckout"
           >
-            {{ t('checkout.payAction') }}
+            {{ isSubmitting ? t('checkout.processing') : t('checkout.payAction') }}
           </button>
 
           <div class="mt-4 flex items-center justify-center gap-2 text-sm text-[#4E6279]">

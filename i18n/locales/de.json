@@ -408,6 +408,123 @@
       "description": "Starten Sie eine Dokumentpruefung aus dem Pricing, um Status und Ergebnisse hier zu sehen."
     }
   },
+  "lettersPage": {
+    "eyebrow": "Briefe",
+    "title": "Briefe",
+    "description": "Erstellen Sie vermietertaugliche Schreiben aus abgeschlossenen Checks oder gefuehrten Eingaben, pruefen Sie die Vorschau und behalten Sie gespeicherte Briefe an einem Ort.",
+    "actions": {
+      "refresh": "Aktualisieren",
+      "generate": "Brief erstellen",
+      "openChecks": "Checks oeffnen",
+      "exportPdf": "PDF exportieren"
+    },
+    "stats": {
+      "total": "Briefe gesamt",
+      "saved": "Gespeicherte Entwuerfe",
+      "linked": "Mit Fall oder Check verknuepft"
+    },
+    "types": {
+      "belege_request": "Belege anfordern",
+      "nebenkosten_objection": "Nebenkosten Einwand",
+      "repair_request": "Reparaturanfrage",
+      "deposit_return_request": "Rueckzahlung Mietdepot",
+      "rent_increase_objection": "Einwand Mietzinserhoehung"
+    },
+    "form": {
+      "title": "Entwurfsgenerator",
+      "description": "Waehlen Sie einen Brieftyp, erfassen Sie den noetigen Kontext und erzeugen Sie einen gespeicherten Entwurf.",
+      "typeLabel": "Brieftyp",
+      "checkLabel": "Zugehoeriger Check",
+      "checkPlaceholder": "Abgeschlossenen Check waehlen",
+      "checkNotRequired": "Fuer diesen Brieftyp ist kein Check noetig",
+      "success": "Briefentwurf wurde erstellt und gespeichert.",
+      "errors": {
+        "checkRequired": "Bitte waehlen Sie fuer diesen Brieftyp einen abgeschlossenen Check.",
+        "generic": "Der Briefentwurf konnte nicht erstellt werden."
+      },
+      "fields": {
+        "recipientName": {
+          "label": "Empfaenger",
+          "placeholder": "Verwaltung oder Vermieter"
+        },
+        "recipientAddress": {
+          "label": "Empfaengeradresse",
+          "placeholder": "Postadresse der Verwaltung oder des Vermieters"
+        },
+        "senderName": {
+          "label": "Absender",
+          "placeholder": "Ihr voller Name"
+        },
+        "senderAddress": {
+          "label": "Absenderadresse",
+          "placeholder": "Ihre Postadresse"
+        },
+        "senderCity": {
+          "label": "Ort und Datum",
+          "placeholder": "Zuerich, 23.06.2026"
+        },
+        "requestedDocuments": {
+          "label": "Angeforderte Unterlagen",
+          "placeholder": "Belege, Rechnungen, Zaehlerstaende, Verteilschluessel"
+        },
+        "context": {
+          "label": "Zusaetzlicher Kontext",
+          "placeholder": "Optionale Hinweise fuer den Entwurf"
+        },
+        "objectionReason": {
+          "label": "Grund des Einwands",
+          "placeholder": "Welche Punkte sollen beanstandet oder geklaert werden"
+        },
+        "issueDescription": {
+          "label": "Beschreibung des Mangels",
+          "placeholder": "Beschreiben Sie den Mangel und seine Auswirkungen"
+        },
+        "issueLocation": {
+          "label": "Ort des Mangels",
+          "placeholder": "Kueche, Bad, Heizung"
+        },
+        "requestedDeadline": {
+          "label": "Gewuenschte Frist",
+          "placeholder": "Bitte innert 10 Tagen antworten"
+        },
+        "depositContext": {
+          "label": "Kontext Mietdepot",
+          "placeholder": "Auszugsdatum, strittige Abzuege, zugesagte Rueckzahlung"
+        },
+        "rentIncreaseContext": {
+          "label": "Kontext Mietzinserhoehung",
+          "placeholder": "Was genau an der Erhoehung beanstandet werden soll"
+        },
+        "additionalNotes": {
+          "label": "Weitere Hinweise",
+          "placeholder": "Optionale Details fuer den Entwurf"
+        }
+      }
+    },
+    "preview": {
+      "title": "Vorschau",
+      "description": "Pruefen Sie Betreff, Text und aufgeloeste Variablen, bevor PDF oder Export dazukommen.",
+      "saved": "Gespeichert",
+      "subject": "Betreff",
+      "body": "Text",
+      "variables": "Variablen",
+      "emptyTitle": "Kein Entwurf ausgewaehlt.",
+      "emptyDescription": "Erstellen Sie einen neuen Brief oder waehlen Sie einen gespeicherten Eintrag aus der Liste.",
+      "sources": {
+        "user_input": "Eingabe",
+        "check_context": "Check Kontext",
+        "system": "System"
+      }
+    },
+    "saved": {
+      "title": "Gespeicherte Briefe",
+      "description": "Jeder erzeugte Entwurf wird in `letters` gespeichert und kann hier wieder geoeffnet werden.",
+      "noCase": "Kein verknuepfter Fall",
+      "emptyTitle": "Noch keine gespeicherten Briefe.",
+      "emptyDescription": "Erstellen Sie den ersten Entwurf, um einen gespeicherten Briefeintrag anzulegen.",
+      "emptyHint": "Wird nach Generierung gespeichert"
+    }
+  },
   "checkDetailPage": {
     "back": "Zurueck zu Pruefungen",
     "notFound": "Die angeforderte Pruefung konnte nicht geladen werden.",
@@ -443,7 +560,14 @@
     "noExtractionText": "Kein extrahierter Text verfuegbar.",
     "noExtraction": "Fuer diese Pruefung liegt noch kein Extraktionsergebnis vor.",
     "matchedValue": "Trefferwert",
-    "noFindings": "Es sind noch keine Regel-Findings gespeichert. Dieser Bereich ist fuer spaetere Rule-Engine-Ausgaben vorbereitet."
+    "noFindings": "Es sind noch keine Regel-Findings gespeichert. Dieser Bereich ist fuer spaetere Rule-Engine-Ausgaben vorbereitet.",
+    "paymentGate": {
+      "previewTitle": "Vorschau Modus",
+      "previewBody": "Die Analyse ist abgeschlossen, aber diese Seite zeigt derzeit nur eine Vorschau. Schliessen Sie die Zahlung ab, um die volle Zusammenfassung, alle Findings und den extrahierten Dokumenttext freizuschalten.",
+      "unlockAction": "Volles Ergebnis freischalten",
+      "findingsLocked": "Vor der Zahlung werden nur Vorschau-Findings angezeigt.",
+      "extractionLocked": "Der extrahierte Text bleibt bis zur abgeschlossenen Zahlung verborgen."
+    }
   },
   "landing": {
     "nav": {
@@ -791,8 +915,16 @@
     "selectedLabel": "Ausgewaehltes Produkt",
     "totalLabel": "Gesamt",
     "placeholder": "Stripe Checkout ist noch nicht angebunden. Diese Seite dient aktuell als Uebergabe des gewaehlten Produkts nach der Registrierung.",
+    "processing": "Weiterleitung zu Stripe...",
     "payAction": "Zur Zahlung",
     "secureNote": "Platzhalter fuer sicheren Zahlungsfluss",
+    "status": {
+      "success": "Stripe Checkout wurde erfolgreich abgeschlossen. Die finale Zahlungsbestaetigung wird spaeter ueber den Webhook verarbeitet.",
+      "cancel": "Stripe Checkout wurde abgebrochen. Sie koennen die Zahlung erneut starten."
+    },
+    "errors": {
+      "generic": "Die Stripe-Checkout-Session konnte nicht erstellt werden."
+    },
     "points": {
       "first": "Das gewaehlte Produkt bleibt von Landing ueber Registrierung bis zum Checkout erhalten.",
       "second": "Hier kann Stripe Checkout spaeter sauber per Produktcode angebunden werden.",

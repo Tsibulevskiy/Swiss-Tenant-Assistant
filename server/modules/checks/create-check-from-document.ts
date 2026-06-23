@@ -2,6 +2,8 @@ import { and, desc, eq, isNull } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { cases, checkDocuments, checks, documents, ruleFindings } from '../../db/schema'
+import { generateCheckRecommendation } from '../ai/generate-check-recommendation'
+import { generateCheckSummary } from '../ai/generate-check-summary'
 import type { AuthUser } from '../auth/types'
 import { getLatestCompletedDocumentExtraction } from '../documents/get-latest-completed-extraction'
 import { saveDocumentExtraction } from '../documents/save-document-extraction'
@@ -220,6 +222,27 @@ export async function createCheckFromDocument(options: {
       structuredDataJson: selectedExtraction.structuredDataJson ?? null
     })
     const serializedRuleResult = serializeRuleResult(evaluated.ruleResultJson)
+    const generatedSummary = await generateCheckSummary({
+      userId: user.id,
+      caseId,
+      checkId,
+      checkType,
+      riskScore: evaluated.riskScore,
+      findings: evaluated.findings,
+      normalizedText: selectedExtraction.normalizedText,
+      structuredDataJson: selectedExtraction.structuredDataJson ?? null,
+      fallbackSummaryText: evaluated.summaryText
+    })
+    const generatedRecommendation = await generateCheckRecommendation({
+      userId: user.id,
+      caseId,
+      checkId,
+      checkType,
+      riskScore: evaluated.riskScore,
+      findings: evaluated.findings,
+      normalizedText: selectedExtraction.normalizedText,
+      summaryText: generatedSummary.summaryText
+    })
     const completedPipelinePayload = buildCompletedCheckPipelinePayload({
       initialPayload: postExtractionPipelinePayload,
       extraction: {
@@ -232,7 +255,7 @@ export async function createCheckFromDocument(options: {
         finishedAt: selectedExtraction.finishedAt
       },
       evaluated: {
-        summaryText: evaluated.summaryText,
+        summaryText: generatedSummary.summaryText,
         riskScore: evaluated.riskScore,
         ruleResultJson: serializedRuleResult
       }
@@ -266,11 +289,17 @@ export async function createCheckFromDocument(options: {
     await db
       .update(checks)
       .set({
-        status: 'ready',
+        status: 'payment_required',
         inputPayloadJson: completedPipelinePayload,
-        summaryText: evaluated.summaryText,
+        summaryText: generatedSummary.summaryText,
+        disclaimerText: generatedSummary.disclaimerText,
         structuredInputJson: selectedExtraction.structuredDataJson ?? null,
         ruleResultJson: serializedRuleResult,
+        aiResultJson: {
+          summary: generatedSummary.aiResultJson,
+          recommendation: generatedRecommendation.aiResultJson,
+          recommendedAction: generatedRecommendation.recommendedAction
+        },
         riskScore: evaluated.riskScore,
         finishedAt: new Date()
       })

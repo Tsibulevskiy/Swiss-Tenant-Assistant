@@ -406,6 +406,81 @@
       "description": "Demarrez une verification depuis la page de pricing pour voir son statut et son resultat ici."
     }
   },
+  "lettersPage": {
+    "eyebrow": "Lettres",
+    "title": "Lettres",
+    "description": "Generez des lettres a partir de verifications terminees ou d'entrees guidees, verifiez l'aperçu et retrouvez les brouillons sauvegardes.",
+    "actions": {
+      "refresh": "Actualiser",
+      "generate": "Generer la lettre",
+      "openChecks": "Ouvrir les verifications",
+      "exportPdf": "Exporter le PDF"
+    },
+    "stats": {
+      "total": "Total lettres",
+      "saved": "Brouillons sauvegardes",
+      "linked": "Lies a un dossier ou une verification"
+    },
+    "types": {
+      "belege_request": "Demande de justificatifs",
+      "nebenkosten_objection": "Contestations des charges",
+      "repair_request": "Demande de reparation",
+      "deposit_return_request": "Demande de restitution du depot",
+      "rent_increase_objection": "Contestation de hausse de loyer"
+    },
+    "form": {
+      "title": "Generateur de brouillon",
+      "description": "Choisissez un type de lettre, ajoutez le contexte utile et genere z un brouillon sauvegarde.",
+      "typeLabel": "Type de lettre",
+      "checkLabel": "Verification liee",
+      "checkPlaceholder": "Choisir une verification terminee",
+      "checkNotRequired": "Aucune verification requise pour ce type",
+      "success": "Le brouillon a ete genere et sauvegarde.",
+      "errors": {
+        "checkRequired": "Veuillez choisir une verification terminee pour ce type de lettre.",
+        "generic": "Le brouillon n'a pas pu etre genere."
+      },
+      "fields": {
+        "recipientName": { "label": "Destinataire", "placeholder": "Gerance ou bailleur" },
+        "recipientAddress": { "label": "Adresse du destinataire", "placeholder": "Adresse postale du bailleur ou de la gerance" },
+        "senderName": { "label": "Expediteur", "placeholder": "Votre nom complet" },
+        "senderAddress": { "label": "Adresse de l'expediteur", "placeholder": "Votre adresse postale" },
+        "senderCity": { "label": "Lieu et date", "placeholder": "Zurich, 23 juin 2026" },
+        "requestedDocuments": { "label": "Documents demandes", "placeholder": "Justificatifs, factures, releves, cle de repartition" },
+        "context": { "label": "Contexte additionnel", "placeholder": "Remarques facultatives pour orienter le brouillon" },
+        "objectionReason": { "label": "Motif de contestation", "placeholder": "Quels points doivent etre contestes ou clarifies" },
+        "issueDescription": { "label": "Description du probleme", "placeholder": "Decrivez le defaut et son impact" },
+        "issueLocation": { "label": "Emplacement du probleme", "placeholder": "Cuisine, salle de bain, chauffage" },
+        "requestedDeadline": { "label": "Delai demande", "placeholder": "Reponse sous 10 jours" },
+        "depositContext": { "label": "Contexte du depot", "placeholder": "Date de sortie, deductions contestees, restitution promise" },
+        "rentIncreaseContext": { "label": "Contexte de hausse de loyer", "placeholder": "Ce qui doit etre conteste dans l'avis d'augmentation" },
+        "additionalNotes": { "label": "Notes supplementaires", "placeholder": "Details facultatifs a inclure" }
+      }
+    },
+    "preview": {
+      "title": "Apercu",
+      "description": "Relisez l'objet, le texte et les variables resolues avant l'ajout de la couche PDF/export.",
+      "saved": "Sauvegarde",
+      "subject": "Objet",
+      "body": "Texte",
+      "variables": "Variables",
+      "emptyTitle": "Aucun brouillon selectionne.",
+      "emptyDescription": "Generez une nouvelle lettre ou choisissez un brouillon sauvegarde.",
+      "sources": {
+        "user_input": "Saisie utilisateur",
+        "check_context": "Contexte verification",
+        "system": "Systeme"
+      }
+    },
+    "saved": {
+      "title": "Lettres sauvegardees",
+      "description": "Chaque brouillon genere est enregistre dans `letters` et peut etre rouvert ici.",
+      "noCase": "Aucun dossier lie",
+      "emptyTitle": "Aucune lettre sauvegardee.",
+      "emptyDescription": "Generez un premier brouillon pour creer un enregistrement sauvegarde.",
+      "emptyHint": "Sauvegarde apres generation"
+    }
+  },
   "checkDetailPage": {
     "back": "Retour aux verifications",
     "notFound": "La verification demandee n'a pas pu etre chargee.",
@@ -441,7 +516,14 @@
     "noExtractionText": "Aucun texte extrait n'est disponible.",
     "noExtraction": "Aucun resultat d'extraction n'est encore disponible pour cette verification.",
     "matchedValue": "Valeur trouvee",
-    "noFindings": "Aucun constat de regle n'est encore enregistre. Cette zone est prete pour les futurs resultats du moteur de regles."
+    "noFindings": "Aucun constat de regle n'est encore enregistre. Cette zone est prete pour les futurs resultats du moteur de regles.",
+    "paymentGate": {
+      "previewTitle": "Mode apercu",
+      "previewBody": "L'analyse est terminee, mais cette page affiche seulement un apercu. Finalisez le paiement pour debloquer le resume complet, tous les constats et le texte extrait.",
+      "unlockAction": "Debloquer le resultat complet",
+      "findingsLocked": "Seuls des constats d'aperçu sont affiches avant le paiement.",
+      "extractionLocked": "Le texte extrait reste masque jusqu'au paiement."
+    }
   },
   "landing": {
     "nav": {
@@ -789,8 +871,16 @@
     "selectedLabel": "Produit selectionne",
     "totalLabel": "Total",
     "placeholder": "Stripe Checkout n'est pas encore connecte. Cette page sert actuellement de relais du produit choisi apres inscription.",
+    "processing": "Redirection vers Stripe...",
     "payAction": "Continuer vers le paiement",
     "secureNote": "Placeholder de paiement securise",
+    "status": {
+      "success": "Stripe Checkout est revenu avec succes. La confirmation finale du paiement sera traitee ensuite via webhook.",
+      "cancel": "Stripe Checkout a ete annule. Vous pouvez relancer le paiement quand vous voulez."
+    },
+    "errors": {
+      "generic": "La session Stripe Checkout n'a pas pu etre creee."
+    },
     "points": {
       "first": "Le produit choisi est conserve du landing a l'inscription puis au checkout.",
       "second": "C'est ici qu'il faut rattacher Stripe Checkout par code produit.",

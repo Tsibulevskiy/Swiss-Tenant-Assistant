@@ -87,6 +87,14 @@ export const letterTypeValues = [
   'custom'
 ] as const
 
+export const mvpLetterTypeValues = [
+  'belege_request',
+  'nebenkosten_objection',
+  'repair_request',
+  'deposit_return_request',
+  'rent_increase_objection'
+] as const
+
 export const letterStatusValues = ['draft', 'generated', 'downloaded', 'sent'] as const
 
 export const reportTypeValues = ['analysis_report'] as const

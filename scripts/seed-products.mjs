@@ -49,13 +49,40 @@ const products = [
     metadataJson: JSON.stringify({ checkType: 'mietvertrag_check' })
   },
   {
-    code: 'letter_generation',
-    name: 'Letter Generation',
+    code: 'mietzinserhoehung_check',
+    name: 'Rent Increase Check',
+    type: 'check',
+    priceChf: '24.00',
+    currency: 'CHF',
+    isActive: true,
+    metadataJson: JSON.stringify({ checkType: 'rent_increase_check' })
+  },
+  {
+    code: 'deposit_return_check',
+    name: 'Deposit Return Check',
+    type: 'check',
+    priceChf: '29.00',
+    currency: 'CHF',
+    isActive: true,
+    metadataJson: JSON.stringify({ checkType: 'deposit_return_check' })
+  },
+  {
+    code: 'letter_generator',
+    name: 'Letter Generator',
     type: 'letter',
-    priceChf: '5.00',
+    priceChf: '9.00',
     currency: 'CHF',
     isActive: true,
     metadataJson: JSON.stringify({ output: ['text', 'pdf', 'email'] })
+  },
+  {
+    code: 'tenant_bundle',
+    name: 'Tenant Protection Bundle',
+    type: 'subscription',
+    priceChf: '39.00',
+    currency: 'CHF',
+    isActive: true,
+    metadataJson: JSON.stringify({ bundle: true })
   }
 ]
 

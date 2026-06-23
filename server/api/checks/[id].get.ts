@@ -3,6 +3,7 @@ import { and, desc, eq } from 'drizzle-orm'
 import { getDb } from '../../db/client'
 import { checkDocuments, checks, cases, documentExtractions, documents, ruleFindings } from '../../db/schema'
 import { deriveCheckProcessingStatus } from '../../modules/checks/processing-status'
+import { getEffectiveCheckStatus, resolveCheckPaymentGate } from '../../modules/payments/check-payment-gating'
 import { apiSuccess } from '../../utils/api'
 import { defineAuthenticatedEventHandler } from '../../utils/auth'
 
@@ -12,7 +13,32 @@ function buildRecommendedAction(input: {
   riskScore: string | null
   findingsCount: number
   summaryText: string | null
+  aiResultJson?: unknown
 }) {
+  const aiResult = input.aiResultJson && typeof input.aiResultJson === 'object'
+    ? input.aiResultJson as {
+      recommendedAction?: {
+        level?: string
+        title?: string
+        body?: string
+      }
+    }
+    : null
+  const aiRecommendedAction = aiResult?.recommendedAction
+
+  if (
+    aiRecommendedAction
+    && typeof aiRecommendedAction.level === 'string'
+    && typeof aiRecommendedAction.title === 'string'
+    && typeof aiRecommendedAction.body === 'string'
+  ) {
+    return {
+      level: aiRecommendedAction.level,
+      title: aiRecommendedAction.title,
+      body: aiRecommendedAction.body
+    }
+  }
+
   if (input.status === 'failed') {
     return {
       level: 'attention',
@@ -26,6 +52,14 @@ function buildRecommendedAction(input: {
       level: 'info',
       title: 'Analysis is in progress',
       body: 'The document is moving through extraction and rule evaluation. Return once the summary is ready.'
+    }
+  }
+
+  if (input.status === 'payment_required') {
+    return {
+      level: 'attention',
+      title: 'Unlock the full result',
+      body: 'A preview is available now. Complete payment to unlock the full summary, findings, and extracted text.'
     }
   }
 
@@ -75,6 +109,7 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
       riskScore: checks.riskScore,
       summaryText: checks.summaryText,
       disclaimerText: checks.disclaimerText,
+      aiResultJson: checks.aiResultJson,
       errorMessage: checks.errorMessage,
       startedAt: checks.startedAt,
       finishedAt: checks.finishedAt,
@@ -92,6 +127,17 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
       statusMessage: 'Check not found'
     })
   }
+
+  const paymentGate = await resolveCheckPaymentGate({
+    checkId: check.id,
+    checkType: check.type,
+    userId: user.id
+  })
+  const effectiveStatus = getEffectiveCheckStatus({
+    originalStatus: check.status,
+    requiresPayment: paymentGate.requiresPayment,
+    hasPaidAccess: paymentGate.hasPaidAccess
+  })
 
   const [primaryDocument] = await db
     .select({
@@ -157,40 +203,63 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
     .orderBy(desc(ruleFindings.createdAt))
 
   const processing = deriveCheckProcessingStatus({
-    checkStatus: check.status,
+    checkStatus: effectiveStatus,
     inputPayloadJson: check.inputPayloadJson,
     errorMessage: check.errorMessage
   })
+  const previewFindings = paymentGate.requiresPayment && !paymentGate.hasPaidAccess
+    ? findings.slice(0, 2).map(item => ({
+      ...item,
+      description: item.description.length > 180 ? `${item.description.slice(0, 180)}…` : item.description,
+      metadataJson: null
+    }))
+    : findings
+  const extractionPreview = extraction && paymentGate.requiresPayment && !paymentGate.hasPaidAccess
+    ? {
+      ...extraction,
+      rawText: null,
+      normalizedText: null,
+      structuredDataJson: null
+    }
+    : extraction
+  const summaryPreview = paymentGate.requiresPayment && !paymentGate.hasPaidAccess && check.summaryText
+    ? `${check.summaryText.slice(0, 260)}${check.summaryText.length > 260 ? '…' : ''}`
+    : check.summaryText
 
   const analysis = {
     aiSummary: {
       title: 'AI summary',
-      body: check.summaryText || null,
-      status: check.summaryText ? 'ready' : 'empty'
+      body: summaryPreview || null,
+      status: summaryPreview ? 'ready' : 'empty'
     },
     ruleFindings: {
       title: 'Rule findings',
       count: findings.length,
-      items: findings,
-      status: findings.length ? 'ready' : 'empty'
+      items: previewFindings,
+      status: findings.length ? 'ready' : 'empty',
+      previewLocked: paymentGate.requiresPayment && !paymentGate.hasPaidAccess
     },
     recommendedAction: buildRecommendedAction({
-      status: check.status,
+      status: effectiveStatus,
       processingCode: processing.code,
       riskScore: check.riskScore,
       findingsCount: findings.length,
-      summaryText: check.summaryText
+      summaryText: summaryPreview,
+      aiResultJson: check.aiResultJson
     })
   }
 
   return apiSuccess({
     check: {
       ...check,
+      status: effectiveStatus,
+      summaryText: summaryPreview,
       processing
     },
+    paymentGate,
     primaryDocument,
-    extraction,
-    findings,
+    extraction: extractionPreview,
+    findings: previewFindings,
     analysis
   })
 })

@@ -27,6 +27,7 @@ export default defineNuxtConfig({
     mysqlUser: process.env.MYSQL_USER || '',
     mysqlPassword: process.env.MYSQL_PASSWORD || '',
     openAiApiKey: process.env.NUXT_OPENAI_API_KEY || '',
+    openAiModel: process.env.NUXT_OPENAI_MODEL || 'gpt-5.5',
     stripeSecretKey: process.env.NUXT_STRIPE_SECRET_KEY || '',
     stripeWebhookSecret: process.env.NUXT_STRIPE_WEBHOOK_SECRET || '',
     brevoApiKey: process.env.NUXT_BREVO_API_KEY || '',

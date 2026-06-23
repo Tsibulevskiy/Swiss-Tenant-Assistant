@@ -406,6 +406,81 @@
       "description": "Avvia una verifica dalla pagina prezzi per vedere qui stato e risultato."
     }
   },
+  "lettersPage": {
+    "eyebrow": "Lettere",
+    "title": "Lettere",
+    "description": "Genera lettere a partire da verifiche completate o input guidati, controlla l'anteprima e ritrova le bozze salvate.",
+    "actions": {
+      "refresh": "Aggiorna",
+      "generate": "Genera lettera",
+      "openChecks": "Apri verifiche",
+      "exportPdf": "Esporta PDF"
+    },
+    "stats": {
+      "total": "Lettere totali",
+      "saved": "Bozze salvate",
+      "linked": "Collegate a caso o verifica"
+    },
+    "types": {
+      "belege_request": "Richiesta giustificativi",
+      "nebenkosten_objection": "Contestazione spese accessorie",
+      "repair_request": "Richiesta di riparazione",
+      "deposit_return_request": "Richiesta restituzione deposito",
+      "rent_increase_objection": "Contestazione aumento affitto"
+    },
+    "form": {
+      "title": "Generatore di bozze",
+      "description": "Scegli il tipo di lettera, aggiungi il contesto necessario e genera una bozza salvata.",
+      "typeLabel": "Tipo di lettera",
+      "checkLabel": "Verifica collegata",
+      "checkPlaceholder": "Scegli una verifica completata",
+      "checkNotRequired": "Nessuna verifica richiesta per questo tipo",
+      "success": "Bozza generata e salvata.",
+      "errors": {
+        "checkRequired": "Seleziona una verifica completata per questo tipo di lettera.",
+        "generic": "Non e stato possibile generare la bozza."
+      },
+      "fields": {
+        "recipientName": { "label": "Destinatario", "placeholder": "Amministrazione o locatore" },
+        "recipientAddress": { "label": "Indirizzo destinatario", "placeholder": "Indirizzo postale del locatore o dell'amministrazione" },
+        "senderName": { "label": "Mittente", "placeholder": "Il tuo nome completo" },
+        "senderAddress": { "label": "Indirizzo mittente", "placeholder": "Il tuo indirizzo postale" },
+        "senderCity": { "label": "Luogo e data", "placeholder": "Zurigo, 23 giugno 2026" },
+        "requestedDocuments": { "label": "Documenti richiesti", "placeholder": "Giustificativi, fatture, letture contatori, chiave di riparto" },
+        "context": { "label": "Contesto aggiuntivo", "placeholder": "Note opzionali per orientare la bozza" },
+        "objectionReason": { "label": "Motivo della contestazione", "placeholder": "Quali punti devono essere contestati o chiariti" },
+        "issueDescription": { "label": "Descrizione del problema", "placeholder": "Descrivi il difetto e il suo impatto" },
+        "issueLocation": { "label": "Posizione del problema", "placeholder": "Cucina, bagno, impianto di riscaldamento" },
+        "requestedDeadline": { "label": "Termine richiesto", "placeholder": "Risposta entro 10 giorni" },
+        "depositContext": { "label": "Contesto deposito", "placeholder": "Data uscita, trattenute contestate, restituzione promessa" },
+        "rentIncreaseContext": { "label": "Contesto aumento affitto", "placeholder": "Cosa deve essere contestato nell'avviso di aumento" },
+        "additionalNotes": { "label": "Note aggiuntive", "placeholder": "Dettagli opzionali da includere" }
+      }
+    },
+    "preview": {
+      "title": "Anteprima",
+      "description": "Rivedi oggetto, testo e variabili risolte prima di aggiungere il livello PDF/export.",
+      "saved": "Salvata",
+      "subject": "Oggetto",
+      "body": "Testo",
+      "variables": "Variabili",
+      "emptyTitle": "Nessuna bozza selezionata.",
+      "emptyDescription": "Genera una nuova lettera o scegli una bozza salvata.",
+      "sources": {
+        "user_input": "Input utente",
+        "check_context": "Contesto verifica",
+        "system": "Sistema"
+      }
+    },
+    "saved": {
+      "title": "Lettere salvate",
+      "description": "Ogni bozza generata viene salvata in `letters` e puo essere riaperta qui.",
+      "noCase": "Nessun caso collegato",
+      "emptyTitle": "Nessuna lettera salvata.",
+      "emptyDescription": "Genera la prima bozza per creare un record salvato.",
+      "emptyHint": "Salvata dopo la generazione"
+    }
+  },
   "checkDetailPage": {
     "back": "Torna alle verifiche",
     "notFound": "Non e stato possibile caricare la verifica richiesta.",
@@ -441,7 +516,14 @@
     "noExtractionText": "Nessun testo estratto disponibile.",
     "noExtraction": "Nessun risultato di estrazione disponibile per questa verifica.",
     "matchedValue": "Valore rilevato",
-    "noFindings": "Nessun finding di regola e ancora salvato. Quest'area e pronta per il futuro output del rule engine."
+    "noFindings": "Nessun finding di regola e ancora salvato. Quest'area e pronta per il futuro output del rule engine.",
+    "paymentGate": {
+      "previewTitle": "Modalita anteprima",
+      "previewBody": "L'analisi e completata, ma questa pagina mostra solo un'anteprima. Completa il pagamento per sbloccare il riepilogo completo, tutti i findings e il testo estratto.",
+      "unlockAction": "Sblocca il risultato completo",
+      "findingsLocked": "Prima del pagamento sono mostrati solo findings di anteprima.",
+      "extractionLocked": "Il testo estratto resta nascosto fino al completamento del pagamento."
+    }
   },
   "landing": {
     "nav": {
@@ -789,8 +871,16 @@
     "selectedLabel": "Prodotto selezionato",
     "totalLabel": "Totale",
     "placeholder": "Stripe Checkout non e ancora collegato. Questa pagina funziona per ora come passaggio del prodotto scelto dopo la registrazione.",
+    "processing": "Reindirizzamento a Stripe...",
     "payAction": "Continua al pagamento",
     "secureNote": "Placeholder per pagamento sicuro",
+    "status": {
+      "success": "Stripe Checkout e tornato con successo. La conferma finale del pagamento verra gestita poi via webhook.",
+      "cancel": "Stripe Checkout e stato annullato. Puoi riavviare il pagamento quando vuoi."
+    },
+    "errors": {
+      "generic": "Non e stato possibile creare la sessione Stripe Checkout."
+    },
     "points": {
       "first": "Il prodotto selezionato viene mantenuto dal landing alla registrazione fino al checkout.",
       "second": "Qui si puo collegare Stripe Checkout in modo pulito per product code.",

@@ -167,18 +167,18 @@
 - [ ] Test rule engine on sample contracts
 
 ### Day 17
-- [ ] Integrate `OpenAI API`
-- [ ] Implement AI service wrapper
-- [ ] Create prompt for `summary`
-- [ ] Create prompt for `recommendations`
-- [ ] Define structured JSON response validation
-- [ ] Log calls to `ai_runs`
+- [x] Integrate `OpenAI API`
+- [x] Implement AI service wrapper
+- [x] Create prompt for `summary`
+- [x] Create prompt for `recommendations`
+- [x] Define structured JSON response validation
+- [x] Log calls to `ai_runs`
 
 ### Day 18
-- [ ] Add AI prompt for `letter_generation`
-- [ ] Add AI failure fallback
-- [ ] Add disclaimer injection
-- [ ] Add safe error handling for AI failures
+- [x] Add AI prompt for `letter_generation`
+- [x] Add AI failure fallback
+- [x] Add disclaimer injection
+- [x] Add safe error handling for AI failures
 - [ ] Test AI outputs on sample extracted data
 
 ### Day 19
@@ -215,43 +215,43 @@
 - [ ] Test module end-to-end
 
 ### Day 23
-- [ ] Define MVP letter types
-- [ ] Build letter generator backend
-- [ ] Generate `subject`
-- [ ] Generate `body_text`
-- [ ] Save records to `letters`
-- [ ] Link letters to `case` / `check`
+- [x] Define MVP letter types
+- [x] Build letter generator backend
+- [x] Generate `subject`
+- [x] Generate `body_text`
+- [x] Save records to `letters`
+- [x] Link letters to `case` / `check`
 
 ### Day 24
-- [ ] Build letter generator frontend
-- [ ] Build input forms for letter variables
-- [ ] Add AI-assisted generation
-- [ ] Add result preview
+- [x] Build letter generator frontend
+- [x] Build input forms for letter variables
+- [x] Add AI-assisted generation
+- [x] Add result preview
 - [ ] Test standalone letter flow
 
 ### Day 25
 - [ ] Integrate `pdf-lib`
 - [ ] Build PDF report template
-- [ ] Build PDF letter template
-- [ ] Save reports to `storage/reports`
-- [ ] Register generated PDFs in `documents`
+- [x] Build PDF letter template
+- [x] Save reports to `storage/reports`
+- [x] Register generated PDFs in `documents`
 - [ ] Test PDF generation for report and letter
 
 ## Week 6
 
 ### Day 26
-- [ ] Integrate `Stripe Checkout`
-- [ ] Create checkout session endpoint
-- [ ] Create payment records in `payments`
-- [ ] Implement payment gating for checks/letters
+- [x] Integrate `Stripe Checkout`
+- [x] Create checkout session endpoint
+- [x] Create payment records in `payments`
+- [x] Implement payment gating for checks/letters
 - [ ] Test checkout creation
 
 ### Day 27
-- [ ] Implement `Stripe Webhook`
-- [ ] Verify webhook signatures
-- [ ] Update payment statuses
+- [x] Implement `Stripe Webhook`
+- [x] Verify webhook signatures
+- [x] Update payment statuses
 - [ ] Unlock report/letter after successful payment
-- [ ] Handle failed/expired payment states
+- [x] Handle failed/expired payment states
 - [ ] Test payment flow end-to-end
 
 ### Day 28

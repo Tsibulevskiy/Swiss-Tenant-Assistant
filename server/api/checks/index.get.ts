@@ -3,6 +3,7 @@ import { and, desc, eq, sql } from 'drizzle-orm'
 import { getDb } from '../../db/client'
 import { cases, checkDocuments, checks, documents, ruleFindings } from '../../db/schema'
 import { deriveCheckProcessingStatus } from '../../modules/checks/processing-status'
+import { getEffectiveCheckStatus, resolveCheckPaymentGate } from '../../modules/payments/check-payment-gating'
 import { apiSuccess } from '../../utils/api'
 import { defineAuthenticatedEventHandler } from '../../utils/auth'
 
@@ -31,6 +32,16 @@ export default defineAuthenticatedEventHandler(async (_event, user) => {
     .orderBy(desc(checks.createdAt))
 
   const enrichedItems = await Promise.all(items.map(async item => {
+    const paymentGate = await resolveCheckPaymentGate({
+      checkId: item.id,
+      checkType: item.type,
+      userId: user.id
+    })
+    const effectiveStatus = getEffectiveCheckStatus({
+      originalStatus: item.status,
+      requiresPayment: paymentGate.requiresPayment,
+      hasPaidAccess: paymentGate.hasPaidAccess
+    })
     const [primaryDocument] = await db
       .select({
         id: documents.id,
@@ -54,11 +65,16 @@ export default defineAuthenticatedEventHandler(async (_event, user) => {
 
     return {
       ...item,
+      status: effectiveStatus,
+      summaryText: paymentGate.requiresPayment && !paymentGate.hasPaidAccess && item.summaryText
+        ? `${item.summaryText.slice(0, 180)}${item.summaryText.length > 180 ? '…' : ''}`
+        : item.summaryText,
       processing: deriveCheckProcessingStatus({
-        checkStatus: item.status,
+        checkStatus: effectiveStatus,
         inputPayloadJson: item.inputPayloadJson,
         errorMessage: item.errorMessage
       }),
+      paymentGate,
       primaryDocument: primaryDocument || null,
       findingsCount: Number(findingsAggregate?.count || 0)
     }

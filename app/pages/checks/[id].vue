@@ -33,6 +33,13 @@ type CheckDetailResponse = {
       createdAt: string | Date
       updatedAt: string | Date
     }
+    paymentGate: {
+      requiresPayment: boolean
+      hasPaidAccess: boolean
+      productCode: string | null
+      paymentStatus: string
+      latestPaymentId: number | null
+    }
     primaryDocument: null | {
       id: number
       kind: string
@@ -72,6 +79,7 @@ type CheckDetailResponse = {
       ruleFindings: {
         title: string
         count: number
+        previewLocked?: boolean
         items: Array<{
           id: number
           ruleCode: string
@@ -108,6 +116,7 @@ const { data, pending, error } = await useAsyncData(
 )
 
 const check = computed(() => data.value?.data.check || null)
+const paymentGate = computed(() => data.value?.data.paymentGate || null)
 const primaryDocument = computed(() => data.value?.data.primaryDocument || null)
 const extraction = computed(() => data.value?.data.extraction || null)
 const findings = computed(() => data.value?.data.findings || [])
@@ -240,6 +249,21 @@ const extractionSummary = computed(() => {
     lineItems: Array.isArray(extracted?.lineItems) ? extracted.lineItems.length : 0
   }
 })
+
+const checkoutQuery = computed(() => {
+  if (!check.value || !paymentGate.value?.productCode) {
+    return null
+  }
+
+  return localePath({
+    path: '/checkout',
+    query: {
+      product: paymentGate.value.productCode,
+      checkId: String(check.value.id),
+      caseId: String(check.value.caseId)
+    }
+  })
+})
 </script>
 
 <template>
@@ -284,6 +308,22 @@ const extractionSummary = computed(() => {
             <p class="mt-3 text-sm leading-6 text-slate-500">
               {{ check.processing.detail }}
             </p>
+
+            <div
+              v-if="paymentGate?.requiresPayment && !paymentGate.hasPaidAccess"
+              class="mt-4 rounded-[1.25rem] border border-amber-200 bg-amber-50 px-4 py-4 text-sm text-amber-800"
+            >
+              <p class="font-medium">{{ t('checkDetailPage.paymentGate.previewTitle') }}</p>
+              <p class="mt-2 leading-6">{{ t('checkDetailPage.paymentGate.previewBody') }}</p>
+              <NuxtLink
+                v-if="checkoutQuery"
+                :to="checkoutQuery"
+                class="mt-4 inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-amber-500 px-4 text-sm font-medium text-white transition hover:bg-amber-600"
+              >
+                <span>{{ t('checkDetailPage.paymentGate.unlockAction') }}</span>
+                <ArrowRight class="h-4 w-4" />
+              </NuxtLink>
+            </div>
 
             <div class="mt-4">
               <div class="flex items-center justify-between text-xs font-medium text-slate-500">
@@ -414,6 +454,12 @@ const extractionSummary = computed(() => {
           <div v-else class="mt-5 rounded-[1.25rem] border border-dashed border-slate-300 bg-slate-50 px-5 py-8 text-sm text-slate-500">
             {{ t('checkDetailPage.noFindings') }}
           </div>
+          <p
+            v-if="analysis?.ruleFindings.previewLocked"
+            class="mt-4 rounded-[1.25rem] border border-amber-200 bg-amber-50 px-4 py-4 text-sm text-amber-800"
+          >
+            {{ t('checkDetailPage.paymentGate.findingsLocked') }}
+          </p>
         </article>
 
         <article class="rounded-[2rem] border border-slate-200 bg-white px-6 py-6 shadow-[0_18px_40px_rgba(15,23,42,0.05)]">
@@ -513,7 +559,13 @@ const extractionSummary = computed(() => {
             <p class="text-xs font-medium uppercase tracking-[0.18em] text-slate-400">
               {{ t('checkDetailPage.extractedText') }}
             </p>
-            <pre class="mt-3 max-h-[420px] overflow-auto whitespace-pre-wrap break-words text-sm leading-6 text-slate-600">{{ extraction.normalizedText || extraction.rawText || t('checkDetailPage.noExtractionText') }}</pre>
+            <pre
+              v-if="extraction.normalizedText || extraction.rawText"
+              class="mt-3 max-h-[420px] overflow-auto whitespace-pre-wrap break-words text-sm leading-6 text-slate-600"
+            >{{ extraction.normalizedText || extraction.rawText }}</pre>
+            <p v-else class="mt-3 text-sm leading-6 text-slate-500">
+              {{ paymentGate?.requiresPayment && !paymentGate.hasPaidAccess ? t('checkDetailPage.paymentGate.extractionLocked') : t('checkDetailPage.noExtractionText') }}
+            </p>
           </div>
         </div>
         <div v-else class="mt-5 rounded-[1.25rem] border border-dashed border-slate-300 bg-slate-50 px-5 py-8 text-sm text-slate-500">

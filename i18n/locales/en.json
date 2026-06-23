@@ -408,6 +408,123 @@
       "description": "Start a document check from pricing to see its status and results here."
     }
   },
+  "lettersPage": {
+    "eyebrow": "Letters",
+    "title": "Letters",
+    "description": "Generate landlord-ready letters from completed checks or guided inputs, preview the draft, and keep saved letters in one place.",
+    "actions": {
+      "refresh": "Refresh",
+      "generate": "Generate letter",
+      "openChecks": "Open checks",
+      "exportPdf": "Export PDF"
+    },
+    "stats": {
+      "total": "Total letters",
+      "saved": "Saved drafts",
+      "linked": "Linked to case or check"
+    },
+    "types": {
+      "belege_request": "Belege request",
+      "nebenkosten_objection": "Nebenkosten objection",
+      "repair_request": "Repair request",
+      "deposit_return_request": "Deposit return request",
+      "rent_increase_objection": "Rent increase objection"
+    },
+    "form": {
+      "title": "Draft generator",
+      "description": "Select a letter type, add the required context, and generate a saved draft.",
+      "typeLabel": "Letter type",
+      "checkLabel": "Related check",
+      "checkPlaceholder": "Choose a completed check",
+      "checkNotRequired": "No check required for this letter type",
+      "success": "Letter draft generated and saved.",
+      "errors": {
+        "checkRequired": "Please choose a completed check for this letter type.",
+        "generic": "The letter draft could not be generated."
+      },
+      "fields": {
+        "recipientName": {
+          "label": "Recipient name",
+          "placeholder": "Property manager or landlord"
+        },
+        "recipientAddress": {
+          "label": "Recipient address",
+          "placeholder": "Postal address of the landlord or administration"
+        },
+        "senderName": {
+          "label": "Sender name",
+          "placeholder": "Your full name"
+        },
+        "senderAddress": {
+          "label": "Sender address",
+          "placeholder": "Your postal address"
+        },
+        "senderCity": {
+          "label": "City and date line",
+          "placeholder": "Zurich, 23 June 2026"
+        },
+        "requestedDocuments": {
+          "label": "Requested documents",
+          "placeholder": "Receipts, invoices, meter statements, allocation key"
+        },
+        "context": {
+          "label": "Additional context",
+          "placeholder": "Optional notes to steer the draft"
+        },
+        "objectionReason": {
+          "label": "Objection reason",
+          "placeholder": "Explain which points should be challenged or clarified"
+        },
+        "issueDescription": {
+          "label": "Issue description",
+          "placeholder": "Describe the defect and its impact"
+        },
+        "issueLocation": {
+          "label": "Issue location",
+          "placeholder": "Kitchen, bathroom, heating system"
+        },
+        "requestedDeadline": {
+          "label": "Requested deadline",
+          "placeholder": "Reply within 10 days"
+        },
+        "depositContext": {
+          "label": "Deposit context",
+          "placeholder": "Move-out date, disputed deductions, promised return"
+        },
+        "rentIncreaseContext": {
+          "label": "Rent increase context",
+          "placeholder": "What exactly should be challenged in the increase notice"
+        },
+        "additionalNotes": {
+          "label": "Additional notes",
+          "placeholder": "Optional details to include in the draft"
+        }
+      }
+    },
+    "preview": {
+      "title": "Draft preview",
+      "description": "Review the generated subject, body, and resolved variables before the PDF/export layer is added.",
+      "saved": "Saved",
+      "subject": "Subject",
+      "body": "Body",
+      "variables": "Variables",
+      "emptyTitle": "No draft selected.",
+      "emptyDescription": "Generate a new letter or choose one from the saved list to inspect it here.",
+      "sources": {
+        "user_input": "User input",
+        "check_context": "Check context",
+        "system": "System"
+      }
+    },
+    "saved": {
+      "title": "Saved letters",
+      "description": "Every generated draft is stored in the letters table and can be reopened here.",
+      "noCase": "No linked case",
+      "emptyTitle": "No saved letters yet.",
+      "emptyDescription": "Generate the first draft to create a saved letter record.",
+      "emptyHint": "Saved after generation"
+    }
+  },
   "checkDetailPage": {
     "back": "Back to checks",
     "notFound": "The requested check could not be loaded.",
@@ -443,7 +560,14 @@
     "noExtractionText": "No extracted text is available.",
     "noExtraction": "No extraction result is available for this check yet.",
     "matchedValue": "Matched value",
-    "noFindings": "No rule findings are stored yet. This area is ready for the future rule engine output."
+    "noFindings": "No rule findings are stored yet. This area is ready for the future rule engine output.",
+    "paymentGate": {
+      "previewTitle": "Preview mode",
+      "previewBody": "The analysis is complete, but this page currently shows only a preview. Complete payment to unlock the full summary, all findings, and the extracted document text.",
+      "unlockAction": "Unlock full result",
+      "findingsLocked": "Only preview findings are shown before payment.",
+      "extractionLocked": "The extracted text is hidden until payment is completed."
+    }
   },
   "landing": {
     "nav": {
@@ -791,8 +915,16 @@
     "selectedLabel": "Selected product",
     "totalLabel": "Total",
     "placeholder": "Stripe checkout is not connected yet. This page acts as the selected-product handoff after registration.",
+    "processing": "Redirecting to Stripe...",
     "payAction": "Continue to payment",
     "secureNote": "Secure payment flow placeholder",
+    "status": {
+      "success": "Stripe Checkout returned successfully. Final payment confirmation will be handled by webhook processing.",
+      "cancel": "Stripe Checkout was cancelled. You can restart the payment when ready."
+    },
+    "errors": {
+      "generic": "The Stripe Checkout session could not be created."
+    },
     "points": {
       "first": "Selected product is preserved from landing to registration and checkout.",
       "second": "This is the correct place to attach Stripe Checkout by product code.",
