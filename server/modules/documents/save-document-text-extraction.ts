@@ -2,10 +2,14 @@ import { eq } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { documentExtractions } from '../../db/schema'
+import { buildStructuredExtraction } from './build-structured-extraction'
 import { extractDocumentText } from './extract-document-text'
+import { normalizeExtractedText } from './normalize-extracted-text'
+import { readDocumentBinary } from './read-document-binary'
 
 export async function saveDocumentTextExtraction(documentId: number) {
   const db = getDb()
+  const document = await readDocumentBinary(documentId)
   const insertResult = await db.insert(documentExtractions).values({
     documentId,
     engine: 'pdf_text',
@@ -26,11 +30,20 @@ export async function saveDocumentTextExtraction(documentId: number) {
   try {
     const extraction = await extractDocumentText(documentId)
     const finishedAt = new Date()
+    const normalized = normalizeExtractedText(extraction.text)
+    const structuredExtraction = buildStructuredExtraction({
+      documentKind: document.kind,
+      sourceEngine: 'pdf_text',
+      normalizedText: normalized.normalizedText,
+      normalization: normalized.metadata
+    })
     const structuredData = {
       pageCount: extraction.pageCount,
       pages: extraction.pages,
       hasExtractedText: extraction.hasExtractedText,
-      isTextlessPdf: extraction.isTextlessPdf
+      isTextlessPdf: extraction.isTextlessPdf,
+      normalization: normalized.metadata,
+      structuredExtraction
     }
 
     await db
@@ -38,7 +51,7 @@ export async function saveDocumentTextExtraction(documentId: number) {
       .set({
         status: 'completed',
         rawText: extraction.text,
-        normalizedText: extraction.text,
+        normalizedText: normalized.normalizedText,
         structuredDataJson: structuredData,
         confidenceScore: '100.00',
         finishedAt,

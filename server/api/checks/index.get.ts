@@ -1,7 +1,8 @@
-import { and, desc, eq } from 'drizzle-orm'
+import { and, desc, eq, sql } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
-import { cases, checks } from '../../db/schema'
+import { cases, checkDocuments, checks, documents, ruleFindings } from '../../db/schema'
+import { deriveCheckProcessingStatus } from '../../modules/checks/processing-status'
 import { apiSuccess } from '../../utils/api'
 import { defineAuthenticatedEventHandler } from '../../utils/auth'
 
@@ -15,6 +16,8 @@ export default defineAuthenticatedEventHandler(async (_event, user) => {
       caseTitle: cases.title,
       type: checks.type,
       status: checks.status,
+      inputPayloadJson: checks.inputPayloadJson,
+      errorMessage: checks.errorMessage,
       riskScore: checks.riskScore,
       summaryText: checks.summaryText,
       startedAt: checks.startedAt,
@@ -27,7 +30,41 @@ export default defineAuthenticatedEventHandler(async (_event, user) => {
     .where(eq(checks.userId, user.id))
     .orderBy(desc(checks.createdAt))
 
+  const enrichedItems = await Promise.all(items.map(async item => {
+    const [primaryDocument] = await db
+      .select({
+        id: documents.id,
+        kind: documents.kind,
+        originalName: documents.originalName,
+        status: documents.status,
+        mimeType: documents.mimeType,
+        fileSize: documents.fileSize
+      })
+      .from(checkDocuments)
+      .innerJoin(documents, eq(checkDocuments.documentId, documents.id))
+      .where(and(eq(checkDocuments.checkId, item.id), eq(checkDocuments.role, 'primary')))
+      .limit(1)
+
+    const [findingsAggregate] = await db
+      .select({
+        count: sql<number>`count(*)`
+      })
+      .from(ruleFindings)
+      .where(eq(ruleFindings.checkId, item.id))
+
+    return {
+      ...item,
+      processing: deriveCheckProcessingStatus({
+        checkStatus: item.status,
+        inputPayloadJson: item.inputPayloadJson,
+        errorMessage: item.errorMessage
+      }),
+      primaryDocument: primaryDocument || null,
+      findingsCount: Number(findingsAggregate?.count || 0)
+    }
+  }))
+
   return apiSuccess({
-    items
+    items: enrichedItems
   })
 })

@@ -2,6 +2,8 @@ import { eq } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { documentExtractions } from '../../db/schema'
+import { buildStructuredExtraction } from './build-structured-extraction'
+import { normalizeExtractedText } from './normalize-extracted-text'
 import { readDocumentBinary } from './read-document-binary'
 import { runOcrOnBuffer } from './run-ocr'
 
@@ -42,11 +44,19 @@ export async function saveDocumentOcrExtraction(documentId: number) {
   try {
     const ocrResult = await runOcrOnBuffer(document.buffer)
     const finishedAt = new Date()
-    const normalizedText = ocrResult.text.replace(/\s+/g, ' ').trim()
+    const normalized = normalizeExtractedText(ocrResult.text)
+    const structuredExtraction = buildStructuredExtraction({
+      documentKind: document.kind,
+      sourceEngine: 'ocr',
+      normalizedText: normalized.normalizedText,
+      normalization: normalized.metadata
+    })
     const structuredData = {
       lineCount: ocrResult.lines.length,
       lines: ocrResult.lines,
-      sourceMimeType: document.mimeType
+      sourceMimeType: document.mimeType,
+      normalization: normalized.metadata,
+      structuredExtraction
     }
 
     await db
@@ -54,7 +64,7 @@ export async function saveDocumentOcrExtraction(documentId: number) {
       .set({
         status: 'completed',
         rawText: ocrResult.text,
-        normalizedText,
+        normalizedText: normalized.normalizedText,
         structuredDataJson: structuredData,
         confidenceScore: ocrResult.confidence.toFixed(2),
         finishedAt,

@@ -1,3 +1,7 @@
+import { desc, eq } from 'drizzle-orm'
+
+import { getDb } from '../../db/client'
+import { documentExtractions } from '../../db/schema'
 import { getDocumentById } from '../../modules/documents/get-document'
 import { apiSuccess } from '../../utils/api'
 import { defineAuthenticatedEventHandler } from '../../utils/auth'
@@ -19,7 +23,25 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
     userAgent: getHeader(event, 'user-agent')
   })
 
+  const db = getDb()
+  const [latestExtraction] = await db
+    .select({
+      id: documentExtractions.id,
+      engine: documentExtractions.engine,
+      status: documentExtractions.status,
+      confidenceScore: documentExtractions.confidenceScore,
+      errorMessage: documentExtractions.errorMessage,
+      structuredDataJson: documentExtractions.structuredDataJson,
+      createdAt: documentExtractions.createdAt,
+      updatedAt: documentExtractions.updatedAt
+    })
+    .from(documentExtractions)
+    .where(eq(documentExtractions.documentId, document.id))
+    .orderBy(desc(documentExtractions.createdAt))
+    .limit(1)
+
   return apiSuccess({
-    document
+    document,
+    extraction: latestExtraction || null
   })
 })

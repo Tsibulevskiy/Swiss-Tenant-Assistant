@@ -117,13 +117,13 @@
     },
     "stats": {
       "documents": "Total documents",
-      "documentsDelta": "+2 this month",
+      "documentsDelta": "{count} ready",
       "completedChecks": "Completed checks",
-      "completedChecksDelta": "+3 this month",
-      "generatedLetters": "Generated letters",
-      "generatedLettersDelta": "+1 this month",
-      "openDeadlines": "Open deadlines",
-      "openDeadlinesDelta": "View all"
+      "completedChecksDelta": "{count} active",
+      "processingDocuments": "Processing documents",
+      "processingDocumentsDelta": "{count} failed",
+      "highRiskChecks": "High-risk checks",
+      "highRiskChecksDelta": "{count} total checks"
     },
     "quickActions": {
       "title": "Quick Actions",
@@ -131,29 +131,32 @@
       "nebenkostenBody": "Check your service charge statement for potential issues.",
       "contractTitle": "Start Mietvertrag Check",
       "contractBody": "Review your rental contract for unfair clauses.",
-      "letterTitle": "Generate Letter",
-      "letterBody": "Create a professional letter to your landlord.",
       "uploadTitle": "Upload Document",
-      "uploadBody": "Upload any document for analysis."
+      "uploadBody": "Upload any document for analysis.",
+      "openChecksTitle": "Open Checks",
+      "openChecksBody": "Review completed checks and current processing stages."
     },
     "sections": {
       "recentChecks": "Recent Checks",
-      "upcomingDeadlines": "Upcoming Deadlines",
+      "processingOverview": "Processing Overview",
       "recentDocuments": "Recent Documents",
       "plan": "Your Plan"
     },
     "actions": {
+      "refresh": "Refresh",
       "viewAllChecks": "View all checks",
       "viewAll": "View all",
       "openVault": "Open document vault",
-      "moreDocuments": "+8 more documents"
+      "moreDocuments": "+8 more documents",
+      "open": "Open"
     },
     "table": {
       "document": "Document",
       "type": "Type",
       "risk": "Risk Level",
       "status": "Status",
-      "date": "Date"
+      "date": "Date",
+      "findings": "findings"
     },
     "checkTypes": {
       "nebenkosten": "Nebenkosten",
@@ -168,18 +171,17 @@
     "status": {
       "ready": "Ready"
     },
-    "deadlines": {
-      "noticeTitle": "Kuendigungsfrist",
-      "noticeRemaining": "45 days left",
-      "rentIncreaseTitle": "Reply to rent increase",
-      "rentIncreaseRemaining": "22 days left",
-      "documentsTitle": "Request Belege",
-      "documentsRemaining": "14 days left"
-    },
     "plan": {
       "badge": "Pay-as-you-go",
       "description": "You have no active subscription. Pay only for the checks you need.",
       "cta": "View Pricing"
+    },
+    "processing": {
+      "live": "Live",
+      "readyDocuments": "Ready documents",
+      "processingDocuments": "Documents in processing",
+      "activeChecks": "Active checks",
+      "failedDocuments": "Failed documents"
     }
   },
   "dashboardPages": {
@@ -230,6 +232,7 @@
     },
     "actions": {
       "refresh": "Refresh",
+      "preview": "Preview",
       "download": "Download",
       "createCheck": "Create check",
       "createCheckError": "The check could not be created."
@@ -239,6 +242,11 @@
       "kindLabel": "Document type",
       "fileLabel": "Choose file",
       "submit": "Upload",
+      "selectedFile": "Selected file",
+      "readyToUpload": "Ready to upload",
+      "helper": "PDF, JPG, PNG, and WEBP files up to 20 MB are supported.",
+      "uploading": "Uploading document",
+      "success": "Document uploaded successfully.",
       "errors": {
         "fileRequired": "Please choose a file before uploading.",
         "generic": "The document could not be uploaded."
@@ -246,6 +254,15 @@
     },
     "list": {
       "title": "Document list"
+    },
+    "filters": {
+      "searchLabel": "Search",
+      "searchPlaceholder": "Search by file name or type",
+      "kindLabel": "Type",
+      "kindAll": "All document types",
+      "statusLabel": "Status",
+      "statusAll": "All statuses",
+      "results": "{count} of {total} documents"
     },
     "table": {
       "name": "Name",
@@ -262,6 +279,12 @@
       "failed": "Failed",
       "deleted": "Deleted"
     },
+    "statusDetails": {
+      "uploaded": "Stored and waiting for extraction.",
+      "processing": "Extraction or OCR is currently running.",
+      "ready": "Metadata and file are available.",
+      "failed": "Processing stopped with an error."
+    },
     "kinds": {
       "mietvertrag": "Rental contract",
       "nebenkostenabrechnung": "Service charge statement",
@@ -270,6 +293,41 @@
       "landlordLetter": "Landlord letter",
       "landlord_letter": "Landlord letter",
       "other": "Other"
+    },
+    "preview": {
+      "title": "Metadata preview",
+      "empty": "Select a document to inspect its metadata and latest extraction summary.",
+      "documentMeta": "Document metadata",
+      "extractionMeta": "Latest extraction",
+      "noExtraction": "No extraction result is stored for this document yet.",
+      "errors": {
+        "generic": "The document metadata could not be loaded."
+      },
+      "labels": {
+        "documentId": "Document ID",
+        "caseId": "Case ID",
+        "mimeType": "MIME type",
+        "fileSize": "File size",
+        "encrypted": "Encrypted",
+        "uploadedAt": "Uploaded at",
+        "updatedAt": "Updated at",
+        "retention": "Delete after",
+        "checksum": "SHA-256",
+        "extractionEngine": "Engine",
+        "extractionStatus": "Extraction status",
+        "extractionConfidence": "Confidence",
+        "extractionCreatedAt": "Extraction created",
+        "extractionSchema": "Structured schema",
+        "normalizedLength": "Normalized text length",
+        "dateCandidates": "Date candidates",
+        "amountCandidates": "Amount candidates",
+        "lineItems": "Expense items",
+        "extractionError": "Extraction error"
+      },
+      "values": {
+        "yes": "Yes",
+        "no": "No"
+      }
     },
     "empty": {
       "title": "No documents uploaded yet.",
@@ -289,16 +347,36 @@
       "total": "Total checks",
       "active": "Active",
       "ready": "Ready",
-      "awaitingPayment": "awaiting payment"
+      "awaitingPayment": "awaiting payment",
+      "highRisk": "High risk"
     },
     "list": {
       "title": "Check list"
+    },
+    "filters": {
+      "searchLabel": "Search",
+      "searchPlaceholder": "Search by case or document",
+      "typeLabel": "Check type",
+      "typeAll": "All check types",
+      "statusLabel": "Processing stage",
+      "statusAll": "All stages",
+      "riskLabel": "Risk",
+      "riskAll": "All risk levels",
+      "results": "{count} of {total} checks"
     },
     "types": {
       "nebenkosten_check": "Nebenkosten check",
       "mietvertrag_check": "Mietvertrag check",
       "rent_increase_check": "Rent increase check",
       "deposit_return_check": "Deposit return check"
+    },
+    "processing": {
+      "completed": "Completed",
+      "failed": "Failed",
+      "payment_required": "Payment required",
+      "extracting": "Extracting",
+      "evaluating_rules": "Evaluating rules",
+      "generating_summary": "Generating summary"
     },
     "status": {
       "draft": "Draft",
@@ -312,7 +390,16 @@
     "risk": {
       "low": "Low risk",
       "medium": "Medium risk",
-      "high": "High risk"
+      "high": "High risk",
+      "none": "Risk pending"
+    },
+    "card": {
+      "summary": "Summary",
+      "findings": "Findings",
+      "findingsCount": "{count} findings",
+      "createdAt": "Created",
+      "sourceDocument": "Source document",
+      "noSourceDocument": "No source document linked"
     },
     "createdAt": "Created",
     "noSummary": "No summary is available for this check yet.",
@@ -327,19 +414,31 @@
     "eyebrow": "Check details",
     "startedAt": "Started",
     "finishedAt": "Finished",
+    "processingProgress": "Processing progress",
+    "findingsCount": "Findings",
+    "riskScoreTitle": "Risk score",
+    "summaryTitle": "Summary",
     "aiSummaryTitle": "AI summary",
     "ruleFindingsTitle": "Rule findings",
+    "resultCardTitle": "Result card",
     "recommendedActionTitle": "Recommended action",
     "noSummary": "No summary is available for this check yet.",
     "documentTitle": "Primary document",
     "documentName": "Document name",
     "documentType": "Document type",
     "documentSize": "File size",
+    "documentStatus": "Document status",
+    "documentCreatedAt": "Uploaded",
+    "viewDocumentVault": "Open documents",
     "noDocument": "No primary document is linked to this check.",
     "extractionTitle": "Extraction result",
     "extractionEngine": "Engine",
     "extractionConfidence": "Confidence",
     "extractionCreated": "Created",
+    "extractionSchema": "Structured schema",
+    "normalizedLength": "Normalized text length",
+    "extractionStats": "Extraction stats",
+    "extractionStatsValue": "{dates} dates, {amounts} amounts, {lineItems} expense items",
     "extractedText": "Extracted text",
     "noExtractionText": "No extracted text is available.",
     "noExtraction": "No extraction result is available for this check yet.",

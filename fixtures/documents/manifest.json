@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "documents": [
+    {
+      "id": "mietvertrag-basic",
+      "path": "pdf/text-based/mietvertrag-basic.pdf",
+      "category": "text-based-pdf",
+      "purpose": [
+        "pdf_text_extraction",
+        "mietvertrag_rules"
+      ]
+    },
+    {
+      "id": "nebenkosten-basic",
+      "path": "pdf/text-based/nebenkosten-basic.pdf",
+      "category": "text-based-pdf",
+      "purpose": [
+        "pdf_text_extraction",
+        "nebenkosten_rules"
+      ]
+    },
+    {
+      "id": "mietvertrag-scan",
+      "path": "pdf/scanned/mietvertrag-scan.pdf",
+      "category": "scanned-pdf",
+      "purpose": [
+        "pdf_ocr_fallback",
+        "mietvertrag_rules"
+      ]
+    },
+    {
+      "id": "nebenkosten-scan",
+      "path": "pdf/scanned/nebenkosten-scan.pdf",
+      "category": "scanned-pdf",
+      "purpose": [
+        "pdf_ocr_fallback",
+        "nebenkosten_rules"
+      ]
+    },
+    {
+      "id": "nebenkosten-photo",
+      "path": "images/nebenkosten-photo.png",
+      "category": "image",
+      "purpose": [
+        "image_ocr"
+      ]
+    },
+    {
+      "id": "rent-increase-letter",
+      "path": "mixed/rent-increase-letter.pdf",
+      "category": "mixed-pdf",
+      "purpose": [
+        "future_rent_increase_check"
+      ]
+    },
+    {
+      "id": "deduction-list",
+      "path": "mixed/deduction-list.pdf",
+      "category": "mixed-pdf",
+      "purpose": [
+        "future_deposit_return_check"
+      ]
+    }
+  ]
+}

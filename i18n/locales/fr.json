@@ -230,6 +230,7 @@
     },
     "actions": {
       "refresh": "Actualiser",
+      "preview": "Apercu",
       "download": "Telecharger",
       "createCheck": "Creer une verification",
       "createCheckError": "La verification n'a pas pu etre creee."
@@ -239,6 +240,11 @@
       "kindLabel": "Type de document",
       "fileLabel": "Choisir un fichier",
       "submit": "Televerser",
+      "selectedFile": "Fichier selectionne",
+      "readyToUpload": "Pret pour le televersement",
+      "helper": "Les fichiers PDF, JPG, PNG et WEBP jusqu'a 20 MB sont pris en charge.",
+      "uploading": "Televersement du document",
+      "success": "Document televerse avec succes.",
       "errors": {
         "fileRequired": "Veuillez choisir un fichier avant de televerser.",
         "generic": "Le document n'a pas pu etre televerse."
@@ -246,6 +252,15 @@
     },
     "list": {
       "title": "Liste des documents"
+    },
+    "filters": {
+      "searchLabel": "Recherche",
+      "searchPlaceholder": "Rechercher par nom de fichier ou type",
+      "kindLabel": "Type",
+      "kindAll": "Tous les types de document",
+      "statusLabel": "Statut",
+      "statusAll": "Tous les statuts",
+      "results": "{count} sur {total} documents"
     },
     "table": {
       "name": "Nom",
@@ -262,6 +277,12 @@
       "failed": "Echec",
       "deleted": "Supprime"
     },
+    "statusDetails": {
+      "uploaded": "Stocke et en attente d'extraction.",
+      "processing": "Extraction ou OCR en cours.",
+      "ready": "Le fichier et les metadonnees sont disponibles.",
+      "failed": "Le traitement s'est arrete avec une erreur."
+    },
     "kinds": {
       "mietvertrag": "Contrat de location",
       "nebenkostenabrechnung": "Decompte de charges",
@@ -270,6 +291,41 @@
       "landlordLetter": "Lettre du proprietaire",
       "landlord_letter": "Lettre du proprietaire",
       "other": "Autre"
+    },
+    "preview": {
+      "title": "Apercu des metadonnees",
+      "empty": "Selectionnez un document pour voir ses metadonnees et le dernier resume d'extraction.",
+      "documentMeta": "Metadonnees du document",
+      "extractionMeta": "Derniere extraction",
+      "noExtraction": "Aucun resultat d'extraction n'est encore enregistre pour ce document.",
+      "errors": {
+        "generic": "Les metadonnees du document n'ont pas pu etre chargees."
+      },
+      "labels": {
+        "documentId": "ID document",
+        "caseId": "ID dossier",
+        "mimeType": "Type MIME",
+        "fileSize": "Taille du fichier",
+        "encrypted": "Chiffre",
+        "uploadedAt": "Televerse le",
+        "updatedAt": "Mis a jour le",
+        "retention": "Suppression apres",
+        "checksum": "SHA-256",
+        "extractionEngine": "Moteur",
+        "extractionStatus": "Statut d'extraction",
+        "extractionConfidence": "Confiance",
+        "extractionCreatedAt": "Extraction creee",
+        "extractionSchema": "Schema structure",
+        "normalizedLength": "Longueur du texte normalise",
+        "dateCandidates": "Dates candidates",
+        "amountCandidates": "Montants candidats",
+        "lineItems": "Postes de charges",
+        "extractionError": "Erreur d'extraction"
+      },
+      "values": {
+        "yes": "Oui",
+        "no": "Non"
+      }
     },
     "empty": {
       "title": "Aucun document televerse pour le moment.",
@@ -289,16 +345,36 @@
       "total": "Total verifications",
       "active": "Actives",
       "ready": "Pretes",
-      "awaitingPayment": "en attente de paiement"
+      "awaitingPayment": "en attente de paiement",
+      "highRisk": "Risque eleve"
     },
     "list": {
       "title": "Liste des verifications"
+    },
+    "filters": {
+      "searchLabel": "Recherche",
+      "searchPlaceholder": "Rechercher par dossier ou document",
+      "typeLabel": "Type de verification",
+      "typeAll": "Tous les types",
+      "statusLabel": "Etape",
+      "statusAll": "Toutes les etapes",
+      "riskLabel": "Risque",
+      "riskAll": "Tous les niveaux",
+      "results": "{count} sur {total} verifications"
     },
     "types": {
       "nebenkosten_check": "Verification Nebenkosten",
       "mietvertrag_check": "Verification Mietvertrag",
       "rent_increase_check": "Verification hausse de loyer",
       "deposit_return_check": "Verification restitution de depot"
+    },
+    "processing": {
+      "completed": "Terminee",
+      "failed": "Echec",
+      "payment_required": "Paiement requis",
+      "extracting": "Extraction",
+      "evaluating_rules": "Evaluation des regles",
+      "generating_summary": "Generation du resume"
     },
     "status": {
       "draft": "Brouillon",
@@ -312,7 +388,16 @@
     "risk": {
       "low": "Risque faible",
       "medium": "Risque moyen",
-      "high": "Risque eleve"
+      "high": "Risque eleve",
+      "none": "Risque en attente"
+    },
+    "card": {
+      "summary": "Resume",
+      "findings": "Constats",
+      "findingsCount": "{count} constats",
+      "createdAt": "Cree le",
+      "sourceDocument": "Document source",
+      "noSourceDocument": "Aucun document source lie"
     },
     "createdAt": "Cree le",
     "noSummary": "Aucun resume n'est encore disponible pour cette verification.",
@@ -327,19 +412,31 @@
     "eyebrow": "Details de la verification",
     "startedAt": "Debut",
     "finishedAt": "Fin",
+    "processingProgress": "Progression",
+    "findingsCount": "Constats",
+    "riskScoreTitle": "Score de risque",
+    "summaryTitle": "Resume",
     "aiSummaryTitle": "Resume AI",
     "ruleFindingsTitle": "Constats des regles",
+    "resultCardTitle": "Carte de resultat",
     "recommendedActionTitle": "Action recommandee",
     "noSummary": "Aucun resume n'est encore disponible pour cette verification.",
     "documentTitle": "Document principal",
     "documentName": "Nom du document",
     "documentType": "Type de document",
     "documentSize": "Taille du fichier",
+    "documentStatus": "Statut du document",
+    "documentCreatedAt": "Televerse",
+    "viewDocumentVault": "Ouvrir les documents",
     "noDocument": "Aucun document principal n'est lie a cette verification.",
     "extractionTitle": "Resultat de l'extraction",
     "extractionEngine": "Moteur",
     "extractionConfidence": "Confiance",
     "extractionCreated": "Cree le",
+    "extractionSchema": "Schema structure",
+    "normalizedLength": "Longueur du texte normalise",
+    "extractionStats": "Statistiques d'extraction",
+    "extractionStatsValue": "{dates} dates, {amounts} montants, {lineItems} postes de charges",
     "extractedText": "Texte extrait",
     "noExtractionText": "Aucun texte extrait n'est disponible.",
     "noExtraction": "Aucun resultat d'extraction n'est encore disponible pour cette verification.",

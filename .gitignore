@@ -25,3 +25,6 @@ logs
 
 # Planning and local docs
 *.docx
+
+# Local test artifacts
+.tmp-test/

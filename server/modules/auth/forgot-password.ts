@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import { forgotPasswordSchema } from '../../../shared/schemas/auth'
 import { getDb } from '../../db/client'
-import { passwordResetTokens, users } from '../../db/schema'
+import { passwordResetTokens } from '../../db/schema'
 import { generateSessionToken, hashSessionToken } from './session'
 
 type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>

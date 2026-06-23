@@ -125,44 +125,45 @@
 ### Day 12
 - [x] Integrate `Tesseract.js`
 - [x] Detect scanned/textless PDFs
-- [ ] Implement OCR fallback
+- [x] Implement OCR fallback
 - [x] Save OCR results
 - [x] Compare extraction vs OCR output quality
 - [ ] Test scanned PDF flow
 
 ### Day 13
-- [ ] Implement text normalization
-- [ ] Define structured extraction JSON shape
-- [ ] Extract basic entities:
-  - [ ] dates
-  - [ ] amounts
-  - [ ] contract values
-  - [ ] expense positions
-- [ ] Store structured extraction results
+- [x] Implement text normalization
+- [x] Define structured extraction JSON shape
+- [x] Extract basic entities:
+  - [x] dates
+  - [x] amounts
+  - [x] contract values
+  - [x] expense positions
+- [x] Store structured extraction results
 
 ### Day 14
-- [ ] Create rule engine module
-- [ ] Define common rule interfaces
-- [ ] Define finding structure
-- [ ] Define risk score strategy
-- [ ] Implement persistence of findings in `rule_findings`
+- [x] Create rule engine module
+- [x] Define common rule interfaces
+- [x] Define finding structure
+- [x] Split rules by document type
+- [x] Define risk score strategy
+- [x] Implement persistence of findings in `rule_findings`
 
 ### Day 15
-- [ ] Implement `Nebenkosten` rules
-- [ ] Add suspicious keyword detection
+- [x] Implement `Nebenkosten` rules
+- [x] Add suspicious keyword detection
 - [ ] Add contract mismatch checks
 - [ ] Add previous-year comparison logic
-- [ ] Add anomaly detection
+- [x] Add anomaly detection
 - [ ] Test rule engine on sample Nebenkosten documents
 
 ## Week 4
 
 ### Day 16
-- [ ] Implement `Mietvertrag` rules
-- [ ] Add deposit > 3 months check
-- [ ] Add Nebenkosten clarity checks
-- [ ] Add Kündigungsfrist checks
-- [ ] Add clause-risk checks
+- [x] Implement `Mietvertrag` rules
+- [x] Add deposit > 3 months check
+- [x] Add Nebenkosten clarity checks
+- [x] Add Kündigungsfrist checks
+- [x] Add clause-risk checks
 - [ ] Test rule engine on sample contracts
 
 ### Day 17
@@ -280,6 +281,9 @@
 - [ ] Review signed links TTL
 - [ ] Add auto-delete job for documents
 - [ ] Add audit log coverage review
+- [x] Remove temporary test artifacts and define fixture documents
+- [x] Add minimal lint
+- [x] Add `typecheck` to CI
 - [ ] Create legal pages:
   - [ ] Impressum
   - [ ] Privacy Policy

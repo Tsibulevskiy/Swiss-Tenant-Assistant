@@ -2,11 +2,13 @@ import { and, desc, eq } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { checkDocuments, checks, cases, documentExtractions, documents, ruleFindings } from '../../db/schema'
+import { deriveCheckProcessingStatus } from '../../modules/checks/processing-status'
 import { apiSuccess } from '../../utils/api'
 import { defineAuthenticatedEventHandler } from '../../utils/auth'
 
 function buildRecommendedAction(input: {
   status: string
+  processingCode: string
   riskScore: string | null
   findingsCount: number
   summaryText: string | null
@@ -16,6 +18,14 @@ function buildRecommendedAction(input: {
       level: 'attention',
       title: 'Review the failed extraction',
       body: 'The check could not complete successfully. Re-upload the document or inspect the extraction issue before relying on the result.'
+    }
+  }
+
+  if (input.processingCode === 'extracting' || input.processingCode === 'normalizing' || input.processingCode === 'structuring' || input.processingCode === 'evaluating_rules' || input.processingCode === 'generating_summary') {
+    return {
+      level: 'info',
+      title: 'Analysis is in progress',
+      body: 'The document is moving through extraction and rule evaluation. Return once the summary is ready.'
     }
   }
 
@@ -61,6 +71,7 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
       caseTitle: cases.title,
       type: checks.type,
       status: checks.status,
+      inputPayloadJson: checks.inputPayloadJson,
       riskScore: checks.riskScore,
       summaryText: checks.summaryText,
       disclaimerText: checks.disclaimerText,
@@ -145,6 +156,12 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
     .where(eq(ruleFindings.checkId, check.id))
     .orderBy(desc(ruleFindings.createdAt))
 
+  const processing = deriveCheckProcessingStatus({
+    checkStatus: check.status,
+    inputPayloadJson: check.inputPayloadJson,
+    errorMessage: check.errorMessage
+  })
+
   const analysis = {
     aiSummary: {
       title: 'AI summary',
@@ -159,6 +176,7 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
     },
     recommendedAction: buildRecommendedAction({
       status: check.status,
+      processingCode: processing.code,
       riskScore: check.riskScore,
       findingsCount: findings.length,
       summaryText: check.summaryText
@@ -166,7 +184,10 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
   }
 
   return apiSuccess({
-    check,
+    check: {
+      ...check,
+      processing
+    },
     primaryDocument,
     extraction,
     findings,

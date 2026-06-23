@@ -3,8 +3,19 @@ import { and, desc, eq, isNull } from 'drizzle-orm'
 import { getDb } from '../../db/client'
 import { cases, checkDocuments, checks, documents, ruleFindings } from '../../db/schema'
 import type { AuthUser } from '../auth/types'
+import { getLatestCompletedDocumentExtraction } from '../documents/get-latest-completed-extraction'
 import { saveDocumentExtraction } from '../documents/save-document-extraction'
+import {
+  buildCompletedCheckPipelinePayload,
+  buildFailedCheckPipelinePayload,
+  buildInitialCheckPipelinePayload,
+  buildPostExtractionCheckPipelinePayload
+} from './check-pipeline'
 import { evaluateRulesForCheck } from './evaluate-rules'
+import {
+  serializePersistedRuleFindingMetadata,
+  serializeRuleResult
+} from './rule-persistence'
 
 const documentKindToCheckType = {
   mietvertrag: 'mietvertrag_check',
@@ -40,9 +51,26 @@ function buildCaseTitle(originalName: string, checkType: SupportedCheckType) {
 export async function createCheckFromDocument(options: {
   documentId: number
   user: AuthUser
+  reuseExisting?: boolean
+  extractionMode?: 'reuse_extraction' | 'force_reextract'
+  trigger?: {
+    type: 'initial' | 'rerun'
+    sourceCheckId: number | null
+    retryMode?: 'reuse_extraction' | 'force_reextract'
+  }
 }) {
   const db = getDb()
-  const { documentId, user } = options
+  const {
+    documentId,
+    user,
+    reuseExisting = true,
+    extractionMode = 'force_reextract',
+    trigger = {
+      type: 'initial',
+      sourceCheckId: null,
+      retryMode: extractionMode
+    }
+  } = options
 
   const document = await db.query.documents.findFirst({
     where: and(eq(documents.id, documentId), eq(documents.userId, user.id), isNull(documents.deletedAt)),
@@ -89,7 +117,7 @@ export async function createCheckFromDocument(options: {
     .orderBy(desc(checks.createdAt))
     .limit(1)
 
-  if (existingLinkedCheck[0]) {
+  if (reuseExisting && existingLinkedCheck[0]) {
     return {
       caseId: document.caseId,
       checkId: existingLinkedCheck[0].id,
@@ -119,18 +147,33 @@ export async function createCheckFromDocument(options: {
   }
 
   await db
+    .update(cases)
+    .set({
+      status: 'analyzing'
+    })
+    .where(eq(cases.id, caseId))
+
+  await db
     .update(documents)
     .set({
       status: 'processing'
     })
     .where(eq(documents.id, document.id))
 
+  const initialPipelinePayload = buildInitialCheckPipelinePayload({
+    documentId: document.id,
+    documentKind: document.kind,
+    originalName: document.originalName,
+    trigger
+  })
+
   const checkInsert = await db.insert(checks).values({
     userId: user.id,
     caseId,
     type: checkType,
     status: 'extracting',
-    startedAt: new Date()
+    startedAt: new Date(),
+    inputPayloadJson: initialPipelinePayload
   })
 
   const checkId = Number(checkInsert[0].insertId)
@@ -141,21 +184,60 @@ export async function createCheckFromDocument(options: {
     role: 'primary'
   })
 
+  let failedStage: 'extraction' | 'rules' | 'summary' = 'extraction'
+
   try {
-    const extraction = await saveDocumentExtraction(document.id)
+    const selectedExtraction = extractionMode === 'reuse_extraction'
+      ? await getLatestCompletedDocumentExtraction(document.id) || await saveDocumentExtraction(document.id)
+      : await saveDocumentExtraction(document.id)
+    const postExtractionPipelinePayload = buildPostExtractionCheckPipelinePayload({
+      initialPayload: initialPipelinePayload,
+      extraction: {
+        id: selectedExtraction.id,
+        engine: selectedExtraction.engine,
+        rawText: selectedExtraction.rawText,
+        normalizedText: selectedExtraction.normalizedText,
+        structuredDataJson: selectedExtraction.structuredDataJson ?? null,
+        confidenceScore: selectedExtraction.confidenceScore,
+        finishedAt: selectedExtraction.finishedAt
+      }
+    })
 
     await db
       .update(checks)
       .set({
-        status: 'analyzing'
+        status: 'analyzing',
+        inputPayloadJson: postExtractionPipelinePayload
       })
       .where(eq(checks.id, checkId))
 
+    failedStage = 'rules'
+
     const evaluated = evaluateRulesForCheck({
       checkType,
-      rawText: extraction.rawText,
-      normalizedText: extraction.normalizedText
+      rawText: selectedExtraction.rawText,
+      normalizedText: selectedExtraction.normalizedText,
+      structuredDataJson: selectedExtraction.structuredDataJson ?? null
     })
+    const serializedRuleResult = serializeRuleResult(evaluated.ruleResultJson)
+    const completedPipelinePayload = buildCompletedCheckPipelinePayload({
+      initialPayload: postExtractionPipelinePayload,
+      extraction: {
+        id: selectedExtraction.id,
+        engine: selectedExtraction.engine,
+        rawText: selectedExtraction.rawText,
+        normalizedText: selectedExtraction.normalizedText,
+        structuredDataJson: selectedExtraction.structuredDataJson ?? null,
+        confidenceScore: selectedExtraction.confidenceScore,
+        finishedAt: selectedExtraction.finishedAt
+      },
+      evaluated: {
+        summaryText: evaluated.summaryText,
+        riskScore: evaluated.riskScore,
+        ruleResultJson: serializedRuleResult
+      }
+    })
+    failedStage = 'summary'
 
     if (evaluated.findings.length) {
       await db.insert(ruleFindings).values(
@@ -166,7 +248,10 @@ export async function createCheckFromDocument(options: {
           title: finding.title,
           description: finding.description,
           matchedValue: finding.matchedValue || null,
-          metadataJson: finding.metadataJson || null
+          metadataJson: serializePersistedRuleFindingMetadata({
+            finding,
+            ruleResult: serializedRuleResult
+          })
         }))
       )
     }
@@ -182,9 +267,10 @@ export async function createCheckFromDocument(options: {
       .update(checks)
       .set({
         status: 'ready',
+        inputPayloadJson: completedPipelinePayload,
         summaryText: evaluated.summaryText,
-        structuredInputJson: extraction.structuredDataJson ?? null,
-        ruleResultJson: evaluated.ruleResultJson,
+        structuredInputJson: selectedExtraction.structuredDataJson ?? null,
+        ruleResultJson: serializedRuleResult,
         riskScore: evaluated.riskScore,
         finishedAt: new Date()
       })
@@ -204,11 +290,17 @@ export async function createCheckFromDocument(options: {
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Extraction failed'
+    const failedPipelinePayload = buildFailedCheckPipelinePayload({
+      initialPayload: initialPipelinePayload,
+      failedStage,
+      errorMessage: message,
+      recoverable: true
+    })
 
     await db
       .update(documents)
       .set({
-        status: 'failed'
+        status: failedStage === 'extraction' ? 'failed' : 'ready'
       })
       .where(eq(documents.id, document.id))
 
@@ -216,6 +308,7 @@ export async function createCheckFromDocument(options: {
       .update(checks)
       .set({
         status: 'failed',
+        inputPayloadJson: failedPipelinePayload,
         errorMessage: message,
         finishedAt: new Date()
       })

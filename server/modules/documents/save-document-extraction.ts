@@ -1,4 +1,5 @@
 import { readDocumentBinary } from './read-document-binary'
+import { saveDocumentPdfOcrExtraction } from './save-document-pdf-ocr-extraction'
 import { saveDocumentOcrExtraction } from './save-document-ocr-extraction'
 import { saveDocumentTextExtraction } from './save-document-text-extraction'
 
@@ -28,10 +29,7 @@ export async function saveDocumentExtraction(documentId: number) {
   }
 
   if (structuredData.isTextlessPdf) {
-    throw createError({
-      statusCode: 501,
-      statusMessage: 'OCR fallback for textless PDFs requires PDF rasterization support'
-    })
+    return saveDocumentPdfOcrExtraction(documentId)
   }
 
   return textExtraction

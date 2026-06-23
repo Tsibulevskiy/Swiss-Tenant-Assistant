@@ -117,13 +117,13 @@
     },
     "stats": {
       "documents": "Gesamte Dokumente",
-      "documentsDelta": "+2 diesen Monat",
+      "documentsDelta": "{count} bereit",
       "completedChecks": "Abgeschlossene Pruefungen",
-      "completedChecksDelta": "+3 diesen Monat",
-      "generatedLetters": "Erstellte Briefe",
-      "generatedLettersDelta": "+1 diesen Monat",
-      "openDeadlines": "Offene Fristen",
-      "openDeadlinesDelta": "Alle ansehen"
+      "completedChecksDelta": "{count} aktiv",
+      "processingDocuments": "Dokumente in Bearbeitung",
+      "processingDocumentsDelta": "{count} fehlgeschlagen",
+      "highRiskChecks": "Pruefungen mit hohem Risiko",
+      "highRiskChecksDelta": "{count} gesamte Pruefungen"
     },
     "quickActions": {
       "title": "Schnellaktionen",
@@ -131,29 +131,32 @@
       "nebenkostenBody": "Pruefen Sie Ihre Nebenkostenabrechnung auf moegliche Probleme.",
       "contractTitle": "Mietvertrag Check starten",
       "contractBody": "Pruefen Sie Ihren Mietvertrag auf unfaire Klauseln.",
-      "letterTitle": "Brief erstellen",
-      "letterBody": "Erstellen Sie einen professionellen Brief an Ihren Vermieter.",
       "uploadTitle": "Dokument hochladen",
-      "uploadBody": "Laden Sie ein Dokument zur Analyse hoch."
+      "uploadBody": "Laden Sie ein Dokument zur Analyse hoch.",
+      "openChecksTitle": "Pruefungen oeffnen",
+      "openChecksBody": "Sehen Sie abgeschlossene Pruefungen und aktuelle Verarbeitungsstufen."
     },
     "sections": {
       "recentChecks": "Letzte Pruefungen",
-      "upcomingDeadlines": "Kommende Fristen",
+      "processingOverview": "Verarbeitung",
       "recentDocuments": "Letzte Dokumente",
       "plan": "Ihr Plan"
     },
     "actions": {
+      "refresh": "Aktualisieren",
       "viewAllChecks": "Alle Pruefungen ansehen",
       "viewAll": "Alle ansehen",
       "openVault": "Dokumentenablage oeffnen",
-      "moreDocuments": "+8 weitere Dokumente"
+      "moreDocuments": "+8 weitere Dokumente",
+      "open": "Oeffnen"
     },
     "table": {
       "document": "Dokument",
       "type": "Typ",
       "risk": "Risikostufe",
       "status": "Status",
-      "date": "Datum"
+      "date": "Datum",
+      "findings": "Findings"
     },
     "checkTypes": {
       "nebenkosten": "Nebenkosten",
@@ -168,18 +171,17 @@
     "status": {
       "ready": "Bereit"
     },
-    "deadlines": {
-      "noticeTitle": "Kuendigungsfrist",
-      "noticeRemaining": "45 Tage offen",
-      "rentIncreaseTitle": "Antwort auf Mietzinserhoehung",
-      "rentIncreaseRemaining": "22 Tage offen",
-      "documentsTitle": "Belege anfordern",
-      "documentsRemaining": "14 Tage offen"
-    },
     "plan": {
       "badge": "Pay-as-you-go",
       "description": "Sie haben kein aktives Abonnement. Zahlen Sie nur fuer die Pruefungen, die Sie brauchen.",
       "cta": "Preise ansehen"
+    },
+    "processing": {
+      "live": "Live",
+      "readyDocuments": "Bereite Dokumente",
+      "processingDocuments": "Dokumente in Bearbeitung",
+      "activeChecks": "Aktive Pruefungen",
+      "failedDocuments": "Fehlgeschlagene Dokumente"
     }
   },
   "dashboardPages": {
@@ -230,6 +232,7 @@
     },
     "actions": {
       "refresh": "Aktualisieren",
+      "preview": "Vorschau",
       "download": "Download",
       "createCheck": "Pruefung erstellen",
       "createCheckError": "Die Pruefung konnte nicht erstellt werden."
@@ -239,6 +242,11 @@
       "kindLabel": "Dokumenttyp",
       "fileLabel": "Datei waehlen",
       "submit": "Hochladen",
+      "selectedFile": "Ausgewaehlte Datei",
+      "readyToUpload": "Bereit zum Upload",
+      "helper": "PDF-, JPG-, PNG- und WEBP-Dateien bis 20 MB werden unterstuetzt.",
+      "uploading": "Dokument wird hochgeladen",
+      "success": "Dokument erfolgreich hochgeladen.",
       "errors": {
         "fileRequired": "Bitte waehlen Sie vor dem Hochladen eine Datei aus.",
         "generic": "Das Dokument konnte nicht hochgeladen werden."
@@ -246,6 +254,15 @@
     },
     "list": {
       "title": "Dokumentenliste"
+    },
+    "filters": {
+      "searchLabel": "Suche",
+      "searchPlaceholder": "Nach Dateiname oder Typ suchen",
+      "kindLabel": "Typ",
+      "kindAll": "Alle Dokumenttypen",
+      "statusLabel": "Status",
+      "statusAll": "Alle Status",
+      "results": "{count} von {total} Dokumenten"
     },
     "table": {
       "name": "Name",
@@ -262,6 +279,12 @@
       "failed": "Fehlgeschlagen",
       "deleted": "Geloescht"
     },
+    "statusDetails": {
+      "uploaded": "Gespeichert und wartet auf Extraktion.",
+      "processing": "Extraktion oder OCR laeuft gerade.",
+      "ready": "Datei und Metadaten sind verfuegbar.",
+      "failed": "Die Verarbeitung wurde mit einem Fehler beendet."
+    },
     "kinds": {
       "mietvertrag": "Mietvertrag",
       "nebenkostenabrechnung": "Nebenkostenabrechnung",
@@ -270,6 +293,41 @@
       "landlordLetter": "Vermieterschreiben",
       "landlord_letter": "Vermieterschreiben",
       "other": "Sonstiges"
+    },
+    "preview": {
+      "title": "Metadaten-Vorschau",
+      "empty": "Waehlen Sie ein Dokument aus, um Metadaten und die letzte Extraktion zu sehen.",
+      "documentMeta": "Dokument-Metadaten",
+      "extractionMeta": "Letzte Extraktion",
+      "noExtraction": "Fuer dieses Dokument ist noch kein Extraktionsergebnis gespeichert.",
+      "errors": {
+        "generic": "Die Dokument-Metadaten konnten nicht geladen werden."
+      },
+      "labels": {
+        "documentId": "Dokument-ID",
+        "caseId": "Case-ID",
+        "mimeType": "MIME-Typ",
+        "fileSize": "Dateigroesse",
+        "encrypted": "Verschluesselt",
+        "uploadedAt": "Hochgeladen am",
+        "updatedAt": "Aktualisiert am",
+        "retention": "Loeschen nach",
+        "checksum": "SHA-256",
+        "extractionEngine": "Engine",
+        "extractionStatus": "Extraktionsstatus",
+        "extractionConfidence": "Konfidenz",
+        "extractionCreatedAt": "Extraktion erstellt",
+        "extractionSchema": "Structured Schema",
+        "normalizedLength": "Laenge des normalisierten Texts",
+        "dateCandidates": "Datums-Kandidaten",
+        "amountCandidates": "Betrags-Kandidaten",
+        "lineItems": "Kostenpositionen",
+        "extractionError": "Extraktionsfehler"
+      },
+      "values": {
+        "yes": "Ja",
+        "no": "Nein"
+      }
     },
     "empty": {
       "title": "Noch keine Dokumente hochgeladen.",
@@ -289,16 +347,36 @@
       "total": "Gesamte Pruefungen",
       "active": "Aktiv",
       "ready": "Bereit",
-      "awaitingPayment": "warten auf Zahlung"
+      "awaitingPayment": "warten auf Zahlung",
+      "highRisk": "Hohes Risiko"
     },
     "list": {
       "title": "Pruefungsliste"
+    },
+    "filters": {
+      "searchLabel": "Suche",
+      "searchPlaceholder": "Nach Fall oder Dokument suchen",
+      "typeLabel": "Pruefungstyp",
+      "typeAll": "Alle Pruefungstypen",
+      "statusLabel": "Verarbeitungsstufe",
+      "statusAll": "Alle Stufen",
+      "riskLabel": "Risiko",
+      "riskAll": "Alle Risikostufen",
+      "results": "{count} von {total} Pruefungen"
     },
     "types": {
       "nebenkosten_check": "Nebenkosten Check",
       "mietvertrag_check": "Mietvertrag Check",
       "rent_increase_check": "Mietzinserhoehung Check",
       "deposit_return_check": "Kautionsrueckgabe Check"
+    },
+    "processing": {
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "payment_required": "Zahlung erforderlich",
+      "extracting": "Extraktion",
+      "evaluating_rules": "Regeln werden geprueft",
+      "generating_summary": "Zusammenfassung wird erstellt"
     },
     "status": {
       "draft": "Entwurf",
@@ -312,7 +390,16 @@
     "risk": {
       "low": "Niedriges Risiko",
       "medium": "Mittleres Risiko",
-      "high": "Hohes Risiko"
+      "high": "Hohes Risiko",
+      "none": "Risiko ausstehend"
+    },
+    "card": {
+      "summary": "Zusammenfassung",
+      "findings": "Findings",
+      "findingsCount": "{count} Findings",
+      "createdAt": "Erstellt",
+      "sourceDocument": "Quelldokument",
+      "noSourceDocument": "Kein Quelldokument verknuepft"
     },
     "createdAt": "Erstellt",
     "noSummary": "Fuer diese Pruefung ist noch keine Zusammenfassung verfuegbar.",
@@ -327,19 +414,31 @@
     "eyebrow": "Pruefungsdetails",
     "startedAt": "Gestartet",
     "finishedAt": "Beendet",
+    "processingProgress": "Verarbeitungsfortschritt",
+    "findingsCount": "Findings",
+    "riskScoreTitle": "Risk Score",
+    "summaryTitle": "Zusammenfassung",
     "aiSummaryTitle": "AI Zusammenfassung",
     "ruleFindingsTitle": "Regel-Findings",
+    "resultCardTitle": "Ergebniskarte",
     "recommendedActionTitle": "Empfohlene Aktion",
     "noSummary": "Fuer diese Pruefung liegt noch keine Zusammenfassung vor.",
     "documentTitle": "Primaeres Dokument",
     "documentName": "Dokumentname",
     "documentType": "Dokumenttyp",
     "documentSize": "Dateigroesse",
+    "documentStatus": "Dokumentstatus",
+    "documentCreatedAt": "Hochgeladen",
+    "viewDocumentVault": "Dokumente oeffnen",
     "noDocument": "Dieser Pruefung ist kein primaeres Dokument zugeordnet.",
     "extractionTitle": "Extraktionsergebnis",
     "extractionEngine": "Engine",
     "extractionConfidence": "Konfidenz",
     "extractionCreated": "Erstellt",
+    "extractionSchema": "Structured Schema",
+    "normalizedLength": "Laenge des normalisierten Texts",
+    "extractionStats": "Extraktionswerte",
+    "extractionStatsValue": "{dates} Daten, {amounts} Betraege, {lineItems} Kostenpositionen",
     "extractedText": "Extrahierter Text",
     "noExtractionText": "Kein extrahierter Text verfuegbar.",
     "noExtraction": "Fuer diese Pruefung liegt noch kein Extraktionsergebnis vor.",

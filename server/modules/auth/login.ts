@@ -4,7 +4,6 @@ import { z } from 'zod'
 
 import { loginSchema } from '../../../shared/schemas/auth'
 import { getDb } from '../../db/client'
-import { users } from '../../db/schema'
 
 type LoginInput = z.infer<typeof loginSchema>
 

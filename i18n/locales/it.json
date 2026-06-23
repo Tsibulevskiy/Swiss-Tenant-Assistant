@@ -230,6 +230,7 @@
     },
     "actions": {
       "refresh": "Aggiorna",
+      "preview": "Anteprima",
       "download": "Scarica",
       "createCheck": "Crea verifica",
       "createCheckError": "Non e stato possibile creare la verifica."
@@ -239,6 +240,11 @@
       "kindLabel": "Tipo di documento",
       "fileLabel": "Scegli file",
       "submit": "Carica",
+      "selectedFile": "File selezionato",
+      "readyToUpload": "Pronto per il caricamento",
+      "helper": "Sono supportati file PDF, JPG, PNG e WEBP fino a 20 MB.",
+      "uploading": "Caricamento del documento",
+      "success": "Documento caricato con successo.",
       "errors": {
         "fileRequired": "Seleziona un file prima del caricamento.",
         "generic": "Non e stato possibile caricare il documento."
@@ -246,6 +252,15 @@
     },
     "list": {
       "title": "Elenco documenti"
+    },
+    "filters": {
+      "searchLabel": "Ricerca",
+      "searchPlaceholder": "Cerca per nome file o tipo",
+      "kindLabel": "Tipo",
+      "kindAll": "Tutti i tipi di documento",
+      "statusLabel": "Stato",
+      "statusAll": "Tutti gli stati",
+      "results": "{count} di {total} documenti"
     },
     "table": {
       "name": "Nome",
@@ -262,6 +277,12 @@
       "failed": "Fallito",
       "deleted": "Eliminato"
     },
+    "statusDetails": {
+      "uploaded": "Salvato e in attesa di estrazione.",
+      "processing": "Estrazione o OCR in corso.",
+      "ready": "File e metadati sono disponibili.",
+      "failed": "L'elaborazione si e fermata con un errore."
+    },
     "kinds": {
       "mietvertrag": "Contratto di locazione",
       "nebenkostenabrechnung": "Rendiconto spese accessorie",
@@ -270,6 +291,41 @@
       "landlordLetter": "Lettera del proprietario",
       "landlord_letter": "Lettera del proprietario",
       "other": "Altro"
+    },
+    "preview": {
+      "title": "Anteprima metadati",
+      "empty": "Seleziona un documento per vedere i metadati e l'ultimo riepilogo di estrazione.",
+      "documentMeta": "Metadati documento",
+      "extractionMeta": "Ultima estrazione",
+      "noExtraction": "Per questo documento non e ancora disponibile alcun risultato di estrazione.",
+      "errors": {
+        "generic": "Non e stato possibile caricare i metadati del documento."
+      },
+      "labels": {
+        "documentId": "ID documento",
+        "caseId": "ID caso",
+        "mimeType": "Tipo MIME",
+        "fileSize": "Dimensione file",
+        "encrypted": "Cifrato",
+        "uploadedAt": "Caricato il",
+        "updatedAt": "Aggiornato il",
+        "retention": "Elimina dopo",
+        "checksum": "SHA-256",
+        "extractionEngine": "Motore",
+        "extractionStatus": "Stato estrazione",
+        "extractionConfidence": "Confidenza",
+        "extractionCreatedAt": "Estrazione creata",
+        "extractionSchema": "Schema strutturato",
+        "normalizedLength": "Lunghezza testo normalizzato",
+        "dateCandidates": "Date candidate",
+        "amountCandidates": "Importi candidati",
+        "lineItems": "Voci di spesa",
+        "extractionError": "Errore di estrazione"
+      },
+      "values": {
+        "yes": "Si",
+        "no": "No"
+      }
     },
     "empty": {
       "title": "Nessun documento caricato finora.",
@@ -289,16 +345,36 @@
       "total": "Verifiche totali",
       "active": "Attive",
       "ready": "Pronte",
-      "awaitingPayment": "in attesa di pagamento"
+      "awaitingPayment": "in attesa di pagamento",
+      "highRisk": "Rischio alto"
     },
     "list": {
       "title": "Elenco verifiche"
+    },
+    "filters": {
+      "searchLabel": "Ricerca",
+      "searchPlaceholder": "Cerca per caso o documento",
+      "typeLabel": "Tipo verifica",
+      "typeAll": "Tutti i tipi",
+      "statusLabel": "Fase",
+      "statusAll": "Tutte le fasi",
+      "riskLabel": "Rischio",
+      "riskAll": "Tutti i livelli",
+      "results": "{count} di {total} verifiche"
     },
     "types": {
       "nebenkosten_check": "Verifica Nebenkosten",
       "mietvertrag_check": "Verifica Mietvertrag",
       "rent_increase_check": "Verifica aumento affitto",
       "deposit_return_check": "Verifica restituzione deposito"
+    },
+    "processing": {
+      "completed": "Completata",
+      "failed": "Fallita",
+      "payment_required": "Pagamento richiesto",
+      "extracting": "Estrazione",
+      "evaluating_rules": "Valutazione regole",
+      "generating_summary": "Generazione riepilogo"
     },
     "status": {
       "draft": "Bozza",
@@ -312,7 +388,16 @@
     "risk": {
       "low": "Rischio basso",
       "medium": "Rischio medio",
-      "high": "Rischio alto"
+      "high": "Rischio alto",
+      "none": "Rischio in attesa"
+    },
+    "card": {
+      "summary": "Riepilogo",
+      "findings": "Findings",
+      "findingsCount": "{count} findings",
+      "createdAt": "Creato il",
+      "sourceDocument": "Documento sorgente",
+      "noSourceDocument": "Nessun documento sorgente collegato"
     },
     "createdAt": "Creato il",
     "noSummary": "Nessun riepilogo disponibile per questa verifica.",
@@ -327,19 +412,31 @@
     "eyebrow": "Dettagli verifica",
     "startedAt": "Avviata",
     "finishedAt": "Conclusa",
+    "processingProgress": "Avanzamento",
+    "findingsCount": "Findings",
+    "riskScoreTitle": "Risk score",
+    "summaryTitle": "Riepilogo",
     "aiSummaryTitle": "Riepilogo AI",
     "ruleFindingsTitle": "Rule findings",
+    "resultCardTitle": "Scheda risultato",
     "recommendedActionTitle": "Azione consigliata",
     "noSummary": "Nessun riepilogo disponibile per questa verifica.",
     "documentTitle": "Documento principale",
     "documentName": "Nome documento",
     "documentType": "Tipo documento",
     "documentSize": "Dimensione file",
+    "documentStatus": "Stato documento",
+    "documentCreatedAt": "Caricato il",
+    "viewDocumentVault": "Apri documenti",
     "noDocument": "Nessun documento principale collegato a questa verifica.",
     "extractionTitle": "Risultato estrazione",
     "extractionEngine": "Motore",
     "extractionConfidence": "Confidenza",
     "extractionCreated": "Creato il",
+    "extractionSchema": "Schema strutturato",
+    "normalizedLength": "Lunghezza testo normalizzato",
+    "extractionStats": "Statistiche estrazione",
+    "extractionStatsValue": "{dates} date, {amounts} importi, {lineItems} voci di spesa",
     "extractedText": "Testo estratto",
     "noExtractionText": "Nessun testo estratto disponibile.",
     "noExtraction": "Nessun risultato di estrazione disponibile per questa verifica.",
