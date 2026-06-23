@@ -12,11 +12,13 @@ node_modules
 # Logs
 logs
 *.log
+.tmp-dev-*.log
 
 # Misc
 .DS_Store
 .fleet
 .idea
+~$*.docx
 
 # Local env files
 .env
