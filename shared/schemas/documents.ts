@@ -13,7 +13,7 @@ export const documentUploadFieldsSchema = z.object({
 })
 
 export const documentSignedLinkRequestSchema = z.object({
-  expiresInMinutes: z.coerce.number().int().min(1).max(1440).optional().default(15)
+  expiresInMinutes: z.coerce.number().int().min(1).optional()
 })
 
 export const normalizationMetadataSchema = z.object({

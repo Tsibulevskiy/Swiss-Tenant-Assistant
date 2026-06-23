@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/tailwind.css'],
   modules: ['@pinia/nuxt', 'shadcn-nuxt', '@nuxtjs/i18n'],
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NODE_ENV !== 'production' },
   nitro: {
     compressPublicAssets: true,
     externals: {
@@ -31,6 +31,15 @@ export default defineNuxtConfig({
     stripeSecretKey: process.env.NUXT_STRIPE_SECRET_KEY || '',
     stripeWebhookSecret: process.env.NUXT_STRIPE_WEBHOOK_SECRET || '',
     brevoApiKey: process.env.NUXT_BREVO_API_KEY || '',
+    brevoSenderEmail: process.env.NUXT_BREVO_SENDER_EMAIL || '',
+    brevoSenderName: process.env.NUXT_BREVO_SENDER_NAME || 'Swiss Tenant Assistant',
+    rateLimitEnabled: process.env.NUXT_RATE_LIMIT_ENABLED !== 'false',
+    signedLinkDefaultTtlMinutes: Number(process.env.NUXT_SIGNED_LINK_DEFAULT_TTL_MINUTES || 10),
+    signedLinkMaxTtlMinutes: Number(process.env.NUXT_SIGNED_LINK_MAX_TTL_MINUTES || 60),
+    documentRetentionUploadsDays: Number(process.env.NUXT_DOCUMENT_RETENTION_UPLOADS_DAYS || 90),
+    documentRetentionReportsDays: Number(process.env.NUXT_DOCUMENT_RETENTION_REPORTS_DAYS || 30),
+    documentRetentionSweepIntervalMinutes: Number(process.env.NUXT_DOCUMENT_RETENTION_SWEEP_INTERVAL_MINUTES || 60),
+    documentRetentionSweepBatchSize: Number(process.env.NUXT_DOCUMENT_RETENTION_SWEEP_BATCH_SIZE || 50),
     storageUploadsDir: process.env.NUXT_STORAGE_UPLOADS_DIR || 'storage/uploads',
     storageReportsDir: process.env.NUXT_STORAGE_REPORTS_DIR || 'storage/reports',
     public: {

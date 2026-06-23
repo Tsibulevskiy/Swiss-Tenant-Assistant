@@ -9,6 +9,7 @@ import { documentUploadFieldsSchema } from '../../../shared/schemas/documents'
 import { getDb } from '../../db/client'
 import { auditLogs, cases, documents } from '../../db/schema'
 import type { AuthUser } from '../auth/types'
+import { resolveDocumentDeleteAfterAt } from './retention'
 import { resolveStorageRoot } from './storage'
 
 type UploadFields = z.infer<typeof documentUploadFieldsSchema>
@@ -148,6 +149,7 @@ export async function createUploadedDocument(options: {
 
   await mkdir(targetDirectory, { recursive: true })
   await writeFile(absoluteStoragePath, file.data)
+  const deleteAfterAt = resolveDocumentDeleteAfterAt(fields.kind, now)
 
   const insertResult = await db.insert(documents).values({
     userId: user.id,
@@ -159,7 +161,8 @@ export async function createUploadedDocument(options: {
     fileSize: file.data.length,
     sha256,
     uploadedBy: user.id,
-    status: 'uploaded'
+    status: 'uploaded',
+    deleteAfterAt
   })
 
   const documentId = Number(insertResult[0].insertId)
@@ -177,7 +180,8 @@ export async function createUploadedDocument(options: {
       originalName,
       mimeType,
       fileSize: file.data.length,
-      caseId: fields.caseId || null
+      caseId: fields.caseId || null,
+      deleteAfterAt: deleteAfterAt.toISOString()
     }
   })
 
@@ -194,6 +198,7 @@ export async function createUploadedDocument(options: {
       fileSize: true,
       sha256: true,
       status: true,
+      deleteAfterAt: true,
       createdAt: true
     }
   })

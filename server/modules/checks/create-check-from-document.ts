@@ -2,6 +2,7 @@ import { and, desc, eq, isNull } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { cases, checkDocuments, checks, documents, ruleFindings } from '../../db/schema'
+import { writeAuditLog } from '../audit/write-audit-log'
 import { generateCheckRecommendation } from '../ai/generate-check-recommendation'
 import { generateCheckSummary } from '../ai/generate-check-summary'
 import type { AuthUser } from '../auth/types'
@@ -186,6 +187,20 @@ export async function createCheckFromDocument(options: {
     role: 'primary'
   })
 
+  await writeAuditLog({
+    userId: user.id,
+    actorType: user.role === 'admin' ? 'admin' : 'user',
+    action: trigger.type === 'rerun' ? 'check.rerun_started' : 'check.created',
+    entityType: 'check',
+    entityId: checkId,
+    metadataJson: {
+      caseId,
+      documentId: document.id,
+      checkType,
+      trigger
+    }
+  })
+
   let failedStage: 'extraction' | 'rules' | 'summary' = 'extraction'
 
   try {
@@ -312,6 +327,21 @@ export async function createCheckFromDocument(options: {
       })
       .where(eq(cases.id, caseId))
 
+    await writeAuditLog({
+      userId: user.id,
+      actorType: user.role === 'admin' ? 'admin' : 'user',
+      action: 'check.completed',
+      entityType: 'check',
+      entityId: checkId,
+      metadataJson: {
+        caseId,
+        documentId: document.id,
+        checkType,
+        riskScore: evaluated.riskScore,
+        findingsCount: evaluated.findings.length
+      }
+    })
+
     return {
       caseId,
       checkId,
@@ -349,6 +379,21 @@ export async function createCheckFromDocument(options: {
         status: 'failed'
       })
       .where(eq(cases.id, caseId))
+
+    await writeAuditLog({
+      userId: user.id,
+      actorType: user.role === 'admin' ? 'admin' : 'user',
+      action: 'check.failed',
+      entityType: 'check',
+      entityId: checkId,
+      metadataJson: {
+        caseId,
+        documentId: document.id,
+        checkType,
+        failedStage,
+        errorMessage: message
+      }
+    })
 
     throw error
   }

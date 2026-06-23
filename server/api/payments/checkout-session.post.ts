@@ -21,7 +21,10 @@ export default defineAuthenticatedEventHandler(async (event, user) => {
     })
   }
 
-  const result = await createCheckoutSession(parsed.data, user)
+  const result = await createCheckoutSession(parsed.data, user, {
+    ipAddress: getRequestIP(event, { xForwardedFor: true }),
+    userAgent: getHeader(event, 'user-agent')
+  })
 
   setResponseStatus(event, 201)
 

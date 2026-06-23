@@ -1,4 +1,4 @@
-import { and, desc, eq, sql } from 'drizzle-orm'
+import { and, desc, eq, isNull, sql } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { cases, checkDocuments, checks, documents, ruleFindings } from '../../db/schema'
@@ -53,7 +53,14 @@ export default defineAuthenticatedEventHandler(async (_event, user) => {
       })
       .from(checkDocuments)
       .innerJoin(documents, eq(checkDocuments.documentId, documents.id))
-      .where(and(eq(checkDocuments.checkId, item.id), eq(checkDocuments.role, 'primary')))
+      .where(
+        and(
+          eq(checkDocuments.checkId, item.id),
+          eq(checkDocuments.role, 'primary'),
+          eq(documents.userId, user.id),
+          isNull(documents.deletedAt)
+        )
+      )
       .limit(1)
 
     const [findingsAggregate] = await db

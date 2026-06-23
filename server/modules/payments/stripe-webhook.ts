@@ -4,6 +4,7 @@ import { and, eq } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { checks, payments } from '../../db/schema'
+import { writeAuditLog } from '../audit/write-audit-log'
 
 type StripeWebhookEvent = {
   id: string
@@ -130,6 +131,20 @@ async function markPaymentPaid(input: {
       .where(and(eq(checks.id, payment.checkId), eq(checks.status, 'payment_required')))
   }
 
+  await writeAuditLog({
+    actorType: 'system',
+    action: 'payment.webhook_paid',
+    entityType: 'payment',
+    entityId: payment.id,
+    metadataJson: {
+      eventId: input.eventId,
+      eventType: input.eventType,
+      checkId: payment.checkId,
+      providerSessionId: input.providerSessionId,
+      providerPaymentIntentId: input.providerPaymentIntentId
+    }
+  })
+
   return { updated: true, reason: null }
 }
 
@@ -167,6 +182,19 @@ async function markPaymentWithStatus(input: {
       }
     })
     .where(eq(payments.id, payment.id))
+
+  await writeAuditLog({
+    actorType: 'system',
+    action: input.status === 'expired' ? 'payment.webhook_expired' : 'payment.webhook_failed',
+    entityType: 'payment',
+    entityId: payment.id,
+    metadataJson: {
+      eventId: input.eventId,
+      eventType: input.eventType,
+      providerSessionId: input.providerSessionId ?? null,
+      providerPaymentIntentId: input.providerPaymentIntentId ?? null
+    }
+  })
 
   return { updated: true, reason: null }
 }

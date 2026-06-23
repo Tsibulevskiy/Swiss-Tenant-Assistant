@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { markRaw } from 'vue'
-import { Bell, CalendarDays, CircleHelp, CreditCard, FileSearch, FolderOpen, House, LogOut, Mail, Menu, Settings, X } from 'lucide-vue-next'
+import { Bell, CalendarDays, CircleHelp, CreditCard, FileSearch, FolderOpen, House, LogOut, Mail, Menu, Settings, Shield, X } from 'lucide-vue-next'
 
 const appStore = useAppStore()
 const auth = useAuth()
@@ -19,60 +19,77 @@ const icons = {
   letters: markRaw(Mail),
   deadlines: markRaw(CalendarDays),
   payments: markRaw(CreditCard),
+  admin: markRaw(Shield),
   settings: markRaw(Settings),
   support: markRaw(CircleHelp)
 }
 
-const navigation = computed(() => [
-  {
-    key: 'dashboard',
-    label: t('shell.nav.dashboard'),
-    href: localePath('/dashboard'),
-    icon: icons.dashboard
-  },
-  {
-    key: 'documents',
-    label: t('shell.nav.documents'),
-    href: localePath('/documents'),
-    icon: icons.documents
-  },
-  {
-    key: 'checks',
-    label: t('shell.nav.checks'),
-    href: localePath('/checks'),
-    icon: icons.checks
-  },
-  {
-    key: 'letters',
-    label: t('shell.nav.letters'),
-    href: localePath('/letters'),
-    icon: icons.letters
-  },
-  {
-    key: 'deadlines',
-    label: t('shell.nav.deadlines'),
-    href: localePath('/deadlines'),
-    icon: icons.deadlines
-  },
-  {
-    key: 'payments',
-    label: t('shell.nav.payments'),
-    href: localePath('/payments'),
-    icon: icons.payments
-  },
-  {
-    key: 'settings',
-    label: t('shell.nav.settings'),
-    href: localePath('/settings'),
-    icon: icons.settings
-  },
-  {
-    key: 'support',
-    label: t('shell.nav.support'),
-    href: localePath('/support'),
-    icon: icons.support
+const navigation = computed(() => {
+  const items = [
+    {
+      key: 'dashboard',
+      label: t('shell.nav.dashboard'),
+      href: localePath('/dashboard'),
+      icon: icons.dashboard
+    },
+    {
+      key: 'documents',
+      label: t('shell.nav.documents'),
+      href: localePath('/documents'),
+      icon: icons.documents
+    },
+    {
+      key: 'checks',
+      label: t('shell.nav.checks'),
+      href: localePath('/checks'),
+      icon: icons.checks
+    },
+    {
+      key: 'letters',
+      label: t('shell.nav.letters'),
+      href: localePath('/letters'),
+      icon: icons.letters
+    },
+    {
+      key: 'deadlines',
+      label: t('shell.nav.deadlines'),
+      href: localePath('/deadlines'),
+      icon: icons.deadlines
+    },
+    {
+      key: 'payments',
+      label: t('shell.nav.payments'),
+      href: localePath('/payments'),
+      icon: icons.payments
+    }
+  ]
+
+  if (auth.user.value?.role === 'admin') {
+    items.push({
+      key: 'admin',
+      label: 'Admin',
+      href: localePath('/admin'),
+      icon: icons.admin
+    })
   }
-])
+
+  items.push(
+    {
+      key: 'settings',
+      label: t('shell.nav.settings'),
+      href: localePath('/settings'),
+      icon: icons.settings
+    },
+    {
+      key: 'support',
+      label: t('shell.nav.support'),
+      href: localePath('/support'),
+      icon: icons.support
+    }
+  )
+
+  return items
+})
 
 const localeOptions = computed(() =>
   [...locales.value]

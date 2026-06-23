@@ -255,32 +255,32 @@
 - [ ] Test payment flow end-to-end
 
 ### Day 28
-- [ ] Integrate `Brevo`
-- [ ] Build email templates:
-  - [ ] upload confirmation
-  - [ ] analysis ready
-  - [ ] payment receipt
-  - [ ] report access link
-- [ ] Log emails in `email_messages`
+- [x] Integrate `Brevo`
+- [x] Build email templates:
+  - [x] upload confirmation
+  - [x] analysis ready
+  - [x] payment receipt
+  - [x] report access link
+- [x] Log emails in `email_messages`
 - [ ] Test email delivery flow
 
 ### Day 29
-- [ ] Build admin panel pages:
-  - [ ] Users
-  - [ ] Payments
-  - [ ] Checks
-  - [ ] Documents
-  - [ ] AI Logs
-  - [ ] Errors
-- [ ] Add basic filters
-- [ ] Add retry/delete/inspect actions
+- [x] Build admin panel pages:
+  - [x] Users
+  - [x] Payments
+  - [x] Checks
+  - [x] Documents
+  - [x] AI Logs
+  - [x] Errors
+- [x] Add basic filters
+- [x] Add retry/delete/inspect actions
 - [ ] Test admin access control
 
 ### Day 30
-- [ ] Add rate limiting
-- [ ] Review signed links TTL
-- [ ] Add auto-delete job for documents
-- [ ] Add audit log coverage review
+- [x] Add rate limiting
+- [x] Review signed links TTL
+- [x] Add auto-delete job for documents
+- [x] Add audit log coverage review
 - [x] Remove temporary test artifacts and define fixture documents
 - [x] Add minimal lint
 - [x] Add `typecheck` to CI

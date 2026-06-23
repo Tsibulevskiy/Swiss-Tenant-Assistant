@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto'
 
-import { and, eq, isNull } from 'drizzle-orm'
+import { and, eq, gt, isNull, or } from 'drizzle-orm'
 
 import { getDb } from '../../db/client'
 import { auditLogs, documents, signedLinks } from '../../db/schema'
@@ -17,6 +17,33 @@ function buildDownloadUrl(appUrl: string, token: string) {
   return new URL(relativePath, appUrl).toString()
 }
 
+function resolveSignedLinkTtl(input: {
+  requestedExpiresInMinutes?: number
+  defaultTtlMinutes: number
+  maxTtlMinutes: number
+}) {
+  const { requestedExpiresInMinutes, defaultTtlMinutes, maxTtlMinutes } = input
+  const effectiveDefault = Number.isInteger(defaultTtlMinutes) && defaultTtlMinutes > 0 ? defaultTtlMinutes : 10
+  const effectiveMax = Number.isInteger(maxTtlMinutes) && maxTtlMinutes > 0 ? maxTtlMinutes : 60
+  const requested = requestedExpiresInMinutes ?? effectiveDefault
+
+  if (!Number.isInteger(requested) || requested <= 0) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid signed link TTL'
+    })
+  }
+
+  if (requested > effectiveMax) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: `Signed link TTL exceeds the maximum of ${effectiveMax} minutes`
+    })
+  }
+
+  return requested
+}
+
 export async function createDocumentSignedLink(options: {
   documentId: number
   user: AuthUser
@@ -26,18 +53,26 @@ export async function createDocumentSignedLink(options: {
 }) {
   const db = getDb()
   const config = useRuntimeConfig()
-  const { documentId, user, expiresInMinutes = 15, ipAddress, userAgent } = options
+  const { documentId, user, expiresInMinutes, ipAddress, userAgent } = options
+  const now = new Date()
+  const resolvedExpiresInMinutes = resolveSignedLinkTtl({
+    requestedExpiresInMinutes: expiresInMinutes,
+    defaultTtlMinutes: config.signedLinkDefaultTtlMinutes,
+    maxTtlMinutes: config.signedLinkMaxTtlMinutes
+  })
 
   const document = await db.query.documents.findFirst({
     where: and(
       eq(documents.id, documentId),
       eq(documents.userId, user.id),
-      isNull(documents.deletedAt)
+      isNull(documents.deletedAt),
+      or(isNull(documents.deleteAfterAt), gt(documents.deleteAfterAt, now))
     ),
     columns: {
       id: true,
       originalName: true,
-      status: true
+      status: true,
+      deleteAfterAt: true
     }
   })
 
@@ -50,7 +85,7 @@ export async function createDocumentSignedLink(options: {
 
   const token = randomBytes(32).toString('hex')
   const tokenHash = hashSignedLinkToken(token)
-  const expiresAt = new Date(Date.now() + expiresInMinutes * 60 * 1000)
+  const expiresAt = new Date(Date.now() + resolvedExpiresInMinutes * 60 * 1000)
 
   await db.insert(signedLinks).values({
     documentId: document.id,
@@ -69,7 +104,8 @@ export async function createDocumentSignedLink(options: {
     userAgent: userAgent || null,
     metadataJson: {
       expiresAt: expiresAt.toISOString(),
-      expiresInMinutes
+      expiresInMinutes: resolvedExpiresInMinutes,
+      signedLinkMaxTtlMinutes: config.signedLinkMaxTtlMinutes
     }
   })
 

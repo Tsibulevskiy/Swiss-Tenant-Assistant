@@ -3,6 +3,7 @@ import { and, eq } from 'drizzle-orm'
 import type { CreateCheckoutSessionInput } from '../../../shared/schemas/payments'
 import { getDb } from '../../db/client'
 import { payments, products } from '../../db/schema'
+import { writeAuditLog } from '../audit/write-audit-log'
 import type { AuthUser } from '../auth/types'
 import { createStripeCheckoutSession, isStripeConfigured } from './stripe-checkout'
 
@@ -26,7 +27,11 @@ function buildAbsoluteUrl(appUrl: string, pathname: string, query?: Record<strin
 
 export async function createCheckoutSession(
   input: CreateCheckoutSessionInput,
-  user: AuthUser
+  user: AuthUser,
+  requestContext?: {
+    ipAddress?: string | null
+    userAgent?: string | null
+  }
 ) {
   if (!isStripeConfigured()) {
     throw createError({
@@ -103,6 +108,22 @@ export async function createCheckoutSession(
       })
       .where(eq(payments.id, paymentId))
 
+    await writeAuditLog({
+      userId: user.id,
+      actorType: user.role === 'admin' ? 'admin' : 'user',
+      action: 'payment.checkout_created',
+      entityType: 'payment',
+      entityId: paymentId,
+      ipAddress: requestContext?.ipAddress,
+      userAgent: requestContext?.userAgent,
+      metadataJson: {
+        productCode: product.code,
+        caseId: input.caseId ?? null,
+        checkId: input.checkId ?? null,
+        sessionId: session.id
+      }
+    })
+
     return {
       paymentId,
       checkoutUrl: session.url,
@@ -117,6 +138,22 @@ export async function createCheckoutSession(
         status: 'failed'
       })
       .where(eq(payments.id, paymentId))
+
+    await writeAuditLog({
+      userId: user.id,
+      actorType: user.role === 'admin' ? 'admin' : 'user',
+      action: 'payment.checkout_failed',
+      entityType: 'payment',
+      entityId: paymentId,
+      ipAddress: requestContext?.ipAddress,
+      userAgent: requestContext?.userAgent,
+      metadataJson: {
+        productCode: product.code,
+        caseId: input.caseId ?? null,
+        checkId: input.checkId ?? null,
+        errorMessage: message
+      }
+    })
 
     throw createError({
       statusCode: 502,

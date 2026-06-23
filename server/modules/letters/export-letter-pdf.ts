@@ -8,6 +8,7 @@ import { getDb } from '../../db/client'
 import { auditLogs, documents, letters } from '../../db/schema'
 import type { AuthUser } from '../auth/types'
 import { createDocumentSignedLink } from '../documents/create-signed-link'
+import { resolveDocumentDeleteAfterAt } from '../documents/retention'
 import { resolveStorageRoot, resolveStoredDocumentPath } from '../documents/storage'
 import { renderLetterPdf } from './render-letter-pdf'
 
@@ -74,6 +75,7 @@ export async function exportLetterPdf(options: {
   const fileSize = pdfBuffer.length
   const storageRoot = resolveStorageRoot(config.storageReportsDir)
   let pdfDocumentId = letter.pdfDocumentId ?? null
+  const deleteAfterAt = resolveDocumentDeleteAfterAt('generated_letter_pdf')
 
   if (pdfDocumentId) {
     const existingDocument = await db.query.documents.findFirst({
@@ -100,7 +102,8 @@ export async function exportLetterPdf(options: {
           mimeType: 'application/pdf',
           fileSize,
           sha256,
-          status: 'ready'
+          status: 'ready',
+          deleteAfterAt
         })
         .where(eq(documents.id, existingDocument.id))
     } else {
@@ -126,7 +129,8 @@ export async function exportLetterPdf(options: {
       fileSize,
       sha256,
       uploadedBy: user.id,
-      status: 'ready'
+      status: 'ready',
+      deleteAfterAt
     })
 
     pdfDocumentId = Number(insertResult[0].insertId)
@@ -150,7 +154,8 @@ export async function exportLetterPdf(options: {
     metadataJson: {
       pdfDocumentId,
       fileSize,
-      sha256
+      sha256,
+      deleteAfterAt: deleteAfterAt.toISOString()
     }
   })
 
