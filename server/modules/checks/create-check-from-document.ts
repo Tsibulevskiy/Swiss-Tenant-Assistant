@@ -36,6 +36,14 @@ const checkTypeToCaseType = {
 
 type SupportedCheckType = (typeof documentKindToCheckType)[keyof typeof documentKindToCheckType]
 
+type CompletedDocumentExtraction = Awaited<ReturnType<typeof getLatestCompletedDocumentExtraction>>
+
+type ReferenceDocumentCandidate = {
+  documentId: number
+  role: 'contract_reference' | 'previous_year_reference'
+  extraction: NonNullable<CompletedDocumentExtraction>
+}
+
 function buildCaseTitle(originalName: string, checkType: SupportedCheckType) {
   const cleanName = originalName.replace(/\.[^.]+$/, '')
 
@@ -48,6 +56,89 @@ function buildCaseTitle(originalName: string, checkType: SupportedCheckType) {
       return `Mietzinserhoehung: ${cleanName}`
     case 'deposit_return_check':
       return `Deposit return: ${cleanName}`
+  }
+}
+
+async function collectReferenceDocuments(options: {
+  caseId: number
+  primaryDocumentId: number
+  checkType: SupportedCheckType
+  userId: number
+}) {
+  const db = getDb()
+  const candidates: Array<{
+    id: number
+    kind: string
+  }> = await db
+    .select({
+      id: documents.id,
+      kind: documents.kind
+    })
+    .from(documents)
+    .where(
+      and(
+        eq(documents.caseId, options.caseId),
+        eq(documents.userId, options.userId),
+        isNull(documents.deletedAt))
+    )
+
+  const references: ReferenceDocumentCandidate[] = []
+  const contractDocument = options.checkType === 'nebenkosten_check'
+    ? candidates.find(item => item.id !== options.primaryDocumentId && item.kind === 'mietvertrag')
+    : null
+  const previousYearDocument = options.checkType === 'nebenkosten_check'
+    ? candidates.find(item => item.id !== options.primaryDocumentId && item.kind === 'previous_nebenkostenabrechnung')
+    : null
+
+  if (contractDocument) {
+    const extraction = await getLatestCompletedDocumentExtraction(contractDocument.id)
+
+    if (extraction) {
+      references.push({
+        documentId: contractDocument.id,
+        role: 'contract_reference',
+        extraction
+      })
+    }
+  }
+
+  if (previousYearDocument) {
+    const extraction = await getLatestCompletedDocumentExtraction(previousYearDocument.id)
+
+    if (extraction) {
+      references.push({
+        documentId: previousYearDocument.id,
+        role: 'previous_year_reference',
+        extraction
+      })
+    }
+  }
+
+  return references
+}
+
+function withReferenceDocuments(
+  structuredDataJson: unknown,
+  references: ReferenceDocumentCandidate[]
+) {
+  const base = structuredDataJson && typeof structuredDataJson === 'object' && !Array.isArray(structuredDataJson)
+    ? structuredDataJson as Record<string, unknown>
+    : {}
+
+  return {
+    ...base,
+    referenceDocuments: references.map(reference => ({
+      role: reference.role,
+      documentId: reference.documentId,
+      rawText: reference.extraction.rawText,
+      normalizedText: reference.extraction.normalizedText,
+      structuredExtraction: reference.extraction.structuredDataJson
+        && typeof reference.extraction.structuredDataJson === 'object'
+        && !Array.isArray(reference.extraction.structuredDataJson)
+        && 'structuredExtraction' in reference.extraction.structuredDataJson
+        ? (reference.extraction.structuredDataJson as { structuredExtraction?: unknown }).structuredExtraction ?? null
+        : null
+    }))
   }
 }
 
@@ -180,12 +271,26 @@ export async function createCheckFromDocument(options: {
   })
 
   const checkId = Number(checkInsert[0].insertId)
+  const referenceDocuments = await collectReferenceDocuments({
+    caseId,
+    primaryDocumentId: document.id,
+    checkType,
+    userId: user.id
+  })
 
   await db.insert(checkDocuments).values({
     checkId,
     documentId: document.id,
     role: 'primary'
   })
+
+  if (referenceDocuments.length) {
+    await db.insert(checkDocuments).values(referenceDocuments.map(reference => ({
+      checkId,
+      documentId: reference.documentId,
+      role: reference.role
+    })))
+  }
 
   await writeAuditLog({
     userId: user.id,
@@ -207,6 +312,10 @@ export async function createCheckFromDocument(options: {
     const selectedExtraction = extractionMode === 'reuse_extraction'
       ? await getLatestCompletedDocumentExtraction(document.id) || await saveDocumentExtraction(document.id)
       : await saveDocumentExtraction(document.id)
+    const enrichedStructuredDataJson = withReferenceDocuments(
+      selectedExtraction.structuredDataJson ?? null,
+      referenceDocuments
+    )
     const postExtractionPipelinePayload = buildPostExtractionCheckPipelinePayload({
       initialPayload: initialPipelinePayload,
       extraction: {
@@ -214,7 +323,7 @@ export async function createCheckFromDocument(options: {
         engine: selectedExtraction.engine,
         rawText: selectedExtraction.rawText,
         normalizedText: selectedExtraction.normalizedText,
-        structuredDataJson: selectedExtraction.structuredDataJson ?? null,
+        structuredDataJson: enrichedStructuredDataJson,
         confidenceScore: selectedExtraction.confidenceScore,
         finishedAt: selectedExtraction.finishedAt
       }
@@ -234,7 +343,7 @@ export async function createCheckFromDocument(options: {
       checkType,
       rawText: selectedExtraction.rawText,
       normalizedText: selectedExtraction.normalizedText,
-      structuredDataJson: selectedExtraction.structuredDataJson ?? null
+      structuredDataJson: enrichedStructuredDataJson
     })
     const serializedRuleResult = serializeRuleResult(evaluated.ruleResultJson)
     const generatedSummary = await generateCheckSummary({
@@ -245,7 +354,7 @@ export async function createCheckFromDocument(options: {
       riskScore: evaluated.riskScore,
       findings: evaluated.findings,
       normalizedText: selectedExtraction.normalizedText,
-      structuredDataJson: selectedExtraction.structuredDataJson ?? null,
+      structuredDataJson: enrichedStructuredDataJson,
       fallbackSummaryText: evaluated.summaryText
     })
     const generatedRecommendation = await generateCheckRecommendation({
@@ -265,7 +374,7 @@ export async function createCheckFromDocument(options: {
         engine: selectedExtraction.engine,
         rawText: selectedExtraction.rawText,
         normalizedText: selectedExtraction.normalizedText,
-        structuredDataJson: selectedExtraction.structuredDataJson ?? null,
+        structuredDataJson: enrichedStructuredDataJson,
         confidenceScore: selectedExtraction.confidenceScore,
         finishedAt: selectedExtraction.finishedAt
       },
@@ -308,7 +417,7 @@ export async function createCheckFromDocument(options: {
         inputPayloadJson: completedPipelinePayload,
         summaryText: generatedSummary.summaryText,
         disclaimerText: generatedSummary.disclaimerText,
-        structuredInputJson: selectedExtraction.structuredDataJson ?? null,
+        structuredInputJson: enrichedStructuredDataJson,
         ruleResultJson: serializedRuleResult,
         aiResultJson: {
           summary: generatedSummary.aiResultJson,

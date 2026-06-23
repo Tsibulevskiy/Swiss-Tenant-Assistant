@@ -11,6 +11,16 @@ export type RuleEvaluationContext = {
   normalizedText: string
   searchableText: string
   structuredExtraction: AnyStructuredExtraction | null
+  contractReference: {
+    normalizedText: string
+    searchableText: string
+    structuredExtraction: AnyStructuredExtraction | null
+  } | null
+  previousYearReference: {
+    normalizedText: string
+    searchableText: string
+    structuredExtraction: AnyStructuredExtraction | null
+  } | null
 }
 
 export type RuleDefinition = {
@@ -57,6 +67,56 @@ export function parseStructuredExtraction(input: RuleEvaluationInput) {
   return null
 }
 
+function parseReferenceDocument(value: unknown) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return null
+  }
+
+  const record = value as {
+    normalizedText?: unknown
+    structuredExtraction?: unknown
+  }
+  const normalizedText = typeof record.normalizedText === 'string' ? record.normalizedText : ''
+  const structuredDataJson = {
+    structuredExtraction: record.structuredExtraction ?? null
+  }
+
+  return {
+    normalizedText,
+    searchableText: normalizeForRules(normalizedText),
+    structuredExtraction: parseStructuredExtraction({
+      checkType: 'reference',
+      rawText: normalizedText,
+      normalizedText,
+      structuredDataJson
+    })
+  }
+}
+
+function parseReferenceByRole(input: RuleEvaluationInput, role: 'contract_reference' | 'previous_year_reference') {
+  if (!input.structuredDataJson || typeof input.structuredDataJson !== 'object') {
+    return null
+  }
+
+  const referenceDocuments = 'referenceDocuments' in input.structuredDataJson
+    ? (input.structuredDataJson as { referenceDocuments?: unknown }).referenceDocuments
+    : null
+
+  if (!Array.isArray(referenceDocuments)) {
+    return null
+  }
+
+  const found = referenceDocuments.find(item =>
+    item
+    && typeof item === 'object'
+    && !Array.isArray(item)
+    && 'role' in item
+    && (item as { role?: unknown }).role === role
+  )
+
+  return parseReferenceDocument(found)
+}
+
 export function createRuleContext(input: RuleEvaluationInput): RuleEvaluationContext {
   const rawText = input.rawText || ''
   const normalizedText = input.normalizedText || rawText
@@ -66,7 +126,9 @@ export function createRuleContext(input: RuleEvaluationInput): RuleEvaluationCon
     rawText,
     normalizedText,
     searchableText: normalizeForRules(normalizedText || rawText),
-    structuredExtraction: parseStructuredExtraction(input)
+    structuredExtraction: parseStructuredExtraction(input),
+    contractReference: parseReferenceByRole(input, 'contract_reference'),
+    previousYearReference: parseReferenceByRole(input, 'previous_year_reference')
   }
 }
 

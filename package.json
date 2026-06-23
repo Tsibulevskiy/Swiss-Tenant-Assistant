@@ -16,6 +16,7 @@
     "lint": "eslint server shared scripts nuxt.config.ts drizzle.config.ts",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "test:rules": "node --import tsx --test tests/**/*.test.ts",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {

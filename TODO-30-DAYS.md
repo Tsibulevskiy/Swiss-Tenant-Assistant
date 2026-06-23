@@ -151,10 +151,10 @@
 ### Day 15
 - [x] Implement `Nebenkosten` rules
 - [x] Add suspicious keyword detection
-- [ ] Add contract mismatch checks
-- [ ] Add previous-year comparison logic
+- [x] Add contract mismatch checks
+- [x] Add previous-year comparison logic
 - [x] Add anomaly detection
-- [ ] Test rule engine on sample Nebenkosten documents
+- [x] Test rule engine on sample Nebenkosten documents
 
 ## Week 4
 

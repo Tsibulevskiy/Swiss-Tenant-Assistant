@@ -510,7 +510,7 @@ export function buildStructuredExtraction(input: {
     })
   }
 
-  if (input.documentKind === 'nebenkostenabrechnung') {
+  if (input.documentKind === 'nebenkostenabrechnung' || input.documentKind === 'previous_nebenkostenabrechnung') {
     return buildNebenkostenStructuredExtraction({
       sourceEngine: input.sourceEngine,
       normalizedText: input.normalizedText,
